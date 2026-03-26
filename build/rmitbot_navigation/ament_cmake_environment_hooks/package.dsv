@@ -1,0 +1,4 @@
+source;share/rmitbot_navigation/local_setup.bash
+source;share/rmitbot_navigation/local_setup.dsv
+source;share/rmitbot_navigation/local_setup.sh
+source;share/rmitbot_navigation/local_setup.zsh

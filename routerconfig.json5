@@ -1,0 +1,31 @@
+{
+  mode: "router",
+
+  connect: {
+    // Connect to your specific Peer/Router endpoint
+    endpoints: ["tcp/100.68.87.13:7447"],
+  },
+
+  listen: {
+    // Listen on all interfaces (IPv4 and IPv6)
+    endpoints: ["tcp/[::]:7447"],
+  },
+
+  scouting: {
+    // Disable Multicast to prevent Wi-Fi flooding/discovery issues
+    multicast: { enabled: false },
+    // Keep gossip enabled so nodes can find each other via the router
+    gossip: { enabled: true },
+  },
+
+  timestamping: {
+    // Required for ROS2 transient_local durability (e.g., static TFs, Map)
+    enabled: true,
+  },
+
+  transport: {
+    unicast: {
+      qos: { enabled: true },
+    },
+  },
+}

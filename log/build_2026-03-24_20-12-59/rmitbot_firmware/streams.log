@@ -1,0 +1,78 @@
+[0.040s] Invoking command in '/home/v120506/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/v120506/rmit_ros2_ws/src/rmitbot_firmware -DCMAKE_INSTALL_PREFIX=/home/v120506/rmit_ros2_ws/install/rmitbot_firmware
+[0.157s] -- The C compiler identification is GNU 13.3.0
+[0.265s] -- The CXX compiler identification is GNU 13.3.0
+[0.306s] -- Detecting C compiler ABI info
+[0.506s] -- Detecting C compiler ABI info - done
+[0.541s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.541s] -- Detecting C compile features
+[0.541s] -- Detecting C compile features - done
+[0.564s] -- Detecting CXX compiler ABI info
+[0.760s] -- Detecting CXX compiler ABI info - done
+[0.796s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.797s] -- Detecting CXX compile features
+[0.800s] -- Detecting CXX compile features - done
+[0.813s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.111s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.376s] -- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.550s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.592s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.665s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.739s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.907s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.916s] -- Found rmw_zenoh_cpp: 0.2.9 (/opt/ros/jazzy/share/rmw_zenoh_cpp/cmake)
+[1.918s] -- Using RMW implementation 'rmw_zenoh_cpp' as default
+[2.042s] -- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)
+[2.063s] -- Found hardware_interface: 4.42.2 (/opt/ros/jazzy/share/hardware_interface/cmake)
+[2.329s] -- Found TinyXML2 via Config file: /usr/lib/x86_64-linux-gnu/cmake/tinyxml2
+[2.558s] -- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1") 
+[2.559s] -- Checking for module 'libserial'
+[2.576s] --   Found libserial, version 1.0.0
+[2.695s] -- Configuring done (2.6s)
+[2.728s] -- Generating done (0.0s)
+[2.741s] -- Build files have been written to: /home/v120506/rmit_ros2_ws/build/rmitbot_firmware
+[2.750s] Invoked command in '/home/v120506/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/v120506/rmit_ros2_ws/src/rmitbot_firmware -DCMAKE_INSTALL_PREFIX=/home/v120506/rmit_ros2_ws/install/rmitbot_firmware
+[2.751s] Invoking command in '/home/v120506/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/v120506/rmit_ros2_ws/build/rmitbot_firmware -- -j8 -l8
+[2.797s] [ 50%] [32mBuilding CXX object CMakeFiles/rmitbot_firmware.dir/src/rmitbot_interface.cpp.o[0m
+[5.219s] [01m[K/home/v120506/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:[m[K In member function ‘[01m[Kvirtual rmitbot_firmware::CallbackReturn rmitbot_firmware::RmitbotInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’:
+[5.219s] [01m[K/home/v120506/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:21:71:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn hardware_interface::HardwareComponentInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’ is deprecated: Use on_init(const HardwareComponentInterfaceParams & params) instead. [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[5.220s]    21 |   CallbackReturn result = [01;35m[Khardware_interface::SystemInterface::on_init(hardware_info)[m[K;
+[5.220s]       |                           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[5.220s] In file included from [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/system_interface.hpp:18[m[K,
+[5.220s]                  from [01m[K/home/v120506/rmit_ros2_ws/src/rmitbot_firmware/include/rmitbot_firmware/rmitbot_interface.hpp:7[m[K,
+[5.220s]                  from [01m[K/home/v120506/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:1[m[K:
+[5.220s] [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/hardware_component_interface.hpp:140:26:[m[K [01;36m[Knote: [m[Kdeclared here
+[5.220s]   140 |   virtual CallbackReturn [01;36m[Kon_init[m[K(const HardwareInfo & hardware_info);
+[5.220s]       |                          [01;36m[K^~~~~~~[m[K
+[6.714s] [100%] [32m[1mLinking CXX shared library librmitbot_firmware.so[0m
+[6.904s] [100%] Built target rmitbot_firmware
+[6.920s] Invoked command in '/home/v120506/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/v120506/rmit_ros2_ws/build/rmitbot_firmware -- -j8 -l8
+[6.921s] Invoking command in '/home/v120506/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/v120506/rmit_ros2_ws/build/rmitbot_firmware
+[6.928s] -- Install configuration: ""
+[6.928s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/rmitbot_interface.xml
+[6.929s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/lib/librmitbot_firmware.so
+[6.929s] -- Set non-toolchain portion of runtime path of "/home/v120506/rmit_ros2_ws/install/rmitbot_firmware/lib/librmitbot_firmware.so" to ""
+[6.929s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/include
+[6.929s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/include/rmitbot_firmware
+[6.929s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/include/rmitbot_firmware/rmitbot_interface.hpp
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/library_path.sh
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/library_path.dsv
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/package_run_dependencies/rmitbot_firmware
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/parent_prefix_path/rmitbot_firmware
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/ament_prefix_path.sh
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/ament_prefix_path.dsv
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/path.sh
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/path.dsv
+[6.930s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.bash
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.sh
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.zsh
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.dsv
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.dsv
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/packages/rmitbot_firmware
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/rmitbot_firmware
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_libraries-extras.cmake
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.931s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/rmitbot_firmwareConfig.cmake
+[6.932s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/rmitbot_firmwareConfig-version.cmake
+[6.932s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.xml
+[6.933s] Invoked command in '/home/v120506/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/v120506/rmit_ros2_ws/build/rmitbot_firmware

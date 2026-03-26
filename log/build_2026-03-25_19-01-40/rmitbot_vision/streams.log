@@ -1,0 +1,28 @@
+[0.060s] Invoking command in '/home/v120506/rmit_ros2_ws/build/rmitbot_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/v120506/rmit_ros2_ws/build/rmitbot_vision -- -j8 -l8
+[0.293s] Invoked command in '/home/v120506/rmit_ros2_ws/build/rmitbot_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/v120506/rmit_ros2_ws/build/rmitbot_vision -- -j8 -l8
+[0.294s] Invoking command in '/home/v120506/rmit_ros2_ws/build/rmitbot_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/v120506/rmit_ros2_ws/build/rmitbot_vision
+[0.318s] -- Install configuration: ""
+[0.318s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/launch
+[0.318s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/launch/vision.launch.py
+[0.318s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/launch/apriltag.launch.py
+[0.319s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/config
+[0.319s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/config/camera_param.yaml
+[0.319s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/config/apriltag_params.yaml
+[0.320s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/config/calibrationdata.tar.gz
+[0.320s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/config/ost.yaml
+[0.321s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/ament_index/resource_index/package_run_dependencies/rmitbot_vision
+[0.321s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/ament_index/resource_index/parent_prefix_path/rmitbot_vision
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/environment/ament_prefix_path.sh
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/environment/ament_prefix_path.dsv
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/environment/path.sh
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/environment/path.dsv
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/local_setup.bash
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/local_setup.sh
+[0.322s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/local_setup.zsh
+[0.323s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/local_setup.dsv
+[0.323s] -- Installing: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.dsv
+[0.323s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/ament_index/resource_index/packages/rmitbot_vision
+[0.323s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/cmake/rmitbot_visionConfig.cmake
+[0.323s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/cmake/rmitbot_visionConfig-version.cmake
+[0.323s] -- Up-to-date: /home/v120506/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.xml
+[0.332s] Invoked command in '/home/v120506/rmit_ros2_ws/build/rmitbot_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/v120506/rmit_ros2_ws/build/rmitbot_vision
