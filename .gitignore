@@ -1,0 +1,9 @@
+build/
+install/
+log/
+.vscode/
+*.swp
+*~
+.vscode/
+*.vc.db
+*.vc.opendb
