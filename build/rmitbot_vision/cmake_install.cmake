@@ -1,8 +1,8 @@
-# Install script for directory: /home/v120506/rmit_ros2_ws/src/rmitbot_vision
+# Install script for directory: /home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/v120506/rmit_ros2_ws/install/rmitbot_vision")
+  set(CMAKE_INSTALL_PREFIX "/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,17 +44,17 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE DIRECTORY FILES
-    "/home/v120506/rmit_ros2_ws/src/rmitbot_vision/launch"
-    "/home/v120506/rmit_ros2_ws/src/rmitbot_vision/config"
+    "/home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision/launch"
+    "/home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision/config"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/rmitbot_vision")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/rmitbot_vision")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/rmitbot_vision")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/rmitbot_vision")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -62,7 +62,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision/environment" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/ament_prefix_path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision/environment" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/ament_prefix_path.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -70,42 +70,42 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision/environment" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision/environment" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/path.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.bash")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.bash")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.sh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.sh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.zsh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.zsh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/local_setup.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/package.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_environment_hooks/package.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_index/share/ament_index/resource_index/packages/rmitbot_vision")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_index/share/ament_index/resource_index/packages/rmitbot_vision")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision/cmake" TYPE FILE FILES
-    "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_core/rmitbot_visionConfig.cmake"
-    "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_core/rmitbot_visionConfig-version.cmake"
+    "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_core/rmitbot_visionConfig.cmake"
+    "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_core/rmitbot_visionConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/src/rmitbot_vision/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_vision" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -116,5 +116,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/v120506/rmit_ros2_ws/build/rmitbot_vision/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

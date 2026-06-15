@@ -1,2 +1,0 @@
-Invoking command in '/home/v120506/rmit_ros2_ws/build/rmitbot_vision': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/v120506/rmit_ros2_ws/src/rmitbot_vision -DCMAKE_INSTALL_PREFIX=/home/v120506/rmit_ros2_ws/install/rmitbot_vision
-Invoked command in '/home/v120506/rmit_ros2_ws/build/rmitbot_vision' returned '1': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/v120506/rmit_ros2_ws/src/rmitbot_vision -DCMAKE_INSTALL_PREFIX=/home/v120506/rmit_ros2_ws/install/rmitbot_vision

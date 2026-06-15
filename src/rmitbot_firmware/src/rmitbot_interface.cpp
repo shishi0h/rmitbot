@@ -137,7 +137,12 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
   if (arduino_.IsDataAvailable()) {
     auto dt = (rclcpp::Clock().now() - last_run_).seconds();
     std::string message;
-    arduino_.ReadLine(message);
+    try {
+      arduino_.ReadLine(message, '\n', 25);
+    } catch (const LibSerial::ReadTimeout&) {
+      RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Serial read timed out! (ESP32 dropped connection or crashed)");
+      return hardware_interface::return_type::OK;
+    }
     // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Message Received: %s", message.c_str());
 
     // Remove only the newline and carriage return characters (i.e., \n, \r)
@@ -160,11 +165,11 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
         // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Parsed velocities: %.2f, %.2f", velocity_states_.at(0), velocity_states_.at(1));
       }
 
-      // Update each wheel state
-      velocity_states_.at(0) = states_data.at(0); // front right wheel
-      velocity_states_.at(1) = states_data.at(1); // front left wheel
-      velocity_states_.at(2) = states_data.at(2); // rear right wheel
-      velocity_states_.at(3) = states_data.at(3); // rear left wheel
+      // Update each wheel state (URDF order: FL, FR, RL, RR)
+      velocity_states_.at(0) = states_data.at(1); // URDF FL gets ESP32 FL (w2)
+      velocity_states_.at(1) = states_data.at(0); // URDF FR gets ESP32 FR (w1)
+      velocity_states_.at(2) = states_data.at(3); // URDF RL gets ESP32 RL (w4)
+      velocity_states_.at(3) = states_data.at(2); // URDF RR gets ESP32 RR (w3)
       position_states_.at(0) += velocity_states_.at(0) * dt;
       position_states_.at(1) += velocity_states_.at(1) * dt;
       position_states_.at(2) += velocity_states_.at(2) * dt;
@@ -197,12 +202,12 @@ hardware_interface::return_type RmitbotInterface::write(const rclcpp::Time &,
   std::stringstream message_stream;
   // Add starting delimiter
   message_stream << "<";
-  // Add the velocity data, separated by tab
+  // Add the velocity data, separated by tab (ESP32 expects: FR, FL, RR, RL)
   message_stream << std::fixed << std::setprecision(2)
-                 << velocity_commands_.at(0) << "\t" // front Right wheel
-                 << velocity_commands_.at(1) << "\t" // front left wheel
-                 << velocity_commands_.at(2) << "\t" // rear Right wheel
-                 << velocity_commands_.at(3);        // rear left wheel
+                 << velocity_commands_.at(1) << "\t" // ESP32 w1 (FR) gets URDF FR
+                 << velocity_commands_.at(0) << "\t" // ESP32 w2 (FL) gets URDF FL
+                 << velocity_commands_.at(3) << "\t" // ESP32 w3 (RR) gets URDF RR
+                 << velocity_commands_.at(2);        // ESP32 w4 (RL) gets URDF RL
   // Add ending delimiter
   message_stream << ">\n"; // Optionally include newline for easy serial monitor reading
 

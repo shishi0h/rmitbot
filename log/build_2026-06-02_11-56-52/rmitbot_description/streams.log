@@ -1,0 +1,61 @@
+[0.019s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_description -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description
+[0.598s] -- The C compiler identification is GNU 13.3.0
+[1.095s] -- The CXX compiler identification is GNU 13.3.0
+[1.136s] -- Detecting C compiler ABI info
+[1.391s] -- Detecting C compiler ABI info - done
+[1.407s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.408s] -- Detecting C compile features
+[1.408s] -- Detecting C compile features - done
+[1.429s] -- Detecting CXX compiler ABI info
+[1.686s] -- Detecting CXX compiler ABI info - done
+[1.700s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.701s] -- Detecting CXX compile features
+[1.701s] -- Detecting CXX compile features - done
+[1.713s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.086s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.613s] -- Configuring done (2.6s)
+[2.618s] -- Generating done (0.0s)
+[2.620s] -- Build files have been written to: /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description
+[2.636s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_description -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description
+[2.636s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description -- -j4 -l4
+[2.738s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description -- -j4 -l4
+[2.740s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description
+[2.759s] -- Install configuration: ""
+[2.759s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes
+[2.760s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/wheel_left_link.STL
+[2.762s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/imu_link.STL
+[2.763s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/caster_front_link.STL
+[2.767s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/base_link.STL
+[2.785s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/caster_rear_link.STL
+[2.788s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/laser_link.STL
+[2.794s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/meshes/wheel_right_link.STL
+[2.796s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf
+[2.796s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf/rmitbot_laser.xacro
+[2.796s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf/rmitbot_gazebo.xacro
+[2.796s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf/rmitbot_ros2_control.xacro
+[2.796s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf/rmitbot_platform.xacro
+[2.796s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf/rmitbot_imu.xacro
+[2.797s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/urdf/rmitbot.urdf.xacro
+[2.798s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/launch
+[2.798s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/launch/rsp.launch.py
+[2.798s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/launch/display.launch.py
+[2.798s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/launch/gazebo.launch.py
+[2.799s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/launch/rviz.launch.py
+[2.799s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/rviz
+[2.799s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/rviz/display.rviz
+[2.799s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/ament_index/resource_index/package_run_dependencies/rmitbot_description
+[2.799s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/ament_index/resource_index/parent_prefix_path/rmitbot_description
+[2.800s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/environment/ament_prefix_path.sh
+[2.800s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/environment/ament_prefix_path.dsv
+[2.800s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/environment/path.sh
+[2.800s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/environment/path.dsv
+[2.800s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/local_setup.bash
+[2.800s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/local_setup.sh
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/local_setup.zsh
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/local_setup.dsv
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.dsv
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/ament_index/resource_index/packages/rmitbot_description
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/cmake/rmitbot_descriptionConfig.cmake
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/cmake/rmitbot_descriptionConfig-version.cmake
+[2.801s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.xml
+[2.881s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description

@@ -1,0 +1,24 @@
+[0.069s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization -- -j4 -l4
+[0.163s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization -- -j4 -l4
+[0.164s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization
+[0.188s] -- Install configuration: ""
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/launch
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/launch/localization.launch.py
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/config
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/config/ekf.yaml
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/ament_index/resource_index/package_run_dependencies/rmitbot_localization
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/ament_index/resource_index/parent_prefix_path/rmitbot_localization
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/ament_prefix_path.sh
+[0.192s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/ament_prefix_path.dsv
+[0.193s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/path.sh
+[0.194s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/path.dsv
+[0.194s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.bash
+[0.194s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.sh
+[0.195s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.zsh
+[0.195s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.dsv
+[0.195s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.dsv
+[0.198s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/ament_index/resource_index/packages/rmitbot_localization
+[0.198s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/cmake/rmitbot_localizationConfig.cmake
+[0.198s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/cmake/rmitbot_localizationConfig-version.cmake
+[0.198s] -- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.xml
+[0.204s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization

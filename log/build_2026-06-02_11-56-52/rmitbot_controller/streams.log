@@ -1,0 +1,44 @@
+[0.020s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_controller -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller
+[0.599s] -- The C compiler identification is GNU 13.3.0
+[1.097s] -- The CXX compiler identification is GNU 13.3.0
+[1.140s] -- Detecting C compiler ABI info
+[1.402s] -- Detecting C compiler ABI info - done
+[1.414s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.414s] -- Detecting C compile features
+[1.415s] -- Detecting C compile features - done
+[1.433s] -- Detecting CXX compiler ABI info
+[1.693s] -- Detecting CXX compiler ABI info - done
+[1.707s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.708s] -- Detecting CXX compile features
+[1.708s] -- Detecting CXX compile features - done
+[1.717s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.090s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.617s] -- Configuring done (2.6s)
+[2.622s] -- Generating done (0.0s)
+[2.626s] -- Build files have been written to: /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller
+[2.643s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_controller -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller
+[2.645s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller -- -j4 -l4
+[2.723s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller -- -j4 -l4
+[2.741s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller
+[2.760s] -- Install configuration: ""
+[2.761s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/launch
+[2.761s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/launch/teleopkeyboard.launch.py
+[2.761s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/launch/controller.launch.py
+[2.761s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/config
+[2.761s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/config/rmitbot_controller.yaml
+[2.762s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/ament_index/resource_index/package_run_dependencies/rmitbot_controller
+[2.762s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/ament_index/resource_index/parent_prefix_path/rmitbot_controller
+[2.762s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/environment/ament_prefix_path.sh
+[2.764s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/environment/ament_prefix_path.dsv
+[2.766s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/environment/path.sh
+[2.766s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/environment/path.dsv
+[2.768s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/local_setup.bash
+[2.769s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/local_setup.sh
+[2.770s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/local_setup.zsh
+[2.771s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/local_setup.dsv
+[2.772s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.dsv
+[2.772s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/ament_index/resource_index/packages/rmitbot_controller
+[2.776s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/cmake/rmitbot_controllerConfig.cmake
+[2.778s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/cmake/rmitbot_controllerConfig-version.cmake
+[2.779s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.xml
+[2.816s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller

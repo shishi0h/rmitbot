@@ -1,0 +1,78 @@
+[0.030s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware
+[0.590s] -- The C compiler identification is GNU 13.3.0
+[1.088s] -- The CXX compiler identification is GNU 13.3.0
+[1.131s] -- Detecting C compiler ABI info
+[1.383s] -- Detecting C compiler ABI info - done
+[1.397s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.402s] -- Detecting C compile features
+[1.402s] -- Detecting C compile features - done
+[1.425s] -- Detecting CXX compiler ABI info
+[1.679s] -- Detecting CXX compiler ABI info - done
+[1.694s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.695s] -- Detecting CXX compile features
+[1.695s] -- Detecting CXX compile features - done
+[1.709s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[2.082s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.375s] -- Found rclcpp: 28.1.18 (/opt/ros/jazzy/share/rclcpp/cmake)
+[2.488s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.524s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.587s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.655s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.905s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.917s] -- Found rmw_zenoh_cpp: 0.2.9 (/opt/ros/jazzy/share/rmw_zenoh_cpp/cmake)
+[2.917s] -- Using RMW implementation 'rmw_zenoh_cpp' as default
+[3.153s] -- Found std_msgs: 5.3.7 (/opt/ros/jazzy/share/std_msgs/cmake)
+[3.216s] -- Found hardware_interface: 4.44.0 (/opt/ros/jazzy/share/hardware_interface/cmake)
+[3.709s] -- Found TinyXML2 via Config file: /usr/lib/aarch64-linux-gnu/cmake/tinyxml2
+[4.248s] -- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1") 
+[4.250s] -- Checking for module 'libserial'
+[4.524s] --   Found libserial, version 1.0.0
+[4.799s] -- Configuring done (4.8s)
+[4.906s] -- Generating done (0.1s)
+[4.916s] -- Build files have been written to: /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware
+[4.944s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware
+[4.946s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware -- -j4 -l4
+[5.059s] [ 50%] [32mBuilding CXX object CMakeFiles/rmitbot_firmware.dir/src/rmitbot_interface.cpp.o[0m
+[9.592s] [01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:[m[K In member function ‘[01m[Kvirtual rmitbot_firmware::CallbackReturn rmitbot_firmware::RmitbotInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’:
+[9.592s] [01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:21:71:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn hardware_interface::HardwareComponentInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’ is deprecated: Use on_init(const HardwareComponentInterfaceParams & params) instead. [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+[9.592s]    21 |   CallbackReturn result = [01;35m[Khardware_interface::SystemInterface::on_init(hardware_info)[m[K;
+[9.592s]       |                           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+[9.592s] In file included from [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/system_interface.hpp:18[m[K,
+[9.592s]                  from [01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/include/rmitbot_firmware/rmitbot_interface.hpp:7[m[K,
+[9.593s]                  from [01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:1[m[K:
+[9.593s] [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/hardware_component_interface.hpp:140:26:[m[K [01;36m[Knote: [m[Kdeclared here
+[9.593s]   140 |   virtual CallbackReturn [01;36m[Kon_init[m[K(const HardwareInfo & hardware_info);
+[9.593s]       |                          [01;36m[K^~~~~~~[m[K
+[12.401s] [100%] [32m[1mLinking CXX shared library librmitbot_firmware.so[0m
+[13.198s] [100%] Built target rmitbot_firmware
+[13.218s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware -- -j4 -l4
+[13.220s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware
+[13.234s] -- Install configuration: ""
+[13.235s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/rmitbot_interface.xml
+[13.235s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/librmitbot_firmware.so
+[13.237s] -- Set non-toolchain portion of runtime path of "/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/librmitbot_firmware.so" to ""
+[13.237s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/include
+[13.237s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/include/rmitbot_firmware
+[13.237s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/include/rmitbot_firmware/rmitbot_interface.hpp
+[13.237s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/library_path.sh
+[13.238s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/library_path.dsv
+[13.238s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/package_run_dependencies/rmitbot_firmware
+[13.238s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/parent_prefix_path/rmitbot_firmware
+[13.238s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/ament_prefix_path.sh
+[13.239s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/ament_prefix_path.dsv
+[13.239s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/path.sh
+[13.239s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/path.dsv
+[13.239s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.bash
+[13.239s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.sh
+[13.239s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.zsh
+[13.240s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.dsv
+[13.240s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.dsv
+[13.240s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/packages/rmitbot_firmware
+[13.240s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/rmitbot_firmware
+[13.240s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_include_directories-extras.cmake
+[13.241s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_libraries-extras.cmake
+[13.241s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_dependencies-extras.cmake
+[13.241s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/rmitbot_firmwareConfig.cmake
+[13.241s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/rmitbot_firmwareConfig-version.cmake
+[13.241s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.xml
+[13.245s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware

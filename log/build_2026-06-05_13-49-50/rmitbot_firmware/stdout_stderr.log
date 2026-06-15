@@ -1,0 +1,41 @@
+[ 50%] [32mBuilding CXX object CMakeFiles/rmitbot_firmware.dir/src/rmitbot_interface.cpp.o[0m
+[01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:[m[K In member function ‘[01m[Kvirtual rmitbot_firmware::CallbackReturn rmitbot_firmware::RmitbotInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’:
+[01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:21:71:[m[K [01;35m[Kwarning: [m[K‘[01m[Kvirtual rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn hardware_interface::HardwareComponentInterface::[01;32m[Kon_init[m[K(const hardware_interface::HardwareInfo&)[m[K’ is deprecated: Use on_init(const HardwareComponentInterfaceParams & params) instead. [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+   21 |   CallbackReturn result = [01;35m[Khardware_interface::SystemInterface::on_init(hardware_info)[m[K;
+      |                           [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~[m[K
+In file included from [01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/system_interface.hpp:18[m[K,
+                 from [01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/include/rmitbot_firmware/rmitbot_interface.hpp:7[m[K,
+                 from [01m[K/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware/src/rmitbot_interface.cpp:1[m[K:
+[01m[K/opt/ros/jazzy/include/hardware_interface/hardware_interface/hardware_component_interface.hpp:140:26:[m[K [01;36m[Knote: [m[Kdeclared here
+  140 |   virtual CallbackReturn [01;36m[Kon_init[m[K(const HardwareInfo & hardware_info);
+      |                          [01;36m[K^~~~~~~[m[K
+[100%] [32m[1mLinking CXX shared library librmitbot_firmware.so[0m
+[100%] Built target rmitbot_firmware
+-- Install configuration: ""
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/rmitbot_interface.xml
+-- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/librmitbot_firmware.so
+-- Set non-toolchain portion of runtime path of "/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/librmitbot_firmware.so" to ""
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/include
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/include/rmitbot_firmware
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/include/rmitbot_firmware/rmitbot_interface.hpp
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/library_path.sh
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/library_path.dsv
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/package_run_dependencies/rmitbot_firmware
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/parent_prefix_path/rmitbot_firmware
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/ament_prefix_path.sh
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/path.sh
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/environment/path.dsv
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.bash
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.sh
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.zsh
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/local_setup.dsv
+-- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.dsv
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/packages/rmitbot_firmware
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/ament_index/resource_index/hardware_interface__pluginlib__plugin/rmitbot_firmware
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/rmitbot_firmwareConfig.cmake
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/cmake/rmitbot_firmwareConfig-version.cmake
+-- Up-to-date: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.xml

@@ -1,0 +1,590 @@
+[0.308s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.308s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=4, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, meson_args=[], ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffffa1578c50>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffa172d5b0>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffa172d5b0>>, mixin_verb=('build',))
+[0.366s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.366s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.366s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.366s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.366s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.366s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.366s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/terra/newtest/rmit_ros2_ws'
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.437s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'meson', 'python']
+[0.437s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.437s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'meson'
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'meson', 'python']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'meson'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extension 'ignore'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extension 'ignore_ament_install'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extensions ['colcon_pkg']
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extension 'colcon_pkg'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extensions ['colcon_meta']
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extension 'colcon_meta'
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extensions ['ros']
+[0.442s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_bringup) by extension 'ros'
+[0.446s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_bringup' with type 'ros.ament_cmake' and name 'rmitbot_bringup'
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extension 'ignore'
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extension 'ignore_ament_install'
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extensions ['colcon_pkg']
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extension 'colcon_pkg'
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extensions ['colcon_meta']
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extension 'colcon_meta'
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extensions ['ros']
+[0.446s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_controller) by extension 'ros'
+[0.447s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_controller' with type 'ros.ament_cmake' and name 'rmitbot_controller'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extensions ['ignore', 'ignore_ament_install']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extension 'ignore'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extension 'ignore_ament_install'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extensions ['colcon_pkg']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extension 'colcon_pkg'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extensions ['colcon_meta']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extension 'colcon_meta'
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extensions ['ros']
+[0.447s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_description) by extension 'ros'
+[0.448s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_description' with type 'ros.ament_cmake' and name 'rmitbot_description'
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extensions ['ignore', 'ignore_ament_install']
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extension 'ignore'
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extension 'ignore_ament_install'
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extensions ['colcon_pkg']
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extension 'colcon_pkg'
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extensions ['colcon_meta']
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extension 'colcon_meta'
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extensions ['ros']
+[0.448s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_firmware) by extension 'ros'
+[0.449s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_firmware' with type 'ros.ament_cmake' and name 'rmitbot_firmware'
+[0.449s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extensions ['ignore', 'ignore_ament_install']
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extension 'ignore'
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extension 'ignore_ament_install'
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extensions ['colcon_pkg']
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extension 'colcon_pkg'
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extensions ['colcon_meta']
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extension 'colcon_meta'
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extensions ['ros']
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_localization) by extension 'ros'
+[0.450s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_localization' with type 'ros.ament_cmake' and name 'rmitbot_localization'
+[0.450s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extensions ['ignore', 'ignore_ament_install']
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extension 'ignore'
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extension 'ignore_ament_install'
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extensions ['colcon_pkg']
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extension 'colcon_pkg'
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extensions ['colcon_meta']
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extension 'colcon_meta'
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extensions ['ros']
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_mapping) by extension 'ros'
+[0.451s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_mapping' with type 'ros.ament_cmake' and name 'rmitbot_mapping'
+[0.451s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extension 'ignore'
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extension 'ignore_ament_install'
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extensions ['colcon_pkg']
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extension 'colcon_pkg'
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extensions ['colcon_meta']
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extension 'colcon_meta'
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extensions ['ros']
+[0.452s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_navigation) by extension 'ros'
+[0.452s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_navigation' with type 'ros.ament_cmake' and name 'rmitbot_navigation'
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extensions ['ignore', 'ignore_ament_install']
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extension 'ignore'
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extension 'ignore_ament_install'
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extensions ['colcon_pkg']
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extension 'colcon_pkg'
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extensions ['colcon_meta']
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extension 'colcon_meta'
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extensions ['ros']
+[0.453s] Level 1:colcon.colcon_core.package_identification:_identify(src/rmitbot_vision) by extension 'ros'
+[0.453s] DEBUG:colcon.colcon_core.package_identification:Package 'src/rmitbot_vision' with type 'ros.ament_cmake' and name 'rmitbot_vision'
+[0.453s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.453s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.454s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.454s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.454s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.474s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.474s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.477s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 8 installed packages in /home/terra/newtest/rmit_ros2_ws/install
+[0.478s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 276 installed packages in /opt/ros/jazzy
+[0.479s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'cmake_args' from command line to 'None'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'cmake_target' from command line to 'None'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'cmake_clean_cache' from command line to 'False'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'cmake_clean_first' from command line to 'False'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'cmake_force_configure' from command line to 'False'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'meson_args' from command line to '[]'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'ament_cmake_args' from command line to 'None'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'catkin_cmake_args' from command line to 'None'
+[0.543s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_bringup' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.543s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_bringup' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_bringup', 'symlink_install': False, 'test_result_base': None}
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'cmake_target' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'meson_args' from command line to '[]'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.556s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_controller', 'symlink_install': False, 'test_result_base': None}
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'cmake_args' from command line to 'None'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'cmake_target' from command line to 'None'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'meson_args' from command line to '[]'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.569s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.569s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_description', 'symlink_install': False, 'test_result_base': None}
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'cmake_args' from command line to 'None'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'cmake_target' from command line to 'None'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'cmake_clean_cache' from command line to 'False'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'cmake_clean_first' from command line to 'False'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'cmake_force_configure' from command line to 'False'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'meson_args' from command line to '[]'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'ament_cmake_args' from command line to 'None'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'catkin_cmake_args' from command line to 'None'
+[0.582s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_firmware' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.582s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_firmware' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware', 'symlink_install': False, 'test_result_base': None}
+[0.596s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'cmake_args' from command line to 'None'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'cmake_target' from command line to 'None'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'cmake_clean_cache' from command line to 'False'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'cmake_clean_first' from command line to 'False'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'cmake_force_configure' from command line to 'False'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'meson_args' from command line to '[]'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'ament_cmake_args' from command line to 'None'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'catkin_cmake_args' from command line to 'None'
+[0.597s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_localization' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.597s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_localization' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_localization', 'symlink_install': False, 'test_result_base': None}
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'cmake_args' from command line to 'None'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'cmake_target' from command line to 'None'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'cmake_clean_cache' from command line to 'False'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'cmake_clean_first' from command line to 'False'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'cmake_force_configure' from command line to 'False'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'meson_args' from command line to '[]'
+[0.609s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'ament_cmake_args' from command line to 'None'
+[0.610s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'catkin_cmake_args' from command line to 'None'
+[0.610s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_mapping' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.610s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_mapping' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_mapping', 'symlink_install': False, 'test_result_base': None}
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'cmake_args' from command line to 'None'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'cmake_target' from command line to 'None'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'cmake_clean_cache' from command line to 'False'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'cmake_clean_first' from command line to 'False'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'cmake_force_configure' from command line to 'False'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'meson_args' from command line to '[]'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'ament_cmake_args' from command line to 'None'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'catkin_cmake_args' from command line to 'None'
+[0.622s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_navigation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.622s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_navigation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation', 'symlink_install': False, 'test_result_base': None}
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'cmake_args' from command line to 'None'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'cmake_target' from command line to 'None'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'cmake_clean_cache' from command line to 'False'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'cmake_clean_first' from command line to 'False'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'cmake_force_configure' from command line to 'False'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'meson_args' from command line to '[]'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'ament_cmake_args' from command line to 'None'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'catkin_cmake_args' from command line to 'None'
+[0.635s] Level 5:colcon.colcon_core.verb:set package 'rmitbot_vision' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.635s] DEBUG:colcon.colcon_core.verb:Building package 'rmitbot_vision' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision', 'merge_install': False, 'meson_args': [], 'path': '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision', 'symlink_install': False, 'test_result_base': None}
+[0.636s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.637s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.637s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_bringup' with build type 'ament_cmake'
+[0.638s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_bringup'
+[0.640s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.640s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.640s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.646s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_controller' with build type 'ament_cmake'
+[0.646s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_controller'
+[0.646s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.646s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.651s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_description' with build type 'ament_cmake'
+[0.652s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_description'
+[0.652s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.652s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.657s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware' with build type 'ament_cmake'
+[0.657s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_firmware'
+[0.658s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.658s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.669s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup -- -j4 -l4
+[0.673s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller -- -j4 -l4
+[0.677s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description -- -j4 -l4
+[0.694s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware -- -j4 -l4
+[0.761s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller -- -j4 -l4
+[0.779s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller
+[0.782s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup -- -j4 -l4
+[0.784s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup
+[0.786s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description -- -j4 -l4
+[0.789s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description
+[0.808s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_controller)
+[0.815s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_controller
+[0.817s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller' for CMake module files
+[0.818s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller' for CMake config files
+[0.819s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_controller', 'cmake_prefix_path')
+[0.819s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/hook/cmake_prefix_path.ps1'
+[0.820s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/hook/cmake_prefix_path.dsv'
+[0.822s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/hook/cmake_prefix_path.sh'
+[0.824s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/bin'
+[0.824s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/lib/pkgconfig/rmitbot_controller.pc'
+[0.824s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/lib/python3.12/site-packages'
+[0.825s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/bin'
+[0.825s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.ps1'
+[0.826s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.dsv'
+[0.827s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.sh'
+[0.832s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.bash'
+[0.833s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.zsh'
+[0.834s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/colcon-core/packages/rmitbot_controller)
+[0.836s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_controller)
+[0.836s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller' for CMake module files
+[0.837s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller' for CMake config files
+[0.837s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_controller', 'cmake_prefix_path')
+[0.838s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/hook/cmake_prefix_path.ps1'
+[0.838s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/hook/cmake_prefix_path.dsv'
+[0.839s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/hook/cmake_prefix_path.sh'
+[0.840s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/bin'
+[0.840s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/lib/pkgconfig/rmitbot_controller.pc'
+[0.841s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/lib/python3.12/site-packages'
+[0.841s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/bin'
+[0.841s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.ps1'
+[0.842s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.dsv'
+[0.843s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.sh'
+[0.844s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.bash'
+[0.844s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/rmitbot_controller/package.zsh'
+[0.845s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_controller/share/colcon-core/packages/rmitbot_controller)
+[0.850s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_localization' with build type 'ament_cmake'
+[0.850s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_localization'
+[0.850s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.850s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.856s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_description)
+[0.857s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description' for CMake module files
+[0.858s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_description
+[0.858s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description' for CMake config files
+[0.859s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_description', 'cmake_prefix_path')
+[0.859s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/hook/cmake_prefix_path.ps1'
+[0.860s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/hook/cmake_prefix_path.dsv'
+[0.860s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/hook/cmake_prefix_path.sh'
+[0.861s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/bin'
+[0.862s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/lib/pkgconfig/rmitbot_description.pc'
+[0.862s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/lib/python3.12/site-packages'
+[0.862s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/bin'
+[0.863s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.ps1'
+[0.863s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.dsv'
+[0.864s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.sh'
+[0.865s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.bash'
+[0.866s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.zsh'
+[0.866s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/colcon-core/packages/rmitbot_description)
+[0.868s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_description)
+[0.868s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description' for CMake module files
+[0.868s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description' for CMake config files
+[0.869s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_description', 'cmake_prefix_path')
+[0.869s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/hook/cmake_prefix_path.ps1'
+[0.870s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/hook/cmake_prefix_path.dsv'
+[0.870s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/hook/cmake_prefix_path.sh'
+[0.871s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/bin'
+[0.871s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/lib/pkgconfig/rmitbot_description.pc'
+[0.872s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/lib/python3.12/site-packages'
+[0.872s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/bin'
+[0.872s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.ps1'
+[0.873s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.dsv'
+[0.874s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.sh'
+[0.875s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.bash'
+[0.876s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/rmitbot_description/package.zsh'
+[0.876s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_description/share/colcon-core/packages/rmitbot_description)
+[0.877s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_bringup)
+[0.877s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup' for CMake module files
+[0.878s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup' for CMake config files
+[0.879s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_bringup
+[0.879s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_bringup', 'cmake_prefix_path')
+[0.880s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/hook/cmake_prefix_path.ps1'
+[0.880s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/hook/cmake_prefix_path.dsv'
+[0.881s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/hook/cmake_prefix_path.sh'
+[0.884s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/bin'
+[0.884s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/lib/pkgconfig/rmitbot_bringup.pc'
+[0.884s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/lib/python3.12/site-packages'
+[0.885s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/bin'
+[0.885s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.ps1'
+[0.886s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.dsv'
+[0.887s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.sh'
+[0.887s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.bash'
+[0.888s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.zsh'
+[0.889s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/colcon-core/packages/rmitbot_bringup)
+[0.889s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_bringup)
+[0.890s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup' for CMake module files
+[0.890s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup' for CMake config files
+[0.891s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_bringup', 'cmake_prefix_path')
+[0.891s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/hook/cmake_prefix_path.ps1'
+[0.891s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/hook/cmake_prefix_path.dsv'
+[0.892s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/hook/cmake_prefix_path.sh'
+[0.893s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/bin'
+[0.893s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/lib/pkgconfig/rmitbot_bringup.pc'
+[0.893s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/lib/python3.12/site-packages'
+[0.894s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/bin'
+[0.894s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.ps1'
+[0.895s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.dsv'
+[0.896s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.sh'
+[0.897s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.bash'
+[0.897s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/rmitbot_bringup/package.zsh'
+[0.898s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_bringup/share/colcon-core/packages/rmitbot_bringup)
+[0.900s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_mapping' with build type 'ament_cmake'
+[0.900s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_mapping'
+[0.900s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.900s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.905s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation' with build type 'ament_cmake'
+[0.906s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation'
+[0.906s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.906s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.912s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware -- -j4 -l4
+[0.914s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware
+[0.920s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization -- -j4 -l4
+[0.924s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping -- -j4 -l4
+[0.933s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation -- -j4 -l4
+[0.946s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_firmware)
+[0.947s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware' for CMake module files
+[0.948s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware' for CMake config files
+[0.948s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_firmware', 'cmake_prefix_path')
+[0.949s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/cmake_prefix_path.ps1'
+[0.949s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_firmware
+[0.951s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/cmake_prefix_path.dsv'
+[0.953s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/cmake_prefix_path.sh'
+[0.955s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib'
+[0.955s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_firmware', 'ld_library_path_lib')
+[0.956s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/ld_library_path_lib.ps1'
+[0.957s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/ld_library_path_lib.dsv'
+[0.958s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/ld_library_path_lib.sh'
+[0.960s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/bin'
+[0.960s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/pkgconfig/rmitbot_firmware.pc'
+[0.961s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/python3.12/site-packages'
+[0.961s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/bin'
+[0.962s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.ps1'
+[0.963s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.dsv'
+[0.964s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.sh'
+[0.966s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.bash'
+[0.967s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.zsh'
+[0.967s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/colcon-core/packages/rmitbot_firmware)
+[0.969s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_firmware)
+[0.970s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware' for CMake module files
+[0.971s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware' for CMake config files
+[0.972s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_firmware', 'cmake_prefix_path')
+[0.972s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/cmake_prefix_path.ps1'
+[0.973s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/cmake_prefix_path.dsv'
+[0.974s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/cmake_prefix_path.sh'
+[0.975s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib'
+[0.976s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_firmware', 'ld_library_path_lib')
+[0.976s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/ld_library_path_lib.ps1'
+[0.977s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/ld_library_path_lib.dsv'
+[0.978s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/hook/ld_library_path_lib.sh'
+[0.979s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/bin'
+[0.980s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/pkgconfig/rmitbot_firmware.pc'
+[0.980s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/lib/python3.12/site-packages'
+[0.981s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/bin'
+[0.982s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.ps1'
+[0.983s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.dsv'
+[0.984s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.sh'
+[0.985s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.bash'
+[0.989s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/rmitbot_firmware/package.zsh'
+[0.990s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_firmware/share/colcon-core/packages/rmitbot_firmware)
+[0.992s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision' with build type 'ament_cmake'
+[0.992s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision'
+[0.993s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.993s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.009s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision -- -j4 -l4
+[1.013s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization -- -j4 -l4
+[1.014s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization
+[1.022s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping -- -j4 -l4
+[1.023s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping
+[1.026s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation -- -j4 -l4
+[1.030s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation
+[1.053s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_localization)
+[1.054s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization' for CMake module files
+[1.055s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization
+[1.055s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization' for CMake config files
+[1.056s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_localization', 'cmake_prefix_path')
+[1.056s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/hook/cmake_prefix_path.ps1'
+[1.057s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/hook/cmake_prefix_path.dsv'
+[1.058s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/hook/cmake_prefix_path.sh'
+[1.059s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/bin'
+[1.059s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/lib/pkgconfig/rmitbot_localization.pc'
+[1.059s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/lib/python3.12/site-packages'
+[1.060s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/bin'
+[1.060s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.ps1'
+[1.061s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.dsv'
+[1.062s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.sh'
+[1.063s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.bash'
+[1.063s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.zsh'
+[1.064s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/colcon-core/packages/rmitbot_localization)
+[1.065s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_localization)
+[1.065s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization' for CMake module files
+[1.066s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization' for CMake config files
+[1.066s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_localization', 'cmake_prefix_path')
+[1.067s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/hook/cmake_prefix_path.ps1'
+[1.067s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/hook/cmake_prefix_path.dsv'
+[1.068s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/hook/cmake_prefix_path.sh'
+[1.069s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/bin'
+[1.069s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/lib/pkgconfig/rmitbot_localization.pc'
+[1.070s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/lib/python3.12/site-packages'
+[1.070s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/bin'
+[1.070s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.ps1'
+[1.071s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.dsv'
+[1.075s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.sh'
+[1.076s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.bash'
+[1.077s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.zsh'
+[1.078s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/colcon-core/packages/rmitbot_localization)
+[1.080s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_navigation)
+[1.081s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation' for CMake module files
+[1.082s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation
+[1.082s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation' for CMake config files
+[1.083s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_navigation', 'cmake_prefix_path')
+[1.083s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/hook/cmake_prefix_path.ps1'
+[1.084s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/hook/cmake_prefix_path.dsv'
+[1.084s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/hook/cmake_prefix_path.sh'
+[1.085s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/bin'
+[1.086s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/lib/pkgconfig/rmitbot_navigation.pc'
+[1.086s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/lib/python3.12/site-packages'
+[1.086s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/bin'
+[1.087s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.ps1'
+[1.088s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.dsv'
+[1.088s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.sh'
+[1.089s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.bash'
+[1.090s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.zsh'
+[1.091s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/colcon-core/packages/rmitbot_navigation)
+[1.092s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_navigation)
+[1.092s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation' for CMake module files
+[1.093s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation' for CMake config files
+[1.093s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_navigation', 'cmake_prefix_path')
+[1.093s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/hook/cmake_prefix_path.ps1'
+[1.094s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/hook/cmake_prefix_path.dsv'
+[1.094s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/hook/cmake_prefix_path.sh'
+[1.095s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/bin'
+[1.095s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/lib/pkgconfig/rmitbot_navigation.pc'
+[1.096s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/lib/python3.12/site-packages'
+[1.096s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/bin'
+[1.096s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.ps1'
+[1.097s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.dsv'
+[1.098s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.sh'
+[1.099s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.bash'
+[1.099s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.zsh'
+[1.100s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/colcon-core/packages/rmitbot_navigation)
+[1.101s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_mapping)
+[1.101s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping' for CMake module files
+[1.102s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping' for CMake config files
+[1.103s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_mapping', 'cmake_prefix_path')
+[1.103s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/hook/cmake_prefix_path.ps1'
+[1.104s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/hook/cmake_prefix_path.dsv'
+[1.104s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping
+[1.105s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/hook/cmake_prefix_path.sh'
+[1.105s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/bin'
+[1.105s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/lib/pkgconfig/rmitbot_mapping.pc'
+[1.106s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/lib/python3.12/site-packages'
+[1.106s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/bin'
+[1.107s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.ps1'
+[1.107s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.dsv'
+[1.108s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.sh'
+[1.108s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.bash'
+[1.109s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.zsh'
+[1.109s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/colcon-core/packages/rmitbot_mapping)
+[1.110s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_mapping)
+[1.110s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping' for CMake module files
+[1.111s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping' for CMake config files
+[1.111s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_mapping', 'cmake_prefix_path')
+[1.111s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/hook/cmake_prefix_path.ps1'
+[1.129s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/hook/cmake_prefix_path.dsv'
+[1.130s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/hook/cmake_prefix_path.sh'
+[1.131s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/bin'
+[1.131s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/lib/pkgconfig/rmitbot_mapping.pc'
+[1.131s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/lib/python3.12/site-packages'
+[1.132s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/bin'
+[1.132s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.ps1'
+[1.133s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.dsv'
+[1.134s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.sh'
+[1.135s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.bash'
+[1.136s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.zsh'
+[1.137s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/colcon-core/packages/rmitbot_mapping)
+[1.142s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision -- -j4 -l4
+[1.142s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision
+[1.165s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_vision)
+[1.165s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision' for CMake module files
+[1.166s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision
+[1.166s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision' for CMake config files
+[1.167s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_vision', 'cmake_prefix_path')
+[1.167s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/hook/cmake_prefix_path.ps1'
+[1.168s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/hook/cmake_prefix_path.dsv'
+[1.169s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/hook/cmake_prefix_path.sh'
+[1.172s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/bin'
+[1.172s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/lib/pkgconfig/rmitbot_vision.pc'
+[1.173s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/lib/python3.12/site-packages'
+[1.173s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/bin'
+[1.173s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.ps1'
+[1.174s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.dsv'
+[1.175s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.sh'
+[1.176s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.bash'
+[1.177s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.zsh'
+[1.177s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/colcon-core/packages/rmitbot_vision)
+[1.178s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(rmitbot_vision)
+[1.178s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision' for CMake module files
+[1.179s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision' for CMake config files
+[1.180s] Level 1:colcon.colcon_core.shell:create_environment_hook('rmitbot_vision', 'cmake_prefix_path')
+[1.180s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/hook/cmake_prefix_path.ps1'
+[1.181s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/hook/cmake_prefix_path.dsv'
+[1.181s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/hook/cmake_prefix_path.sh'
+[1.182s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/bin'
+[1.182s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/lib/pkgconfig/rmitbot_vision.pc'
+[1.183s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/lib/python3.12/site-packages'
+[1.183s] Level 1:colcon.colcon_core.environment:checking '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/bin'
+[1.184s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.ps1'
+[1.185s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.dsv'
+[1.185s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.sh'
+[1.186s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.bash'
+[1.187s] INFO:colcon.colcon_core.shell:Creating package script '/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/rmitbot_vision/package.zsh'
+[1.188s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/terra/newtest/rmit_ros2_ws/install/rmitbot_vision/share/colcon-core/packages/rmitbot_vision)
+[1.188s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.189s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.189s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.189s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.190s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[1.190s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/terra/newtest/rmit_ros2_ws/install/local_setup.ps1'
+[1.191s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/terra/newtest/rmit_ros2_ws/install/_local_setup_util_ps1.py'
+[1.193s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/terra/newtest/rmit_ros2_ws/install/setup.ps1'
+[1.194s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/terra/newtest/rmit_ros2_ws/install/local_setup.sh'
+[1.195s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/terra/newtest/rmit_ros2_ws/install/_local_setup_util_sh.py'
+[1.196s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/terra/newtest/rmit_ros2_ws/install/setup.sh'
+[1.199s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/terra/newtest/rmit_ros2_ws/install/local_setup.bash'
+[1.200s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/terra/newtest/rmit_ros2_ws/install/setup.bash'
+[1.201s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/terra/newtest/rmit_ros2_ws/install/local_setup.zsh'
+[1.202s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/terra/newtest/rmit_ros2_ws/install/setup.zsh'

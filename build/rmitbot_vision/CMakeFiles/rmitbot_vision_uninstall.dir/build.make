@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/v120506/rmit_ros2_ws/src/rmitbot_vision
+CMAKE_SOURCE_DIR = /home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/v120506/rmit_ros2_ws/build/rmitbot_vision
+CMAKE_BINARY_DIR = /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision
 
 # Utility rule file for rmitbot_vision_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/rmitbot_vision_uninstall.dir/compiler_depend.make
 include CMakeFiles/rmitbot_vision_uninstall.dir/progress.make
 
 CMakeFiles/rmitbot_vision_uninstall:
-	/usr/bin/cmake -P /home/v120506/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 rmitbot_vision_uninstall: CMakeFiles/rmitbot_vision_uninstall
 rmitbot_vision_uninstall: CMakeFiles/rmitbot_vision_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/rmitbot_vision_uninstall.dir/clean:
 .PHONY : CMakeFiles/rmitbot_vision_uninstall.dir/clean
 
 CMakeFiles/rmitbot_vision_uninstall.dir/depend:
-	cd /home/v120506/rmit_ros2_ws/build/rmitbot_vision && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/v120506/rmit_ros2_ws/src/rmitbot_vision /home/v120506/rmit_ros2_ws/src/rmitbot_vision /home/v120506/rmit_ros2_ws/build/rmitbot_vision /home/v120506/rmit_ros2_ws/build/rmitbot_vision /home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/rmitbot_vision_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision /home/terra/newtest/rmit_ros2_ws/src/rmitbot_vision /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision /home/terra/newtest/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/rmitbot_vision_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/rmitbot_vision_uninstall.dir/depend
 

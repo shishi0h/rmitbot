@@ -7,7 +7,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 from launch.substitutions import Command, LaunchConfiguration
 
 # Launch the file
-# ros2 launch rmitbot_description display.launch.py
+# ros2 launch rmitbot_description rviz.launch.py
 
 def generate_launch_description():
     

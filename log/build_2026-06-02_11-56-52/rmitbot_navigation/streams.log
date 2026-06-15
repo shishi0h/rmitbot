@@ -1,0 +1,45 @@
+[0.018s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation
+[0.162s] -- The C compiler identification is GNU 13.3.0
+[0.305s] -- The CXX compiler identification is GNU 13.3.0
+[0.340s] -- Detecting C compiler ABI info
+[0.556s] -- Detecting C compiler ABI info - done
+[0.571s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.571s] -- Detecting C compile features
+[0.573s] -- Detecting C compile features - done
+[0.589s] -- Detecting CXX compiler ABI info
+[0.826s] -- Detecting CXX compiler ABI info - done
+[0.843s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.843s] -- Detecting CXX compile features
+[0.843s] -- Detecting CXX compile features - done
+[0.848s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.183s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.591s] -- Configuring done (1.6s)
+[1.597s] -- Generating done (0.0s)
+[1.598s] -- Build files have been written to: /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation
+[1.611s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation
+[1.613s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation -- -j4 -l4
+[1.706s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation -- -j4 -l4
+[1.707s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation
+[1.728s] -- Install configuration: ""
+[1.728s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/launch
+[1.728s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/launch/twistmux.launch.py
+[1.730s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/launch/nav.launch.py
+[1.730s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/config
+[1.730s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/config/nav2_params.yaml
+[1.731s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/config/twistmux.yaml
+[1.732s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/ament_index/resource_index/package_run_dependencies/rmitbot_navigation
+[1.737s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/ament_index/resource_index/parent_prefix_path/rmitbot_navigation
+[1.744s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/environment/ament_prefix_path.sh
+[1.745s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/environment/ament_prefix_path.dsv
+[1.746s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/environment/path.sh
+[1.746s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/environment/path.dsv
+[1.746s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/local_setup.bash
+[1.746s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/local_setup.sh
+[1.747s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/local_setup.zsh
+[1.748s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/local_setup.dsv
+[1.749s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.dsv
+[1.749s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/ament_index/resource_index/packages/rmitbot_navigation
+[1.749s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/cmake/rmitbot_navigationConfig.cmake
+[1.750s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/cmake/rmitbot_navigationConfig-version.cmake
+[1.750s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation/share/rmitbot_navigation/package.xml
+[1.776s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation

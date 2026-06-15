@@ -1,0 +1,49 @@
+[0.044s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_localization -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization
+[0.189s] -- The C compiler identification is GNU 13.3.0
+[0.337s] -- The CXX compiler identification is GNU 13.3.0
+[0.370s] -- Detecting C compiler ABI info
+[0.584s] -- Detecting C compiler ABI info - done
+[0.601s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.601s] -- Detecting C compile features
+[0.601s] -- Detecting C compile features - done
+[0.617s] -- Detecting CXX compiler ABI info
+[0.861s] -- Detecting CXX compiler ABI info - done
+[0.876s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.878s] -- Detecting CXX compile features
+[0.878s] -- Detecting CXX compile features - done
+[0.882s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.233s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.541s] -- Found nav_msgs: 5.3.7 (/opt/ros/jazzy/share/nav_msgs/cmake)
+[1.692s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.717s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.748s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.784s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.943s] -- Found sensor_msgs: 5.3.7 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[2.180s] -- Configuring done (2.1s)
+[2.186s] -- Generating done (0.0s)
+[2.190s] -- Build files have been written to: /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization
+[2.203s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_localization -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization
+[2.204s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization -- -j4 -l4
+[2.283s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization -- -j4 -l4
+[2.285s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization
+[2.299s] -- Install configuration: ""
+[2.299s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/launch
+[2.299s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/launch/localization.launch.py
+[2.299s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/config
+[2.300s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/config/ekf.yaml
+[2.300s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/ament_index/resource_index/package_run_dependencies/rmitbot_localization
+[2.300s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/ament_index/resource_index/parent_prefix_path/rmitbot_localization
+[2.301s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/ament_prefix_path.sh
+[2.301s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/ament_prefix_path.dsv
+[2.301s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/path.sh
+[2.301s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/environment/path.dsv
+[2.302s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.bash
+[2.302s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.sh
+[2.302s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.zsh
+[2.302s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/local_setup.dsv
+[2.302s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.dsv
+[2.303s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/ament_index/resource_index/packages/rmitbot_localization
+[2.303s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/cmake/rmitbot_localizationConfig.cmake
+[2.303s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/cmake/rmitbot_localizationConfig-version.cmake
+[2.304s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_localization/share/rmitbot_localization/package.xml
+[2.309s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_localization

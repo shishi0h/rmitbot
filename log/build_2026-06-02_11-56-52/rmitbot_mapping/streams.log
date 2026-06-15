@@ -1,0 +1,44 @@
+[0.042s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_mapping -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping
+[0.193s] -- The C compiler identification is GNU 13.3.0
+[0.339s] -- The CXX compiler identification is GNU 13.3.0
+[0.370s] -- Detecting C compiler ABI info
+[0.586s] -- Detecting C compiler ABI info - done
+[0.603s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.603s] -- Detecting C compile features
+[0.605s] -- Detecting C compile features - done
+[0.624s] -- Detecting CXX compiler ABI info
+[0.854s] -- Detecting CXX compiler ABI info - done
+[0.868s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.870s] -- Detecting CXX compile features
+[0.870s] -- Detecting CXX compile features - done
+[0.874s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.226s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.631s] -- Configuring done (1.6s)
+[1.641s] -- Generating done (0.0s)
+[1.642s] -- Build files have been written to: /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping
+[1.656s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/terra/newtest/rmit_ros2_ws/src/rmitbot_mapping -DCMAKE_INSTALL_PREFIX=/home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping
+[1.657s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping -- -j4 -l4
+[1.739s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping -- -j4 -l4
+[1.742s] Invoking command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping
+[1.762s] -- Install configuration: ""
+[1.762s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/launch
+[1.763s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/launch/rplidar.launch.py
+[1.764s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/launch/slam.launch.py
+[1.764s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/config
+[1.764s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/config/slam.yaml
+[1.764s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/ament_index/resource_index/package_run_dependencies/rmitbot_mapping
+[1.765s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/ament_index/resource_index/parent_prefix_path/rmitbot_mapping
+[1.766s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/environment/ament_prefix_path.sh
+[1.767s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/environment/ament_prefix_path.dsv
+[1.767s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/environment/path.sh
+[1.769s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/environment/path.dsv
+[1.769s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/local_setup.bash
+[1.769s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/local_setup.sh
+[1.770s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/local_setup.zsh
+[1.770s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/local_setup.dsv
+[1.770s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.dsv
+[1.773s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/ament_index/resource_index/packages/rmitbot_mapping
+[1.773s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/cmake/rmitbot_mappingConfig.cmake
+[1.773s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/cmake/rmitbot_mappingConfig-version.cmake
+[1.773s] -- Installing: /home/terra/newtest/rmit_ros2_ws/install/rmitbot_mapping/share/rmitbot_mapping/package.xml
+[1.776s] Invoked command in '/home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/terra/newtest/rmit_ros2_ws/build/rmitbot_mapping

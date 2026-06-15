@@ -1,8 +1,8 @@
-# Install script for directory: /home/v120506/rmit_ros2_ws/src/rmitbot_navigation
+# Install script for directory: /home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/v120506/rmit_ros2_ws/install/rmitbot_navigation")
+  set(CMAKE_INSTALL_PREFIX "/home/terra/newtest/rmit_ros2_ws/install/rmitbot_navigation")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,17 +44,17 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE DIRECTORY FILES
-    "/home/v120506/rmit_ros2_ws/src/rmitbot_navigation/launch"
-    "/home/v120506/rmit_ros2_ws/src/rmitbot_navigation/config"
+    "/home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation/launch"
+    "/home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation/config"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/rmitbot_navigation")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/rmitbot_navigation")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/rmitbot_navigation")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/rmitbot_navigation")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -62,7 +62,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation/environment" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/ament_prefix_path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation/environment" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/ament_prefix_path.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -70,42 +70,42 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation/environment" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation/environment" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/path.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.bash")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.bash")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.sh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.sh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.zsh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.zsh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/local_setup.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/package.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_environment_hooks/package.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_index/share/ament_index/resource_index/packages/rmitbot_navigation")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_index/share/ament_index/resource_index/packages/rmitbot_navigation")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation/cmake" TYPE FILE FILES
-    "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_core/rmitbot_navigationConfig.cmake"
-    "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_core/rmitbot_navigationConfig-version.cmake"
+    "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_core/rmitbot_navigationConfig.cmake"
+    "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/ament_cmake_core/rmitbot_navigationConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/v120506/rmit_ros2_ws/src/rmitbot_navigation/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/rmitbot_navigation" TYPE FILE FILES "/home/terra/newtest/rmit_ros2_ws/src/rmitbot_navigation/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -116,5 +116,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/v120506/rmit_ros2_ws/build/rmitbot_navigation/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/terra/newtest/rmit_ros2_ws/build/rmitbot_navigation/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
