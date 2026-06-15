@@ -110,7 +110,8 @@ void IMUGetData_Uncalibrated()
             double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
             double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
             double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
-            double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+            double val = 1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3));
+            double q0 = (val > 0.0) ? sqrt(val) : 0.0;
             double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
 
             quat[0] = q1 / n;
@@ -159,7 +160,8 @@ void IMUGetData()
             double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
             double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
             double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
-            double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+            double val = 1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3));
+            double q0 = (val > 0.0) ? sqrt(val) : 0.0;
             double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
 
             quat[0] = q1 / n;

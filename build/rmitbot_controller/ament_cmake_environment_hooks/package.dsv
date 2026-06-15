@@ -1,4 +1,0 @@
-source;share/rmitbot_controller/local_setup.bash
-source;share/rmitbot_controller/local_setup.dsv
-source;share/rmitbot_controller/local_setup.sh
-source;share/rmitbot_controller/local_setup.zsh

@@ -1,9 +1,0 @@
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/uninstall.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/rmitbot_vision_uninstall.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/test.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/edit_cache.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/rebuild_cache.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/list_install_components.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/install.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/install/local.dir
-/home/v120506/rmit_ros2_ws/build/rmitbot_vision/CMakeFiles/install/strip.dir

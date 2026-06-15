@@ -1,4 +1,0 @@
-source;share/rmitbot_localization/local_setup.bash
-source;share/rmitbot_localization/local_setup.dsv
-source;share/rmitbot_localization/local_setup.sh
-source;share/rmitbot_localization/local_setup.zsh

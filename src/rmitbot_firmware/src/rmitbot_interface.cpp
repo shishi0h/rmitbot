@@ -137,7 +137,12 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
   if (arduino_.IsDataAvailable()) {
     auto dt = (rclcpp::Clock().now() - last_run_).seconds();
     std::string message;
-    arduino_.ReadLine(message);
+    try {
+      arduino_.ReadLine(message, '\n', 25);
+    } catch (const LibSerial::ReadTimeout&) {
+      RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Serial read timed out! (ESP32 dropped connection or crashed)");
+      return hardware_interface::return_type::OK;
+    }
     // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Message Received: %s", message.c_str());
 
     // Remove only the newline and carriage return characters (i.e., \n, \r)

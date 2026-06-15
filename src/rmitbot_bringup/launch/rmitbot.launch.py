@@ -95,7 +95,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         display,
-        # controller,
+        controller,
         twistmux,
         localization,
         # rplidar, 
