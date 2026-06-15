@@ -3,7 +3,7 @@
 
   connect: {
     // Connect to your specific Peer/Router endpoint
-    endpoints: ["tcp/100.68.87.13:7447"],
+    endpoints: ["tcp/100.66.229.31:7447"],
   },
 
   listen: {
