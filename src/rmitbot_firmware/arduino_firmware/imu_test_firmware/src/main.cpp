@@ -2,124 +2,101 @@
 #include <Wire.h>
 #include "ICM_20948.h"
 
-// Your custom I2C pins
+// I2C pins from your original firmware's MySetup.h
 #define I2C_SDA 23
 #define I2C_SCL 22
 
 ICM_20948_I2C myICM;
 
-// Add success flag globally
-bool dmp_success = false;
+// Global IMU variables just like original firmware
+double quat[4];
+double gyr[3];
+double acc[3];
+double quat_calib[4] = {0};
+double gyr_calib[3] = {0};
+double acc_calib[3] = {0};
 
-void setup() {
-  Serial.begin(115200);
-  while (!Serial);
-
-  Serial.println("IMU Standalone Tester Starting...");
-
-  Wire.begin(I2C_SDA, I2C_SCL);
-  Wire.setClock(100000);
-  Wire.setTimeOut(2000);
-
-  bool initialized = false;
-  while (!initialized) {
-    myICM.begin(Wire, 0); // I2C address 0x68 (0)
-    if (myICM.status != ICM_20948_Stat_Ok) {
-      Serial.println("IMU initialization failed. Retrying...");
-      delay(500);
-    } else {
-      initialized = true;
-    }
-  }
-  Serial.println("IMU Initialized! Booting DMP...");
-
-  // Initialize DMP exactly as original firmware did
-  bool success = true;
-  ICM_20948_Status_e stat;
-
-  Serial.println("Performing Software Reset on IMU...");
-  myICM.swReset();
-  delay(250);
-
-  // Wake up the IMU
-  myICM.sleep(false);
-  myICM.lowPower(false);
-  delay(250);
-
-  stat = myICM.initializeDMP();
-  Serial.print("initializeDMP: "); Serial.println(stat);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.enableDMPSensor(INV_ICM20948_SENSOR_GAME_ROTATION_VECTOR);
-  Serial.print("enableDMPSensor(Quat): "); Serial.println(stat);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_GYROSCOPE);
-  Serial.print("enableDMPSensor(Gyro): "); Serial.println(stat);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_ACCELEROMETER);
-  Serial.print("enableDMPSensor(Accel): "); Serial.println(stat);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.setDMPODRrate(DMP_ODR_Reg_Quat6, 0);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.setDMPODRrate(DMP_ODR_Reg_Accel, 0);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 0);
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.enableFIFO();
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.enableDMP();
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.resetDMP();
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  stat = myICM.resetFIFO();
-  success &= (stat == ICM_20948_Stat_Ok);
-
-  if (success) {
-    dmp_success = true;
-    Serial.println("DMP Ready! Starting raw data stream...");
-  } else {
-    dmp_success = false;
-    Serial.println("DMP Failed! (Will sit idle in loop)");
-  }
-}
-
-void loop() {
-  if (dmp_success) {
+void IMUGetData_Uncalibrated()
+{
     icm_20948_DMP_data_t data;
     myICM.readDMPdataFromFIFO(&data);
 
-    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) {
-      if ((data.header & DMP_header_bitmap_Gyro) > 0) {
-        // Print raw integer data exactly as the DMP outputs it
-        int raw_z = data.Raw_Gyro.Data.Z;
-        Serial.print("Raw Gyro Z: ");
-        Serial.print(raw_z);
+    // DUMP EVERYTHING!
+    Serial.print("Status: ");
+    Serial.print(myICM.status);
+    Serial.print(" | Header: ");
+    Serial.println(data.header);
 
-        // Print calculated values for both 16.4 and 65.5 scales to compare
+    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) // Was valid data available?
+    {
+        // Blindly extract and print gyro data without checking the header
+        float z = (float)data.Raw_Gyro.Data.Z;
         constexpr float Deg2Rad = 3.1416f / 180.0f;
-        float z_float = (float)raw_z;
-
-        float rads_16 = (z_float / 16.4f) * Deg2Rad;
-        float rads_65 = (z_float / 65.5f) * Deg2Rad;
-
-        Serial.print("\t| If 16.4 scale: ");
-        Serial.print(rads_16, 4);
-        Serial.print(" rad/s");
-
-        Serial.print("\t| If 65.5 scale: ");
-        Serial.print(rads_65, 4);
-        Serial.println(" rad/s");
-      }
+        constexpr float LSB_PER_DPS = 16.4f;
+        gyr[2] = z / LSB_PER_DPS * Deg2Rad;
+        
+        Serial.print("Raw Gyro Z: ");
+        Serial.print(z);
+        Serial.print("  -> Calculated rad/s: ");
+        Serial.println(gyr[2], 6);
     }
-  }
-  delay(10); // Wait for the DMP to generate new data
+}
+
+void IMUCalibrate()
+{
+    Serial.println("IMUCalibrate() started...");
+    for (size_t i = 0; i < 100; i++)
+    {
+        IMUGetData_Uncalibrated();
+        // I added a 10ms delay here so it doesn't capture the exact same sample 100 times instantly
+        delay(10); 
+    }
+    Serial.println("IMUCalibrate() finished!");
+}
+
+void IMUBegin()
+{
+    Wire.begin(I2C_SDA, I2C_SCL);
+    Wire.setClock(100000);
+    Wire.setTimeOut(2000);
+    bool initialized = false;
+    while (!initialized)
+    {
+        myICM.begin(Wire, 0);
+        if (myICM.status != ICM_20948_Stat_Ok)
+            initialized = false;
+        else
+            initialized = true;
+    }
+    
+    // Exactly as written in your original MyIMU.cpp
+    bool success = true;
+    success &= (myICM.initializeDMP() == ICM_20948_Stat_Ok);
+    success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_GAME_ROTATION_VECTOR) == ICM_20948_Stat_Ok);
+    success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_GYROSCOPE) == ICM_20948_Stat_Ok);
+    success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_ACCELEROMETER) == ICM_20948_Stat_Ok);
+    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Quat6, 0) == ICM_20948_Stat_Ok); // Set to the maximum
+    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Accel, 0) == ICM_20948_Stat_Ok); // Set to the maximum
+    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 0) == ICM_20948_Stat_Ok);  // Set to the maximum
+    success &= (myICM.enableFIFO() == ICM_20948_Stat_Ok);
+    success &= (myICM.enableDMP() == ICM_20948_Stat_Ok);
+    success &= (myICM.resetDMP() == ICM_20948_Stat_Ok);
+    success &= (myICM.resetFIFO() == ICM_20948_Stat_Ok);
+
+    IMUCalibrate();
+}
+
+void setup()
+{
+    Serial.begin(115200);
+    delay(1000); // Wait for monitor
+    Serial.println("\n--- Starting test based on Original Firmware ---");
+    
+    IMUBegin();
+}
+
+void loop()
+{
+    IMUGetData_Uncalibrated();
+    delay(10);
 }
