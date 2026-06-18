@@ -30,20 +30,52 @@ void setup() {
   }
   Serial.println("IMU Initialized! Booting DMP...");
 
-  // Initialize DMP
+  // Initialize DMP exactly as original firmware did
   bool success = true;
-  success &= (myICM.initializeDMP() == ICM_20948_Stat_Ok);
-  success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_GYROSCOPE) == ICM_20948_Stat_Ok);
-  success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 0) == ICM_20948_Stat_Ok); 
-  success &= (myICM.enableFIFO() == ICM_20948_Stat_Ok);
-  success &= (myICM.enableDMP() == ICM_20948_Stat_Ok);
-  success &= (myICM.resetDMP() == ICM_20948_Stat_Ok);
-  success &= (myICM.resetFIFO() == ICM_20948_Stat_Ok);
+  ICM_20948_Status_e stat;
+
+  stat = myICM.initializeDMP();
+  Serial.print("initializeDMP: "); Serial.println(stat);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.enableDMPSensor(INV_ICM20948_SENSOR_GAME_ROTATION_VECTOR);
+  Serial.print("enableDMPSensor(Quat): "); Serial.println(stat);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_GYROSCOPE);
+  Serial.print("enableDMPSensor(Gyro): "); Serial.println(stat);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_ACCELEROMETER);
+  Serial.print("enableDMPSensor(Accel): "); Serial.println(stat);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.setDMPODRrate(DMP_ODR_Reg_Quat6, 0);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.setDMPODRrate(DMP_ODR_Reg_Accel, 0);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 0);
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.enableFIFO();
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.enableDMP();
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.resetDMP();
+  success &= (stat == ICM_20948_Stat_Ok);
+
+  stat = myICM.resetFIFO();
+  success &= (stat == ICM_20948_Stat_Ok);
 
   if (success) {
     Serial.println("DMP Ready! Starting raw data stream...");
   } else {
-    Serial.println("DMP Failed!");
+    Serial.println("DMP Failed! Halting to prevent boot loops.");
+    while(1) { delay(100); } // Halt here
   }
 }
 
