@@ -8,6 +8,9 @@
 
 ICM_20948_I2C myICM;
 
+// Add success flag globally
+bool dmp_success = false;
+
 void setup() {
   Serial.begin(115200);
   while (!Serial);
@@ -72,38 +75,41 @@ void setup() {
   success &= (stat == ICM_20948_Stat_Ok);
 
   if (success) {
+    dmp_success = true;
     Serial.println("DMP Ready! Starting raw data stream...");
   } else {
-    Serial.println("DMP Failed! Halting to prevent boot loops.");
-    while(1) { delay(100); } // Halt here
+    dmp_success = false;
+    Serial.println("DMP Failed! (Will sit idle in loop)");
   }
 }
 
 void loop() {
-  icm_20948_DMP_data_t data;
-  myICM.readDMPdataFromFIFO(&data);
+  if (dmp_success) {
+    icm_20948_DMP_data_t data;
+    myICM.readDMPdataFromFIFO(&data);
 
-  if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) {
-    if ((data.header & DMP_header_bitmap_Gyro) > 0) {
-      // Print raw integer data exactly as the DMP outputs it
-      int raw_z = data.Raw_Gyro.Data.Z;
-      Serial.print("Raw Gyro Z: ");
-      Serial.print(raw_z);
+    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) {
+      if ((data.header & DMP_header_bitmap_Gyro) > 0) {
+        // Print raw integer data exactly as the DMP outputs it
+        int raw_z = data.Raw_Gyro.Data.Z;
+        Serial.print("Raw Gyro Z: ");
+        Serial.print(raw_z);
 
-      // Print calculated values for both 16.4 and 65.5 scales to compare
-      constexpr float Deg2Rad = 3.1416f / 180.0f;
-      float z_float = (float)raw_z;
+        // Print calculated values for both 16.4 and 65.5 scales to compare
+        constexpr float Deg2Rad = 3.1416f / 180.0f;
+        float z_float = (float)raw_z;
 
-      float rads_16 = (z_float / 16.4f) * Deg2Rad;
-      float rads_65 = (z_float / 65.5f) * Deg2Rad;
+        float rads_16 = (z_float / 16.4f) * Deg2Rad;
+        float rads_65 = (z_float / 65.5f) * Deg2Rad;
 
-      Serial.print("\t| If 16.4 scale: ");
-      Serial.print(rads_16, 4);
-      Serial.print(" rad/s");
+        Serial.print("\t| If 16.4 scale: ");
+        Serial.print(rads_16, 4);
+        Serial.print(" rad/s");
 
-      Serial.print("\t| If 65.5 scale: ");
-      Serial.print(rads_65, 4);
-      Serial.println(" rad/s");
+        Serial.print("\t| If 65.5 scale: ");
+        Serial.print(rads_65, 4);
+        Serial.println(" rad/s");
+      }
     }
   }
   delay(10); // Wait for the DMP to generate new data
