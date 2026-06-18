@@ -37,6 +37,15 @@ void setup() {
   bool success = true;
   ICM_20948_Status_e stat;
 
+  Serial.println("Performing Software Reset on IMU...");
+  myICM.swReset();
+  delay(250);
+
+  // Wake up the IMU
+  myICM.sleep(false);
+  myICM.lowPower(false);
+  delay(250);
+
   stat = myICM.initializeDMP();
   Serial.print("initializeDMP: "); Serial.println(stat);
   success &= (stat == ICM_20948_Stat_Ok);
