@@ -9,36 +9,82 @@ extern double acc_calib[3];
 
 ICM_20948_I2C myICM;
 
+// Mahony AHRS variables
+float Mahony_q0 = 1.0f, Mahony_q1 = 0.0f, Mahony_q2 = 0.0f, Mahony_q3 = 0.0f;
+float integralFBx = 0.0f,  integralFBy = 0.0f, integralFBz = 0.0f;
+unsigned long last_imu_time = 0;
+
+void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az, float dt) {
+    float recipNorm;
+    float halfvx, halfvy, halfvz;
+    float halfex, halfey, halfez;
+    float qa, qb, qc;
+
+    // Compute feedback only if accelerometer measurement valid
+    if(!((ax == 0.0f) && (ay == 0.0f) && (az == 0.0f))) {
+        recipNorm = 1.0f / sqrt(ax * ax + ay * ay + az * az);
+        ax *= recipNorm;
+        ay *= recipNorm;
+        az *= recipNorm;        
+
+        halfvx = Mahony_q1 * Mahony_q3 - Mahony_q0 * Mahony_q2;
+        halfvy = Mahony_q0 * Mahony_q1 + Mahony_q2 * Mahony_q3;
+        halfvz = Mahony_q0 * Mahony_q0 - 0.5f + Mahony_q3 * Mahony_q3;
+    
+        halfex = (ay * halfvz - az * halfvy);
+        halfey = (az * halfvx - ax * halfvz);
+        halfez = (ax * halfvy - ay * halfvx);
+
+        float twoKi = 0.0f; // 0 to disable integral
+        float twoKp = 2.0f; // 2 * proportional gain
+
+        integralFBx += twoKi * halfex * dt;
+        integralFBy += twoKi * halfey * dt;
+        integralFBz += twoKi * halfez * dt;
+        gx += integralFBx;
+        gy += integralFBy;
+        gz += integralFBz;
+
+        gx += twoKp * halfex;
+        gy += twoKp * halfey;
+        gz += twoKp * halfez;
+    }
+    
+    gx *= (0.5f * dt);
+    gy *= (0.5f * dt);
+    gz *= (0.5f * dt);
+    qa = Mahony_q0;
+    qb = Mahony_q1;
+    qc = Mahony_q2;
+    Mahony_q0 += (-qb * gx - qc * gy - Mahony_q3 * gz);
+    Mahony_q1 += (qa * gx + qc * gz - Mahony_q3 * gy);
+    Mahony_q2 += (qa * gy - qb * gz + Mahony_q3 * gx);
+    Mahony_q3 += (qa * gz + qb * gy - qc * gx); 
+    
+    recipNorm = 1.0f / sqrt(Mahony_q0 * Mahony_q0 + Mahony_q1 * Mahony_q1 + Mahony_q2 * Mahony_q2 + Mahony_q3 * Mahony_q3);
+    Mahony_q0 *= recipNorm;
+    Mahony_q1 *= recipNorm;
+    Mahony_q2 *= recipNorm;
+    Mahony_q3 *= recipNorm;
+}
+
 void IMUBegin()
 {
     Wire.begin(I2C_SDA, I2C_SCL);
-    Wire.setClock(100000);
-    Wire.setTimeOut(2000);
+    Wire.setClock(400000);
     bool initialized = false;
     while (!initialized)
     {
-        myICM.begin(Wire, 0);
-        if (myICM.status != ICM_20948_Stat_Ok)
-        {
-            initialized = false;
-        }
-        else
-        {
+        myICM.begin(Wire, 1);
+        if (myICM.status != ICM_20948_Stat_Ok) {
+            delay(500);
+        } else {
             initialized = true;
         }
     }
-    bool success = true;
-    success &= (myICM.initializeDMP() == ICM_20948_Stat_Ok);
-    success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_GAME_ROTATION_VECTOR) == ICM_20948_Stat_Ok);
-    success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_GYROSCOPE) == ICM_20948_Stat_Ok);
-    success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_ACCELEROMETER) == ICM_20948_Stat_Ok);
-    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Quat6, 3) == ICM_20948_Stat_Ok); // Set to 55Hz to prevent crash
-    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Accel, 3) == ICM_20948_Stat_Ok); // Set to 55Hz to prevent crash
-    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 3) == ICM_20948_Stat_Ok);  // Set to 55Hz to prevent crash
-    success &= (myICM.enableFIFO() == ICM_20948_Stat_Ok);
-    success &= (myICM.enableDMP() == ICM_20948_Stat_Ok);
-    success &= (myICM.resetDMP() == ICM_20948_Stat_Ok);
-    success &= (myICM.resetFIFO() == ICM_20948_Stat_Ok);
+
+    // Use pure, unadulterated hardware defaults. No buggy DMP.
+    myICM.startupDefault();
 
     IMUCalibrate();
 }
@@ -48,24 +94,17 @@ void IMUCalibrate()
     Serial.println("Calibrating IMU... Do not move robot!");
     delay(2000); // Give the DMP time to fully settle and converge
     
-    // Flush any garbage packets from bootup
-    icm_20948_DMP_data_t data;
-    myICM.readDMPdataFromFIFO(&data);
-    while (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail) {
-        myICM.readDMPdataFromFIFO(&data);
-    }
+    // No FIFO to flush, just wait a moment for hardware
+    delay(500);
 
     for (size_t i = 0; i < 100; i++)
     {
-        // Wait until we actually receive a fresh valid packet!
+        // Wait until we actually receive a fresh hardware reading!
         while (!IMUGetData_Uncalibrated()) {
             delay(5);
         }
         
-        quat_calib[0] += quat[0];
-        quat_calib[1] += quat[1];
-        quat_calib[2] += quat[2];
-        quat_calib[3] += quat[3];
+        // No quaternions in hardware reads, just raw sensors
         gyr_calib[0] += gyr[0];
         gyr_calib[1] += gyr[1];
         gyr_calib[2] += gyr[2];
@@ -73,12 +112,8 @@ void IMUCalibrate()
         acc_calib[1] += acc[1];
         acc_calib[2] += acc[2];
         
-        delay(10); // Wait for fresh DMP packets to arrive
+        delay(10); // Wait for fresh readings
     }
-    quat_calib[0] /= 100.0;
-    quat_calib[1] /= 100.0;
-    quat_calib[2] /= 100.0;
-    quat_calib[3] /= 100.0;
     gyr_calib[0] /= 100.0;
     gyr_calib[1] /= 100.0;
     gyr_calib[2] /= 100.0;
@@ -87,14 +122,6 @@ void IMUCalibrate()
     acc_calib[2] /= 100.0;
 
     Serial.println("IMU Calibrated");
-    Serial.print("quat_calib: ");
-    Serial.print(quat_calib[0], 6);
-    Serial.print(", ");
-    Serial.print(quat_calib[1], 6);
-    Serial.print(", ");
-    Serial.print(quat_calib[2], 6);
-    Serial.print(", ");
-    Serial.println(quat_calib[3], 6);
     Serial.print("gyr_calib: ");
     Serial.print(gyr_calib[0], 6);
     Serial.print(", ");
@@ -111,122 +138,45 @@ void IMUCalibrate()
 
 bool IMUGetData_Uncalibrated()
 {
-    bool got_data = false;
-    icm_20948_DMP_data_t data;
-    myICM.readDMPdataFromFIFO(&data);
-
-    // Process EVERY packet in the FIFO so we don't throw away Gyro or Accel!
-    while ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail))
+    if (myICM.dataReady())
     {
-        got_data = true;
-        // Quaternion
-        if ((data.header & DMP_header_bitmap_Quat6) > 0)
-        {
-            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; 
-            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; 
-            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; 
-            double val = 1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3));
-            double q0 = (val > 0.0) ? sqrt(val) : 0.0;
-            double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
+        myICM.getAGMT();
 
-            quat[0] = q1 / n;
-            quat[1] = q2 / n;
-            quat[2] = q3 / n;
-            quat[3] = q0 / n;
-        }
+        constexpr float Deg2Rad = 3.1416f / 180.0f;
+        gyr[0] = myICM.gyrX() * Deg2Rad;  
+        gyr[1] = myICM.gyrY() * Deg2Rad;
+        gyr[2] = myICM.gyrZ() * Deg2Rad;
+
+        constexpr float G = 9.80665f;
+        acc[0] = (myICM.accX() / 1000.0f) * G; 
+        acc[1] = (myICM.accY() / 1000.0f) * G;
+        acc[2] = (myICM.accZ() / 1000.0f) * G;
         
-        // Gyroscope
-        if ((data.header & DMP_header_bitmap_Gyro) > 0)
-        {
-            float x = (float)data.Raw_Gyro.Data.X;
-            float y = (float)data.Raw_Gyro.Data.Y;
-            float z = (float)data.Raw_Gyro.Data.Z;
-
-            constexpr float Deg2Rad = 3.1416f / 180.0f;
-            constexpr float LSB_PER_DPS = 16.4f; // dps2000 is currently used: FS = ±500 dps
-            gyr[0] = x / LSB_PER_DPS * Deg2Rad;  
-            gyr[1] = y / LSB_PER_DPS * Deg2Rad;
-            gyr[2] = z / LSB_PER_DPS * Deg2Rad;
-        }
-        
-        // Accelerometer
-        if ((data.header & DMP_header_bitmap_Accel) > 0)
-        {
-            constexpr float G = 9.80665f;
-            constexpr float LSB_PER_G = 8192.0f; // gpm4 is currently used: FS = ±4 g
-
-            float acc_x = (float)data.Raw_Accel.Data.X;
-            float acc_y = (float)data.Raw_Accel.Data.Y;
-            float acc_z = (float)data.Raw_Accel.Data.Z;
-            acc[0] = acc_x / LSB_PER_G * G; 
-            acc[1] = acc_y / LSB_PER_G * G;
-            acc[2] = acc_z / LSB_PER_G * G;
-        }
-
-        if (myICM.status != ICM_20948_Stat_FIFOMoreDataAvail) {
-            break;
-        }
-        myICM.readDMPdataFromFIFO(&data);
+        return true;
     }
-    
-    return got_data;
+    return false;
 }
 
 void IMUGetData()
 {
-    icm_20948_DMP_data_t data;
-    myICM.readDMPdataFromFIFO(&data);
-
-    // Process EVERY packet in the FIFO so we don't throw away Gyro or Accel!
-    while ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail))
+    if (IMUGetData_Uncalibrated()) 
     {
-        // Quaternion
-        if ((data.header & DMP_header_bitmap_Quat6) > 0)
-        {
-            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; 
-            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; 
-            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; 
-            double val = 1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3));
-            double q0 = (val > 0.0) ? sqrt(val) : 0.0;
-            double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
+        unsigned long current_time = micros();
+        float dt = (current_time - last_imu_time) / 1000000.0f;
+        if (last_imu_time == 0) dt = 0.02f; // Initialize first dt
+        last_imu_time = current_time;
 
-            quat[0] = q1 / n;
-            quat[1] = q2 / n;
-            quat[2] = q3 / n;
-            quat[3] = q0 / n;
-        }
-        
-        // Gyroscope
-        if ((data.header & DMP_header_bitmap_Gyro) > 0)
-        {
-            float x = (float)data.Raw_Gyro.Data.X;
-            float y = (float)data.Raw_Gyro.Data.Y;
-            float z = (float)data.Raw_Gyro.Data.Z;
+        // Apply bias calibration
+        gyr[0] -= gyr_calib[0];
+        gyr[1] -= gyr_calib[1];
+        gyr[2] -= gyr_calib[2];
 
-            constexpr float Deg2Rad = 3.1416f / 180.0f;
-            constexpr float LSB_PER_DPS = 16.4f; // dps2000 is currently used: FS = ±500 dps
-            gyr[0] = x / LSB_PER_DPS * Deg2Rad - gyr_calib[0];  
-            gyr[1] = y / LSB_PER_DPS * Deg2Rad - gyr_calib[1];
-            gyr[2] = z / LSB_PER_DPS * Deg2Rad - gyr_calib[2];
-        }
-        
-        // Accelerometer
-        if ((data.header & DMP_header_bitmap_Accel) > 0)
-        {
-            constexpr float G = 9.80665f;
-            constexpr float LSB_PER_G = 8192.0f; // gpm4 is currently used: FS = ±4 g
+        // Apply Mahony filter for perfect stable Quaternions
+        MahonyAHRSupdateIMU(gyr[0], gyr[1], gyr[2], acc[0], acc[1], acc[2], dt);
 
-            float acc_x = (float)data.Raw_Accel.Data.X;
-            float acc_y = (float)data.Raw_Accel.Data.Y;
-            float acc_z = (float)data.Raw_Accel.Data.Z;
-            acc[0] = acc_x / LSB_PER_G * G; 
-            acc[1] = acc_y / LSB_PER_G * G;
-            acc[2] = acc_z / LSB_PER_G * G;
-        }
-
-        if (myICM.status != ICM_20948_Stat_FIFOMoreDataAvail) {
-            break;
-        }
-        myICM.readDMPdataFromFIFO(&data);
+        quat[0] = Mahony_q1;
+        quat[1] = Mahony_q2;
+        quat[2] = Mahony_q3;
+        quat[3] = Mahony_q0;
     }
 }
