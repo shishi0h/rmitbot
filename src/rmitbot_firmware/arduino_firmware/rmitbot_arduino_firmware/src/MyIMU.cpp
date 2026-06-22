@@ -71,11 +71,12 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
 void IMUBegin()
 {
     Wire.begin(I2C_SDA, I2C_SCL);
-    Wire.setClock(400000);
+    Wire.setClock(100000);
+    Wire.setTimeOut(2000);
     bool initialized = false;
     while (!initialized)
     {
-        myICM.begin(Wire, 1);
+        myICM.begin(Wire, 0);
         if (myICM.status != ICM_20948_Stat_Ok) {
             delay(500);
         } else {
