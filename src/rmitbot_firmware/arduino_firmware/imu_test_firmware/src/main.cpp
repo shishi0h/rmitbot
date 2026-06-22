@@ -8,54 +8,12 @@
 
 ICM_20948_I2C myICM;
 
-// Global IMU variables just like original firmware
-double quat[4];
-double gyr[3];
-double acc[3];
-double quat_calib[4] = {0};
-double gyr_calib[3] = {0};
-double acc_calib[3] = {0};
-
-void IMUGetData_Uncalibrated()
+void setup()
 {
-    icm_20948_DMP_data_t data;
-    myICM.readDMPdataFromFIFO(&data);
-
-    // DUMP EVERYTHING!
-    Serial.print("Status: ");
-    Serial.print(myICM.status);
-    Serial.print(" | Header: ");
-    Serial.println(data.header);
-
-    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) // Was valid data available?
-    {
-        // Blindly extract and print gyro data without checking the header
-        float z = (float)data.Raw_Gyro.Data.Z;
-        constexpr float Deg2Rad = 3.1416f / 180.0f;
-        constexpr float LSB_PER_DPS = 16.4f;
-        gyr[2] = z / LSB_PER_DPS * Deg2Rad;
-        
-        Serial.print("Raw Gyro Z: ");
-        Serial.print(z);
-        Serial.print("  -> Calculated rad/s: ");
-        Serial.println(gyr[2], 6);
-    }
-}
-
-void IMUCalibrate()
-{
-    Serial.println("IMUCalibrate() started...");
-    for (size_t i = 0; i < 100; i++)
-    {
-        IMUGetData_Uncalibrated();
-        // I added a 10ms delay here so it doesn't capture the exact same sample 100 times instantly
-        delay(10); 
-    }
-    Serial.println("IMUCalibrate() finished!");
-}
-
-void IMUBegin()
-{
+    Serial.begin(115200);
+    delay(1000); // Wait for monitor
+    Serial.println("\n--- Starting DMP Hardware Test ---");
+    
     Wire.begin(I2C_SDA, I2C_SCL);
     Wire.setClock(100000);
     Wire.setTimeOut(2000);
@@ -63,10 +21,12 @@ void IMUBegin()
     while (!initialized)
     {
         myICM.begin(Wire, 0);
-        if (myICM.status != ICM_20948_Stat_Ok)
-            initialized = false;
-        else
+        if (myICM.status != ICM_20948_Stat_Ok) {
+            Serial.println("Trying to connect to IMU...");
+            delay(500);
+        } else {
             initialized = true;
+        }
     }
     
     // Exactly as written in your original MyIMU.cpp
@@ -83,20 +43,39 @@ void IMUBegin()
     success &= (myICM.resetDMP() == ICM_20948_Stat_Ok);
     success &= (myICM.resetFIFO() == ICM_20948_Stat_Ok);
 
-    IMUCalibrate();
-}
-
-void setup()
-{
-    Serial.begin(115200);
-    delay(1000); // Wait for monitor
-    Serial.println("\n--- Starting test based on Original Firmware ---");
-    
-    IMUBegin();
+    if (success) {
+        Serial.println("DMP Successfully Initialized!");
+    } else {
+        Serial.println("DMP Initialization FAILED!");
+    }
 }
 
 void loop()
 {
-    IMUGetData_Uncalibrated();
-    delay(10);
+    icm_20948_DMP_data_t data;
+    myICM.readDMPdataFromFIFO(&data);
+
+    if ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail)) // Was valid data available?
+    {
+        // BLIND EXTRACTION: We completely ignore the broken data.header bitmasks!
+        // If the struct is correctly populated, these will contain real values.
+        
+        // --- GYRO (RAW) ---
+        float gz = (float)data.Raw_Gyro.Data.Z;
+
+        // --- ACCEL (RAW) ---
+        float az = (float)data.Raw_Accel.Data.Z;
+
+        // --- QUATERNIONS (from GAME_ROTATION_VECTOR) ---
+        double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; 
+
+        Serial.print("DMP Packet | Gyro Z (raw): ");
+        Serial.print(gz, 0);
+        Serial.print(" | Accel Z (raw): ");
+        Serial.print(az, 0);
+        Serial.print(" | Quat Q1: ");
+        Serial.println(q1, 4);
+
+        delay(50); // Slow down the prints so you can read them
+    }
 }
