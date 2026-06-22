@@ -32,9 +32,9 @@ void IMUBegin()
     success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_GAME_ROTATION_VECTOR) == ICM_20948_Stat_Ok);
     success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_GYROSCOPE) == ICM_20948_Stat_Ok);
     success &= (myICM.enableDMPSensor(INV_ICM20948_SENSOR_RAW_ACCELEROMETER) == ICM_20948_Stat_Ok);
-    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Quat6, 0) == ICM_20948_Stat_Ok); // Set to the maximum
-    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Accel, 0) == ICM_20948_Stat_Ok); // Set to the maximum
-    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 0) == ICM_20948_Stat_Ok);  // Set to the maximum
+    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Quat6, 3) == ICM_20948_Stat_Ok); // Set to 55Hz to prevent crash
+    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Accel, 3) == ICM_20948_Stat_Ok); // Set to 55Hz to prevent crash
+    success &= (myICM.setDMPODRrate(DMP_ODR_Reg_Gyro, 3) == ICM_20948_Stat_Ok);  // Set to 55Hz to prevent crash
     success &= (myICM.enableFIFO() == ICM_20948_Stat_Ok);
     success &= (myICM.enableDMP() == ICM_20948_Stat_Ok);
     success &= (myICM.resetDMP() == ICM_20948_Stat_Ok);
@@ -57,7 +57,11 @@ void IMUCalibrate()
 
     for (size_t i = 0; i < 100; i++)
     {
-        IMUGetData_Uncalibrated();
+        // Wait until we actually receive a fresh valid packet!
+        while (!IMUGetData_Uncalibrated()) {
+            delay(5);
+        }
+        
         quat_calib[0] += quat[0];
         quat_calib[1] += quat[1];
         quat_calib[2] += quat[2];
@@ -105,14 +109,16 @@ void IMUCalibrate()
     Serial.println(acc_calib[2], 6);
 }
 
-void IMUGetData_Uncalibrated()
+bool IMUGetData_Uncalibrated()
 {
+    bool got_data = false;
     icm_20948_DMP_data_t data;
     myICM.readDMPdataFromFIFO(&data);
 
     // Process EVERY packet in the FIFO so we don't throw away Gyro or Accel!
     while ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail))
     {
+        got_data = true;
         // Quaternion
         if ((data.header & DMP_header_bitmap_Quat6) > 0)
         {
@@ -162,6 +168,8 @@ void IMUGetData_Uncalibrated()
         }
         myICM.readDMPdataFromFIFO(&data);
     }
+    
+    return got_data;
 }
 
 void IMUGetData()

@@ -9,7 +9,7 @@
 
 void IMUBegin();     // Function to initialize the IMU
 void IMUGetData();   // Function to get the data from the IMU
-void IMUGetData_Uncalibrated(); // Function to get the uncalibrated data from the IMU
+bool IMUGetData_Uncalibrated(); // Function to get the uncalibrated data from the IMU
 void IMUCalibrate(); // Function to calibrate the IMU
 
 #endif
