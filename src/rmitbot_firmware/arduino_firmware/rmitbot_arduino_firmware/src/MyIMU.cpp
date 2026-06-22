@@ -45,6 +45,16 @@ void IMUBegin()
 
 void IMUCalibrate()
 {    
+    Serial.println("Calibrating IMU... Do not move robot!");
+    delay(2000); // Give the DMP time to fully settle and converge
+    
+    // Flush any garbage packets from bootup
+    icm_20948_DMP_data_t data;
+    myICM.readDMPdataFromFIFO(&data);
+    while (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail) {
+        myICM.readDMPdataFromFIFO(&data);
+    }
+
     for (size_t i = 0; i < 100; i++)
     {
         IMUGetData_Uncalibrated();
@@ -58,6 +68,8 @@ void IMUCalibrate()
         acc_calib[0] += acc[0];
         acc_calib[1] += acc[1];
         acc_calib[2] += acc[2];
+        
+        delay(10); // Wait for fresh DMP packets to arrive
     }
     quat_calib[0] /= 100.0;
     quat_calib[1] /= 100.0;
@@ -91,31 +103,22 @@ void IMUCalibrate()
     Serial.print(acc_calib[1], 6);
     Serial.print(", ");
     Serial.println(acc_calib[2], 6);
-    // while (1)
-    // {
-    //     /* code */
-    // }
-    
 }
 
 void IMUGetData_Uncalibrated()
 {
     icm_20948_DMP_data_t data;
-    
-    // 1. Flush the DMP FIFO to get the absolute newest Quaternion packet!
     myICM.readDMPdataFromFIFO(&data);
-    while (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail) {
-        myICM.readDMPdataFromFIFO(&data);
-    }
 
-    if (myICM.status == ICM_20948_Stat_Ok) 
+    // Process EVERY packet in the FIFO so we don't throw away Gyro or Accel!
+    while ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail))
     {
-        // Quaternion (from GAME_ROTATION_VECTOR)
+        // Quaternion
         if ((data.header & DMP_header_bitmap_Quat6) > 0)
         {
-            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
-            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
-            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
+            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; 
+            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; 
+            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; 
             double val = 1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3));
             double q0 = (val > 0.0) ? sqrt(val) : 0.0;
             double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
@@ -125,45 +128,56 @@ void IMUGetData_Uncalibrated()
             quat[2] = q3 / n;
             quat[3] = q0 / n;
         }
-    }
-
-    // 2. Hardware Gyroscope and Accelerometer (bypassing the DMP suppression bug)
-    if (myICM.dataReady())
-    {
-        myICM.getAGMT(); // Reads perfectly aligned, zero-latency hardware registers
         
-        // Gyroscope (myICM.gyrX returns degrees/s)
-        constexpr float Deg2Rad = 3.1416f / 180.0f;
-        gyr[0] = myICM.gyrX() * Deg2Rad;  
-        gyr[1] = myICM.gyrY() * Deg2Rad;
-        gyr[2] = myICM.gyrZ() * Deg2Rad;
+        // Gyroscope
+        if ((data.header & DMP_header_bitmap_Gyro) > 0)
+        {
+            float x = (float)data.Raw_Gyro.Data.X;
+            float y = (float)data.Raw_Gyro.Data.Y;
+            float z = (float)data.Raw_Gyro.Data.Z;
 
-        // Accelerometer (myICM.accX returns milli-g's)
-        constexpr float G = 9.80665f;
-        acc[0] = (myICM.accX() / 1000.0f) * G; 
-        acc[1] = (myICM.accY() / 1000.0f) * G;
-        acc[2] = (myICM.accZ() / 1000.0f) * G;
+            constexpr float Deg2Rad = 3.1416f / 180.0f;
+            constexpr float LSB_PER_DPS = 16.4f; // dps2000 is currently used: FS = ±500 dps
+            gyr[0] = x / LSB_PER_DPS * Deg2Rad;  
+            gyr[1] = y / LSB_PER_DPS * Deg2Rad;
+            gyr[2] = z / LSB_PER_DPS * Deg2Rad;
+        }
+        
+        // Accelerometer
+        if ((data.header & DMP_header_bitmap_Accel) > 0)
+        {
+            constexpr float G = 9.80665f;
+            constexpr float LSB_PER_G = 8192.0f; // gpm4 is currently used: FS = ±4 g
+
+            float acc_x = (float)data.Raw_Accel.Data.X;
+            float acc_y = (float)data.Raw_Accel.Data.Y;
+            float acc_z = (float)data.Raw_Accel.Data.Z;
+            acc[0] = acc_x / LSB_PER_G * G; 
+            acc[1] = acc_y / LSB_PER_G * G;
+            acc[2] = acc_z / LSB_PER_G * G;
+        }
+
+        if (myICM.status != ICM_20948_Stat_FIFOMoreDataAvail) {
+            break;
+        }
+        myICM.readDMPdataFromFIFO(&data);
     }
 }
 
 void IMUGetData()
 {
     icm_20948_DMP_data_t data;
-    
-    // 1. Flush the DMP FIFO to get the absolute newest Quaternion packet!
     myICM.readDMPdataFromFIFO(&data);
-    while (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail) {
-        myICM.readDMPdataFromFIFO(&data);
-    }
 
-    if (myICM.status == ICM_20948_Stat_Ok) 
+    // Process EVERY packet in the FIFO so we don't throw away Gyro or Accel!
+    while ((myICM.status == ICM_20948_Stat_Ok) || (myICM.status == ICM_20948_Stat_FIFOMoreDataAvail))
     {
-        // Quaternion (from GAME_ROTATION_VECTOR)
+        // Quaternion
         if ((data.header & DMP_header_bitmap_Quat6) > 0)
         {
-            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
-            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
-            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
+            double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; 
+            double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; 
+            double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; 
             double val = 1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3));
             double q0 = (val > 0.0) ? sqrt(val) : 0.0;
             double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
@@ -173,23 +187,38 @@ void IMUGetData()
             quat[2] = q3 / n;
             quat[3] = q0 / n;
         }
-    }
-
-    // 2. Hardware Gyroscope and Accelerometer (bypassing the DMP suppression bug)
-    if (myICM.dataReady())
-    {
-        myICM.getAGMT(); // Reads perfectly aligned, zero-latency hardware registers
         
-        // Gyroscope (myICM.gyrX returns degrees/s)
-        constexpr float Deg2Rad = 3.1416f / 180.0f;
-        gyr[0] = (myICM.gyrX() * Deg2Rad) - gyr_calib[0];  
-        gyr[1] = (myICM.gyrY() * Deg2Rad) - gyr_calib[1];
-        gyr[2] = (myICM.gyrZ() * Deg2Rad) - gyr_calib[2];
+        // Gyroscope
+        if ((data.header & DMP_header_bitmap_Gyro) > 0)
+        {
+            float x = (float)data.Raw_Gyro.Data.X;
+            float y = (float)data.Raw_Gyro.Data.Y;
+            float z = (float)data.Raw_Gyro.Data.Z;
 
-        // Accelerometer (myICM.accX returns milli-g's)
-        constexpr float G = 9.80665f;
-        acc[0] = (myICM.accX() / 1000.0f) * G; 
-        acc[1] = (myICM.accY() / 1000.0f) * G;
-        acc[2] = (myICM.accZ() / 1000.0f) * G;
+            constexpr float Deg2Rad = 3.1416f / 180.0f;
+            constexpr float LSB_PER_DPS = 16.4f; // dps2000 is currently used: FS = ±500 dps
+            gyr[0] = x / LSB_PER_DPS * Deg2Rad - gyr_calib[0];  
+            gyr[1] = y / LSB_PER_DPS * Deg2Rad - gyr_calib[1];
+            gyr[2] = z / LSB_PER_DPS * Deg2Rad - gyr_calib[2];
+        }
+        
+        // Accelerometer
+        if ((data.header & DMP_header_bitmap_Accel) > 0)
+        {
+            constexpr float G = 9.80665f;
+            constexpr float LSB_PER_G = 8192.0f; // gpm4 is currently used: FS = ±4 g
+
+            float acc_x = (float)data.Raw_Accel.Data.X;
+            float acc_y = (float)data.Raw_Accel.Data.Y;
+            float acc_z = (float)data.Raw_Accel.Data.Z;
+            acc[0] = acc_x / LSB_PER_G * G; 
+            acc[1] = acc_y / LSB_PER_G * G;
+            acc[2] = acc_z / LSB_PER_G * G;
+        }
+
+        if (myICM.status != ICM_20948_Stat_FIFOMoreDataAvail) {
+            break;
+        }
+        myICM.readDMPdataFromFIFO(&data);
     }
 }
