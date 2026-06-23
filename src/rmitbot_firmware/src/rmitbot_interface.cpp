@@ -58,6 +58,13 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
     // Disable DTR and RTS to prevent Linux from holding the ESP32 in bootloader mode!
     arduino_.SetDTR(false);
     arduino_.SetRTS(false);
+    
+    // The ESP32 takes about 5 to 6 seconds to run its setup() and IMUBegin() sequences.
+    // If we return immediately, ROS 2 will flood the ESP32 with 100Hz commands while it is booting,
+    // which corrupts the serial buffer and causes permanent read timeouts.
+    // Wait for the ESP32 to finish booting before returning SUCCESS!
+    RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Waiting 6 seconds for ESP32 and IMU to boot...");
+    std::this_thread::sleep_for(std::chrono::seconds(6));
   } 
   catch (...) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while interacting with port " << port_);
