@@ -68,19 +68,28 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
     Mahony_q3 *= recipNorm;
 }
 
+bool imu_ok = false;
+
 void IMUBegin()
 {
     Wire.begin(I2C_SDA, I2C_SCL);
     Wire.setClock(100000);
     Wire.setTimeOut(2000);
-    bool initialized = false;
-    while (!initialized)
+    
+    int retries = 0;
+    while (!imu_ok)
     {
         myICM.begin(Wire, 0);
         if (myICM.status != ICM_20948_Stat_Ok) {
+            Serial.println("IMU initialization failed, retrying...");
             delay(500);
+            retries++;
+            if (retries > 10) {
+                Serial.println("IMU completely failed. Restarting the ESP32 to try again!");
+                ESP.restart();
+            }
         } else {
-            initialized = true;
+            imu_ok = true;
         }
     }
 
@@ -160,6 +169,8 @@ bool IMUGetData_Uncalibrated()
 
 void IMUGetData()
 {
+    if (!imu_ok) return; // If IMU failed to initialize, do not try to read from it!
+    
     if (IMUGetData_Uncalibrated()) 
     {
         unsigned long current_time = micros();
