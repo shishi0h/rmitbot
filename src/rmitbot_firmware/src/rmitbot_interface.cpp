@@ -55,9 +55,6 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
   try {
     arduino_.Open(port_);
     arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
-    // Disable DTR and RTS to prevent Linux from holding the ESP32 in bootloader mode!
-    arduino_.SetDTR(false);
-    arduino_.SetRTS(false);
     
     // The ESP32 takes about 5 to 6 seconds to run its setup() and IMUBegin() sequences.
     // If we return immediately, ROS 2 will flood the ESP32 with 100Hz commands while it is booting,
