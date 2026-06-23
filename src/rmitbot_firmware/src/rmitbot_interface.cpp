@@ -1,6 +1,7 @@
 #include "rmitbot_firmware/rmitbot_interface.hpp"
 #include <hardware_interface/types/hardware_interface_type_values.hpp>
 #include <pluginlib/class_list_macros.hpp>
+#include <termios.h>
 
 namespace rmitbot_firmware {
 // Constructor
@@ -56,12 +57,22 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
     arduino_.Open(port_);
     arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
     
-    // The ESP32 takes about 5 to 6 seconds to run its setup() and IMUBegin() sequences.
-    // If we return immediately, ROS 2 will flood the ESP32 with 100Hz commands while it is booting,
-    // which corrupts the serial buffer and causes permanent read timeouts.
-    // Wait for the ESP32 to finish booting before returning SUCCESS!
-    RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Waiting 6 seconds for ESP32 and IMU to boot...");
-    std::this_thread::sleep_for(std::chrono::seconds(6));
+    // Explicitly disable HUPCL (Hang Up on Close) to match the stty command behavior.
+    // This prevents Linux from asserting DTR/RTS in ways that might hold the ESP32 in reset.
+    int fd = arduino_.GetFileDescriptor();
+    struct termios tty;
+    if (tcgetattr(fd, &tty) == 0) {
+        tty.c_cflag &= ~HUPCL;
+        tcsetattr(fd, TCSANOW, &tty);
+    }
+    
+    // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences:
+    // (2000ms setup delay + 2000ms settle + 500ms wait + 1500ms calibration = ~6.0s minimum).
+    // If we return immediately (or too early), ROS 2 will flood the ESP32 with 100Hz commands
+    // while it is still calibrating, which corrupts the serial buffer and causes permanent timeouts.
+    // Wait for the ESP32 to completely finish booting before returning SUCCESS!
+    RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Waiting 9 seconds for ESP32 and IMU to boot...");
+    std::this_thread::sleep_for(std::chrono::seconds(9));
   } 
   catch (...) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while interacting with port " << port_);
