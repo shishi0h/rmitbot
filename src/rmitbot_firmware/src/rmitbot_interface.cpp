@@ -57,6 +57,14 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
     arduino_.Open(port_);
     arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
     
+    // LibSerial's Open() automatically asserts DTR and RTS (pulls them low).
+    // On many ESP32 boards, this physically holds the EN (Enable) pin low, keeping the chip in a permanent RESET state!
+    // We must explicitly de-assert them so the ESP32 can actually boot.
+    // The transition from Open() (asserted) -> SetDTR(false) (de-asserted) creates a perfect hardware reset pulse,
+    // ensuring the ESP32 starts fresh exactly at this moment!
+    arduino_.SetDTR(false);
+    arduino_.SetRTS(false);
+    
     // Explicitly disable HUPCL (Hang Up on Close) to match the stty command behavior.
     // This prevents Linux from asserting DTR/RTS in ways that might hold the ESP32 in reset.
     int fd = arduino_.GetFileDescriptor();
