@@ -25,6 +25,7 @@ Controller controller4(&w4, &MOT4_cmd, &w4_ref); // Create an instance of the Co
 //==============================================
 void setup()
 {
+  delay(2000); // Give the IMU and sensors 2 seconds to fully power on during a cold boot!
   SerialBegin();
   encoder1.begin();    // Initialize the encoder
   encoder2.begin();    // Initialize the encoder
