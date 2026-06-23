@@ -55,23 +55,25 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
 
   try {
     arduino_.Open(port_);
+    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
     
-    // It turns out LibSerial is failing to properly configure the baud rate and DTR/RTS states on your specific Linux driver!
-    // Since you proved that the manual 'stty' command works flawlessly, we will literally just execute that exact command
-    // from within the C++ code to forcefully configure the port perfectly.
-    std::string stty_cmd = "stty -F " + port_ + " 115200 -hupcl -echo";
-    int ret = system(stty_cmd.c_str());
-    if (ret != 0) {
-        RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Failed to execute stty command, but continuing anyway...");
+    // Explicitly disable HUPCL (Hang Up on Close) to match the stty command behavior.
+    // This prevents Linux from asserting DTR/RTS when the port is closed, preventing accidental resets.
+    int fd = arduino_.GetFileDescriptor();
+    struct termios tty;
+    if (tcgetattr(fd, &tty) == 0) {
+        tty.c_cflag &= ~HUPCL;
+        tcsetattr(fd, TCSANOW, &tty);
     }
     
-    // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences:
-    // (2000ms setup delay + 2000ms settle + 500ms wait + 1500ms calibration = ~6.0s minimum).
-    // If we return immediately (or too early), ROS 2 will flood the ESP32 with 100Hz commands
-    // while it is still calibrating, which corrupts the serial buffer and causes permanent timeouts.
-    // Wait for the ESP32 to completely finish booting before returning SUCCESS!
+    // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences.
     RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Waiting 9 seconds for ESP32 and IMU to boot...");
     std::this_thread::sleep_for(std::chrono::seconds(9));
+    
+    // VERY IMPORTANT: During these 9 seconds, the ESP32 has been blindly blasting data
+    // at 100Hz once it finished booting. The Linux serial buffer is now completely full of 
+    // old, potentially misaligned data. We MUST flush it before we begin reading!
+    arduino_.FlushIOBuffers();
   } 
   catch (...) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while interacting with port " << port_);
