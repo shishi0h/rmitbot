@@ -55,6 +55,9 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
   try {
     arduino_.Open(port_);
     arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+    // Disable DTR and RTS to prevent Linux from holding the ESP32 in bootloader mode!
+    arduino_.SetDTR(false);
+    arduino_.SetRTS(false);
   } 
   catch (...) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while interacting with port " << port_);
