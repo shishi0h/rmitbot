@@ -70,8 +70,25 @@ void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float
 
 bool imu_ok = false;
 
+void I2C_ClearBus() {
+    pinMode(I2C_SDA, INPUT_PULLUP);
+    pinMode(I2C_SCL, INPUT_PULLUP);
+    delay(100);
+    if (digitalRead(I2C_SDA) == LOW) {
+        pinMode(I2C_SCL, OUTPUT);
+        for (byte i = 0; i < 16; i++) {
+            digitalWrite(I2C_SCL, LOW);
+            delayMicroseconds(20);
+            digitalWrite(I2C_SCL, HIGH);
+            delayMicroseconds(20);
+        }
+        pinMode(I2C_SCL, INPUT_PULLUP);
+    }
+}
+
 void IMUBegin()
 {
+    I2C_ClearBus(); // Physically unstick the IMU if it froze during a cold boot!
     Wire.begin(I2C_SDA, I2C_SCL);
     Wire.setClock(100000);
     Wire.setTimeOut(2000);
