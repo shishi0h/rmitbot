@@ -45,7 +45,8 @@ namespace rmitbot_firmware
     hardware_interface::return_type write(const rclcpp::Time &, const rclcpp::Duration &) override;
 
   private:
-    LibSerial::SerialPort arduino_;
+    int serial_fd_ = -1;
+    std::string serial_buffer_ = "";
     std::string port_;
     std::vector<double> velocity_commands_;
     std::vector<double> position_states_;
