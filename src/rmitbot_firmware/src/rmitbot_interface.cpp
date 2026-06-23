@@ -55,14 +55,16 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
 
   try {
     arduino_.Open(port_);
-    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
     
-    // Explicitly disable HUPCL (Hang Up on Close) to match the stty command behavior.
-    // This prevents Linux from asserting DTR/RTS when the port is closed, preventing accidental resets.
+    // LibSerial's SetBaudRate() function has known bugs on some Raspberry Pi ARM Linux distributions
+    // where the BAUD_115200 constant maps to the wrong kernel integer. 
+    // We will bypass it entirely and set the baud rate manually using native Linux termios!
     int fd = arduino_.GetFileDescriptor();
     struct termios tty;
     if (tcgetattr(fd, &tty) == 0) {
-        tty.c_cflag &= ~HUPCL;
+        cfsetispeed(&tty, B115200); // Manually enforce 115200 baud
+        cfsetospeed(&tty, B115200); // Manually enforce 115200 baud
+        tty.c_cflag &= ~HUPCL;      // Prevent auto-reset
         tcsetattr(fd, TCSANOW, &tty);
     }
     
