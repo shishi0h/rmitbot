@@ -55,23 +55,14 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
 
   try {
     arduino_.Open(port_);
-    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
     
-    // LibSerial's Open() automatically asserts DTR and RTS (pulls them low).
-    // On many ESP32 boards, this physically holds the EN (Enable) pin low, keeping the chip in a permanent RESET state!
-    // We must explicitly de-assert them so the ESP32 can actually boot.
-    // The transition from Open() (asserted) -> SetDTR(false) (de-asserted) creates a perfect hardware reset pulse,
-    // ensuring the ESP32 starts fresh exactly at this moment!
-    arduino_.SetDTR(false);
-    arduino_.SetRTS(false);
-    
-    // Explicitly disable HUPCL (Hang Up on Close) to match the stty command behavior.
-    // This prevents Linux from asserting DTR/RTS in ways that might hold the ESP32 in reset.
-    int fd = arduino_.GetFileDescriptor();
-    struct termios tty;
-    if (tcgetattr(fd, &tty) == 0) {
-        tty.c_cflag &= ~HUPCL;
-        tcsetattr(fd, TCSANOW, &tty);
+    // It turns out LibSerial is failing to properly configure the baud rate and DTR/RTS states on your specific Linux driver!
+    // Since you proved that the manual 'stty' command works flawlessly, we will literally just execute that exact command
+    // from within the C++ code to forcefully configure the port perfectly.
+    std::string stty_cmd = "stty -F " + port_ + " 115200 -hupcl -echo";
+    int ret = system(stty_cmd.c_str());
+    if (ret != 0) {
+        RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Failed to execute stty command, but continuing anyway...");
     }
     
     // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences:
