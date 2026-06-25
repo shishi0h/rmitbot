@@ -55,13 +55,38 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
 
   try {
     arduino_.Open(port_);
-    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
     
+    // DEBUG STEP 1: Catch any hidden LibSerial exceptions when setting the baud rate
+    try {
+      arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+      RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "LibSerial SetBaudRate executed without exceptions.");
+    } catch (const std::exception& e) {
+      RCLCPP_WARN_STREAM(rclcpp::get_logger("RmitbotInterface"), "LibSerial SetBaudRate THREW AN EXCEPTION: " << e.what());
+    }
+
+    // DEBUG STEP 2: Manually check and FORCE the kernel termios settings
     int fd = arduino_.GetFileDescriptor();
     struct termios tty;
     if (tcgetattr(fd, &tty) == 0) {
+        // Read what LibSerial actually set
+        speed_t current_ispeed = cfgetispeed(&tty);
+        RCLCPP_INFO_STREAM(rclcpp::get_logger("RmitbotInterface"), "Current kernel baud code: " << current_ispeed << " (Expected B115200: " << B115200 << ")");
+        
+        // FORCE the baud rate natively to overwrite LibSerial's potential mistake
+        cfsetispeed(&tty, B115200);
+        cfsetospeed(&tty, B115200);
+        
+        // Prevent auto-reset
         tty.c_cflag &= ~HUPCL;
-        tcsetattr(fd, TCSANOW, &tty);
+        
+        // Apply changes and verify
+        if (tcsetattr(fd, TCSANOW, &tty) == 0) {
+            RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Successfully forced 115200 baud and -hupcl at the Linux kernel level.");
+        } else {
+            RCLCPP_ERROR_STREAM(rclcpp::get_logger("RmitbotInterface"), "tcsetattr FAILED to apply settings! errno: " << errno);
+        }
+    } else {
+        RCLCPP_ERROR_STREAM(rclcpp::get_logger("RmitbotInterface"), "tcgetattr FAILED! Cannot read kernel state. errno: " << errno);
     }
     
     // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences.
