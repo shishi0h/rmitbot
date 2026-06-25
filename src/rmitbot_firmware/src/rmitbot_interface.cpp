@@ -2,9 +2,6 @@
 #include <hardware_interface/types/hardware_interface_type_values.hpp>
 #include <pluginlib/class_list_macros.hpp>
 #include <termios.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <cstdlib>
 
 namespace rmitbot_firmware {
 // Constructor
@@ -12,11 +9,9 @@ RmitbotInterface::RmitbotInterface() {}
 
 // Destructor
 RmitbotInterface::~RmitbotInterface() {
-  if (serial_fd_ >= 0) {
-    try {
-      close(serial_fd_);
-      serial_fd_ = -1;
-    } catch (...) {
+  if (arduino_.IsOpen()) {
+    try {arduino_.Close();} 
+    catch (...) {
       RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while closing connection with port " << port_);
     }
   }
@@ -57,32 +52,22 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
   ang_vel_ = {0.0, 0.0, 0.0};
   lin_acc_ = {0.0, 0.0, 0.0};
   last_run_ = rclcpp::Clock().now();
-  serial_buffer_ = "";
 
   try {
-    // 1. Force the system to configure the port exactly as we want BEFORE opening it!
-    // This perfectly bypasses all C++ termios bugs and prevents DTR/RTS resets.
-    std::string stty_cmd = "stty -F " + port_ + " 115200 -hupcl raw -echo";
-    if (system(stty_cmd.c_str()) != 0) {
-      RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Failed to run stty. The port might not configure correctly.");
+    arduino_.Open(port_);
+    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+    
+    int fd = arduino_.GetFileDescriptor();
+    struct termios tty;
+    if (tcgetattr(fd, &tty) == 0) {
+        tty.c_cflag &= ~HUPCL;
+        tcsetattr(fd, TCSANOW, &tty);
     }
     
-    // 2. Open using standard POSIX C.
-    serial_fd_ = open(port_.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
-    if (serial_fd_ < 0) {
-      RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"), "Failed to open serial port: " << port_);
-      return CallbackReturn::FAILURE;
-    }
-    
-    // Ensure the file descriptor is non-blocking
-    fcntl(serial_fd_, F_SETFL, FNDELAY);
-    
-    // 3. Wait for ESP32 and IMU to fully boot.
+    // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences.
     RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Waiting 9 seconds for ESP32 and IMU to boot...");
     std::this_thread::sleep_for(std::chrono::seconds(9));
-    
-    // 4. Flush the kernel IO buffers to clear all backlogged/corrupted boot data!
-    tcflush(serial_fd_, TCIOFLUSH);
+    arduino_.FlushIOBuffers();
   } 
   catch (...) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while interacting with port " << port_);
@@ -97,11 +82,9 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
 CallbackReturn RmitbotInterface::on_deactivate(const rclcpp_lifecycle::State &) {
   RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Stopping robot hardware ...");
 
-  if (serial_fd_ >= 0) {
-    try {
-      close(serial_fd_);
-      serial_fd_ = -1;
-    } catch (...) {
+  if (arduino_.IsOpen()) {
+    try {arduino_.Close();} 
+    catch (...) {
       RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while closing connection with port " << port_);
     }
   }
@@ -151,26 +134,20 @@ std::vector<hardware_interface::CommandInterface> RmitbotInterface::export_comma
 // =======================================================================
 hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
                                                        const rclcpp::Duration &) {
-  if (serial_fd_ < 0) return hardware_interface::return_type::ERROR;
+  if (arduino_.IsDataAvailable()) {
+    auto dt = (rclcpp::Clock().now() - last_run_).seconds();
+    std::string message;
+    try {
+      arduino_.ReadLine(message, '\n', 25);
+    } catch (const LibSerial::ReadTimeout&) {
+      RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Serial read timed out! (ESP32 dropped connection or crashed)");
+      return hardware_interface::return_type::OK;
+    }
 
-  char buf[256];
-  int n = ::read(serial_fd_, buf, sizeof(buf) - 1);
-  if (n > 0) {
-    buf[n] = '\0';
-    serial_buffer_ += buf;
-  } else if (n < 0 && errno != EAGAIN) {
-    RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Serial read error!");
-  }
-
-  size_t pos;
-  while ((pos = serial_buffer_.find('\n')) != std::string::npos) {
-    std::string message = serial_buffer_.substr(0, pos);
-    serial_buffer_.erase(0, pos + 1);
-
+    message.erase(std::remove(message.begin(), message.end(), '\n'), message.end());
     message.erase(std::remove(message.begin(), message.end(), '\r'), message.end());
 
     if (!message.empty() && message.front() == '<' && message.back() == '>') {
-      auto dt = (rclcpp::Clock().now() - last_run_).seconds();
       std::string data = message.substr(1, message.size() - 2);
       std::stringstream ss(data);
       std::string token;
@@ -180,7 +157,6 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
         try {
           states_data.push_back(std::stof(token));
         } catch (...) {
-          // Bad float parsing, ignore this frame
           break;
         }
       }
@@ -209,9 +185,8 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
         lin_acc_.at(2) = states_data.at(13); 
       }
     }
+    last_run_ = rclcpp::Clock().now();
   }
-
-  last_run_ = rclcpp::Clock().now();
   return hardware_interface::return_type::OK;
 }
 
@@ -220,8 +195,6 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
 // =======================================================================
 hardware_interface::return_type RmitbotInterface::write(const rclcpp::Time &,
                                                         const rclcpp::Duration &) {
-  if (serial_fd_ < 0) return hardware_interface::return_type::ERROR;
-
   std::stringstream message_stream;
   message_stream << "<" << std::fixed << std::setprecision(2)
                  << velocity_commands_.at(0) << "\t"
@@ -229,11 +202,9 @@ hardware_interface::return_type RmitbotInterface::write(const rclcpp::Time &,
                  << velocity_commands_.at(2) << "\t"
                  << velocity_commands_.at(3) << ">\n";
 
-  std::string msg = message_stream.str();
-  int n = ::write(serial_fd_, msg.c_str(), msg.length());
-  
-  if (n < 0) {
-    RCLCPP_ERROR_STREAM(rclcpp::get_logger("RmitbotInterface"),"Error sending message to the port " << port_);
+  try {arduino_.Write(message_stream.str());} 
+  catch (...) {
+    RCLCPP_ERROR_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while sending the message "<< message_stream.str() << " to the port " << port_);
     return hardware_interface::return_type::ERROR;
   }
 

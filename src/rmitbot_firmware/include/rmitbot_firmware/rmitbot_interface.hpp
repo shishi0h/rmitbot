@@ -8,6 +8,9 @@
 #include <libserial/SerialPort.h>
 #include <rclcpp_lifecycle/state.hpp>
 #include <rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp>
+#include <termios.h>
+#include <iostream>
+#include <exception>
 
 
 
@@ -45,8 +48,7 @@ namespace rmitbot_firmware
     hardware_interface::return_type write(const rclcpp::Time &, const rclcpp::Duration &) override;
 
   private:
-    int serial_fd_ = -1;
-    std::string serial_buffer_ = "";
+    LibSerial::SerialPort arduino_;
     std::string port_;
     std::vector<double> velocity_commands_;
     std::vector<double> position_states_;
