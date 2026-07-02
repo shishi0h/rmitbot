@@ -107,7 +107,7 @@ def generate_launch_description():
         rsp, 
         controller,
         localization,
-        rplidar, 
-        slamtoolbox, 
+        # rplidar, 
+        # slamtoolbox, 
     ])
     

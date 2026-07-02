@@ -1,7 +1,6 @@
 #include "rmitbot_firmware/rmitbot_interface.hpp"
 #include <hardware_interface/types/hardware_interface_type_values.hpp>
 #include <pluginlib/class_list_macros.hpp>
-#include <termios.h>
 
 namespace rmitbot_firmware {
 // Constructor
@@ -55,44 +54,7 @@ CallbackReturn RmitbotInterface::on_activate(const rclcpp_lifecycle::State &) {
 
   try {
     arduino_.Open(port_);
-    
-    // DEBUG STEP 1: Catch any hidden LibSerial exceptions when setting the baud rate
-    try {
-      arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
-      RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "LibSerial SetBaudRate executed without exceptions.");
-    } catch (const std::exception& e) {
-      RCLCPP_WARN_STREAM(rclcpp::get_logger("RmitbotInterface"), "LibSerial SetBaudRate THREW AN EXCEPTION: " << e.what());
-    }
-
-    // DEBUG STEP 2: Manually check and FORCE the kernel termios settings
-    int fd = arduino_.GetFileDescriptor();
-    struct termios tty;
-    if (tcgetattr(fd, &tty) == 0) {
-        // Read what LibSerial actually set
-        speed_t current_ispeed = cfgetispeed(&tty);
-        RCLCPP_INFO_STREAM(rclcpp::get_logger("RmitbotInterface"), "Current kernel baud code: " << current_ispeed << " (Expected B115200: " << B115200 << ")");
-        
-        // FORCE the baud rate natively to overwrite LibSerial's potential mistake
-        cfsetispeed(&tty, B115200);
-        cfsetospeed(&tty, B115200);
-        
-        // Prevent auto-reset
-        tty.c_cflag &= ~HUPCL;
-        
-        // Apply changes and verify
-        if (tcsetattr(fd, TCSANOW, &tty) == 0) {
-            RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Successfully forced 115200 baud and -hupcl at the Linux kernel level.");
-        } else {
-            RCLCPP_ERROR_STREAM(rclcpp::get_logger("RmitbotInterface"), "tcsetattr FAILED to apply settings! errno: " << errno);
-        }
-    } else {
-        RCLCPP_ERROR_STREAM(rclcpp::get_logger("RmitbotInterface"), "tcgetattr FAILED! Cannot read kernel state. errno: " << errno);
-    }
-    
-    // The ESP32 takes about 6.5 to 7.0 seconds to run its setup() and IMUBegin() sequences.
-    RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Waiting 9 seconds for ESP32 and IMU to boot...");
-    std::this_thread::sleep_for(std::chrono::seconds(9));
-    arduino_.FlushIOBuffers();
+    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
   } 
   catch (...) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("RmitbotInterface"),"Something went wrong while interacting with port " << port_);
@@ -122,6 +84,7 @@ CallbackReturn RmitbotInterface::on_deactivate(const rclcpp_lifecycle::State &) 
 std::vector<hardware_interface::StateInterface> RmitbotInterface::export_state_interfaces() {
   std::vector<hardware_interface::StateInterface> state_interfaces;
 
+  // Provide position and velocity interfaces for each wheel
   for (size_t i = 0; i < info_.joints.size(); i++) {
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &position_states_[i]));
@@ -129,14 +92,20 @@ std::vector<hardware_interface::StateInterface> RmitbotInterface::export_state_i
         info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &velocity_states_[i]));
   }
 
+  // Provide IMU state interfaces
   std::string imu_name = info_.sensors[0].name;
+  // Orientation (quaternion)
   state_interfaces.emplace_back(imu_name, "orientation.x", &orientation_[0]);
   state_interfaces.emplace_back(imu_name, "orientation.y", &orientation_[1]);
   state_interfaces.emplace_back(imu_name, "orientation.z", &orientation_[2]);
   state_interfaces.emplace_back(imu_name, "orientation.w", &orientation_[3]);
+
+  // Angular velocity
   state_interfaces.emplace_back(imu_name, "angular_velocity.x", &ang_vel_[0]);
   state_interfaces.emplace_back(imu_name, "angular_velocity.y", &ang_vel_[1]);
   state_interfaces.emplace_back(imu_name, "angular_velocity.z", &ang_vel_[2]);
+
+  // Linear acceleration
   state_interfaces.emplace_back(imu_name, "linear_acceleration.x", &lin_acc_[0]);
   state_interfaces.emplace_back(imu_name, "linear_acceleration.y", &lin_acc_[1]);
   state_interfaces.emplace_back(imu_name, "linear_acceleration.z", &lin_acc_[2]);
@@ -147,10 +116,13 @@ std::vector<hardware_interface::StateInterface> RmitbotInterface::export_state_i
 // Export the command interfaces
 std::vector<hardware_interface::CommandInterface> RmitbotInterface::export_command_interfaces() {
   std::vector<hardware_interface::CommandInterface> command_interfaces;
+
+  // Provide only a velocity Interafce
   for (size_t i = 0; i < info_.joints.size(); i++) {
     command_interfaces.emplace_back(hardware_interface::CommandInterface(
         info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &velocity_commands_[i]));
   }
+
   return command_interfaces;
 }
 
@@ -159,59 +131,61 @@ std::vector<hardware_interface::CommandInterface> RmitbotInterface::export_comma
 // =======================================================================
 hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
                                                        const rclcpp::Duration &) {
+  // Interpret the string from Arduino, e.g.: "<1.24\t-2.36>"
+  // It is much better to use starting and ending delimiters, because serial will fail
+  // Usually because Arduino is sending too fast, or the buffer is not empty
   if (arduino_.IsDataAvailable()) {
     auto dt = (rclcpp::Clock().now() - last_run_).seconds();
     std::string message;
-    try {
-      arduino_.ReadLine(message, '\n', 25);
-    } catch (const LibSerial::ReadTimeout&) {
-      RCLCPP_WARN(rclcpp::get_logger("RmitbotInterface"), "Serial read timed out! (ESP32 dropped connection or crashed)");
-      return hardware_interface::return_type::OK;
-    }
+    arduino_.ReadLine(message);
+    // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Message Received: %s", message.c_str());
 
+    // Remove only the newline and carriage return characters (i.e., \n, \r)
     message.erase(std::remove(message.begin(), message.end(), '\n'), message.end());
     message.erase(std::remove(message.begin(), message.end(), '\r'), message.end());
+    // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Trimmed message: '%s'", message.c_str());
 
+    // Check for proper start and end delimiters
     if (!message.empty() && message.front() == '<' && message.back() == '>') {
+      // Remove the start '<' and end '>'
       std::string data = message.substr(1, message.size() - 2);
       std::stringstream ss(data);
       std::string token;
+      // std::vector<float> velocities;
       std::vector<float> states_data;
+      // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Data Received: %s", data.c_str());
 
       while (std::getline(ss, token, '\t')) {
-        try {
-          states_data.push_back(std::stof(token));
-        } catch (...) {
-          break;
-        }
+        states_data.push_back(std::stof(token)); // Store the right_vel and left_vel in the vector
+        // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "Parsed velocities: %.2f, %.2f", velocity_states_.at(0), velocity_states_.at(1));
       }
 
-      if (states_data.size() >= 14) {
-        velocity_states_.at(0) = states_data.at(0); 
-        velocity_states_.at(1) = states_data.at(1); 
-        velocity_states_.at(2) = states_data.at(2); 
-        velocity_states_.at(3) = states_data.at(3); 
-        position_states_.at(0) += velocity_states_.at(0) * dt;
-        position_states_.at(1) += velocity_states_.at(1) * dt;
-        position_states_.at(2) += velocity_states_.at(2) * dt;
-        position_states_.at(3) += velocity_states_.at(3) * dt;
+      // Update each wheel state
+      velocity_states_.at(0) = states_data.at(0); // front right wheel
+      velocity_states_.at(1) = states_data.at(1); // front left wheel
+      velocity_states_.at(2) = states_data.at(2); // rear right wheel
+      velocity_states_.at(3) = states_data.at(3); // rear left wheel
+      position_states_.at(0) += velocity_states_.at(0) * dt;
+      position_states_.at(1) += velocity_states_.at(1) * dt;
+      position_states_.at(2) += velocity_states_.at(2) * dt;
+      position_states_.at(3) += velocity_states_.at(3) * dt;
 
-        orientation_.at(0) = states_data.at(4); 
-        orientation_.at(1) = states_data.at(5); 
-        orientation_.at(2) = states_data.at(6); 
-        orientation_.at(3) = states_data.at(7); 
+      orientation_.at(0) = states_data.at(4); // imu orientation x
+      orientation_.at(1) = states_data.at(5); // imu orientation y
+      orientation_.at(2) = states_data.at(6); // imu orientation z
+      orientation_.at(3) = states_data.at(7); // imu orientation w
 
-        ang_vel_.at(0) = states_data.at(8);  
-        ang_vel_.at(1) = states_data.at(9);  
-        ang_vel_.at(2) = states_data.at(10); 
+      ang_vel_.at(0) = states_data.at(8);  // imu angular velocity x
+      ang_vel_.at(1) = states_data.at(9);  // imu angular velocity y
+      ang_vel_.at(2) = states_data.at(10); // imu angular velocity z
 
-        lin_acc_.at(0) = states_data.at(11); 
-        lin_acc_.at(1) = states_data.at(12); 
-        lin_acc_.at(2) = states_data.at(13); 
-      }
+      lin_acc_.at(0) = states_data.at(11); // imu linear acceleration x
+      lin_acc_.at(1) = states_data.at(12); // imu linear acceleration y
+      lin_acc_.at(2) = states_data.at(13); // imu linear acceleration z
     }
     last_run_ = rclcpp::Clock().now();
   }
+  // RCLCPP_INFO(rclcpp::get_logger("RmitbotInterface"), "read() was called");
   return hardware_interface::return_type::OK;
 }
 
@@ -221,11 +195,16 @@ hardware_interface::return_type RmitbotInterface::read(const rclcpp::Time &,
 hardware_interface::return_type RmitbotInterface::write(const rclcpp::Time &,
                                                         const rclcpp::Duration &) {
   std::stringstream message_stream;
-  message_stream << "<" << std::fixed << std::setprecision(2)
-                 << velocity_commands_.at(0) << "\t"
-                 << velocity_commands_.at(1) << "\t"
-                 << velocity_commands_.at(2) << "\t"
-                 << velocity_commands_.at(3) << ">\n";
+  // Add starting delimiter
+  message_stream << "<";
+  // Add the velocity data, separated by tab
+  message_stream << std::fixed << std::setprecision(2)
+                 << velocity_commands_.at(0) << "\t" // front Right wheel
+                 << velocity_commands_.at(1) << "\t" // front left wheel
+                 << velocity_commands_.at(2) << "\t" // rear Right wheel
+                 << velocity_commands_.at(3);        // rear left wheel
+  // Add ending delimiter
+  message_stream << ">\n"; // Optionally include newline for easy serial monitor reading
 
   try {arduino_.Write(message_stream.str());} 
   catch (...) {
