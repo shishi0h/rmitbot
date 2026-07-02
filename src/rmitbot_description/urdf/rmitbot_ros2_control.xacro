@@ -5,7 +5,7 @@
         <hardware>
             <plugin>rmitbot_firmware/RmitbotInterface</plugin>
             <!-- <param name="port">/dev/esp32</param> -->
-            <param name="port">/dev/ttyUSB1</param>
+            <param name="port">/dev/ttyUSB0</param>
         </hardware>
 
         <joint name="front_left_wheel_joint">
