@@ -20,9 +20,6 @@ void TOFBegin()
 
 void TOFGetData()
 {
-    tofSensor.read();
-    // read() blocks until data is ready if we don't check dataReady(), or read(false) doesn't block.
-    // However, if we do startContinuous(50), we can just check if data is ready.
     if (tofSensor.dataReady())
     {
         tof_distance = tofSensor.read(false);
