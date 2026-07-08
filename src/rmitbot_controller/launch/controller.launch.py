@@ -48,7 +48,7 @@ def generate_launch_description():
         arguments=[
             "diff_drive_controller",
             "--param-file",
-            config_controller,
+            ctrl_config,
         ],
     )
     
