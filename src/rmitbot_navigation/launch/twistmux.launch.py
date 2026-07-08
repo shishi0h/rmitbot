@@ -19,7 +19,7 @@ def generate_launch_description():
             {"use_sim_time": False}, 
             {'stamped': True},  
             {'frame_id': 'base_footprint'},],  
-        remappings=[('cmd_vel', '/cmd_vel_keyboard')],  
+        remappings=[('cmd_vel', '/diff_drive_controller/cmd_vel')],  
     ) 
 
     # twist_stamper_node: navigation does not have time stamped
