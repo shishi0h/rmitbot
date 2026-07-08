@@ -1,11 +1,11 @@
 #include "MyIMU.h"
 
-extern double quat[4];
-extern double gyr[3];
-extern double acc[3];
-extern double quat_calib[4];
-extern double gyr_calib[3];
-extern double acc_calib[3];
+double quat[4] = {0, 0, 0, 1};
+double gyr[3] = {0, 0, 0};
+double acc[3] = {0, 0, 0};
+double quat_calib[4] = {0, 0, 0, 0};
+double gyr_calib[3] = {0, 0, 0};
+double acc_calib[3] = {0, 0, 0};
 
 ICM_20948_I2C myICM;
 

@@ -20,5 +20,4 @@ void loop()
   TOFGetData();                // Get the data from the TOF
   // IMUGetData_Uncalibrated();                // Get the data from the IMU
   SerialDataPrint();           // Print the data to the Serial Monitor
-  SerialDataRead();            // Write the data to the Serial Monitor
 }
