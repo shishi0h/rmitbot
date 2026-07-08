@@ -21,7 +21,7 @@ def generate_launch_description():
             {"use_sim_time": False},
             {'stamped': True}], 
         remappings=[
-            ('cmd_vel', '/rmitbot_controller/cmd_vel')]
+            ('cmd_vel', '/cmd_vel_keyboard')]
     )         
     
     return LaunchDescription(

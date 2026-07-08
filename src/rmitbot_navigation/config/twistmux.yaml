@@ -14,7 +14,7 @@ twist_mux_node:
   ros__parameters: 
     use_stamped: true 
     # cmd_vel: /rmitbot_controller/cmd_vel # Output topic for velocity commands 
-    cmd_vel: /rmitbot_controller/cmd_vel # Output topic for velocity commands 
+    cmd_vel: /diff_drive_controller/cmd_vel # Output topic for velocity commands 
     topics: 
       # joy: 
       #   topic: /cmd_vel_joystick # Input topic for joystick commands 

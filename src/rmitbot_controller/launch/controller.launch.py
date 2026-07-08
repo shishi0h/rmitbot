@@ -43,12 +43,12 @@ def generate_launch_description():
     
     # controller: IK from Cartesian speed to motor speed command
     controller_spawner = Node(
-        package=    "controller_manager",
-        executable= "spawner",
+        package="controller_manager",
+        executable="spawner",
         arguments=[
-            'mecanum_drive_controller','--param-file',ctrl_config,
-            '--controller-ros-args','-r /mecanum_drive_controller/tf_odometry:=/tf',
-            '--controller-ros-args','-r /mecanum_drive_controller/reference:=/rmitbot_controller/cmd_vel',
+            "diff_drive_controller",
+            "--param-file",
+            config_controller,
         ],
     )
     

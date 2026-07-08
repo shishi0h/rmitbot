@@ -5,6 +5,15 @@ controller_manager:
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
+      ros__parameters:
+        joints:
+          - front_left_wheel_joint
+          - front_right_wheel_joint
+          - rear_left_wheel_joint
+          - rear_right_wheel_joint
+        interfaces:
+          - position
+          - velocity
 
     mecanum_drive_controller:
       type: mecanum_drive_controller/MecanumDriveController
@@ -12,22 +21,30 @@ controller_manager:
     imu_sensor_broadcaster:
       type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
-mecanum_drive_controller:
-  ros__parameters: 
-    reference_timeout: 1.0 
-    front_left_wheel_command_joint_name: "front_left_wheel_joint"
-    front_right_wheel_command_joint_name: "front_right_wheel_joint"
-    rear_right_wheel_command_joint_name: "rear_right_wheel_joint"
-    rear_left_wheel_command_joint_name: "rear_left_wheel_joint"
-    kinematics:
-        base_frame_offset: { x: 0.0, y: 0.0, theta: 0.0 }
-        wheels_radius: 0.05
-        sum_of_robot_center_projection_on_X_Y_axis: 0.29
-    base_frame_id: "base_footprint"
-    odom_frame_id: "odom"
-    enable_odom_tf: false #true
+diff_drive_controller:
+  ros__parameters:
 
-imu_sensor_broadcaster:
+    use_stamped_vel: false
+
+    left_wheel_names:
+      - front_left_wheel_joint
+      - rear_left_wheel_joint
+
+    right_wheel_names:
+      - front_right_wheel_joint
+      - rear_right_wheel_joint
+
+    wheel_separation: 0.40
+    wheel_radius: 0.05
+
+    publish_rate: 50.0
+
+    base_frame_id: base_footprint
+    odom_frame_id: odom
+
+    enable_odom_tf: false
+
+imu_sensor_broadcaster:  # Comment this section when run on gazebo along with broadcaster
   ros__parameters:
     sensor_name: "imu_sensor"
     frame_id:  "imu_link"
