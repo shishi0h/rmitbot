@@ -48,8 +48,8 @@ def generate_launch_description():
             twistmux_params,  
             {"use_sim_time": False},
         ], 
-        # remappings=[ 
-        #     ('/cmd_vel_out', '/rmitbot_controller/cmd_vel')], 
+        remappings=[ 
+            ('/cmd_vel_out', '/diff_drive_controller/cmd_vel')], 
     ) 
 
     return LaunchDescription([ 
