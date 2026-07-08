@@ -15,8 +15,8 @@ controller_manager:
           - position
           - velocity
 
-    mecanum_drive_controller:
-      type: mecanum_drive_controller/MecanumDriveController
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
 
     imu_sensor_broadcaster:
       type: imu_sensor_broadcaster/IMUSensorBroadcaster

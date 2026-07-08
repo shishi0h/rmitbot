@@ -49,7 +49,7 @@ def generate_launch_description():
             {"use_sim_time": False},
         ], 
         remappings=[ 
-            ('/cmd_vel_out', '/diff_drive_controller/cmd_vel')], 
+            ('/cmd_vel_out', '/diff_drive_controller/cmd_vel_unstamped')], 
     ) 
 
     return LaunchDescription([ 
