@@ -12,7 +12,7 @@ void TOFBegin()
     }
     else
     {
-        tofSensor.setDistanceMode(VL53L1X::Long);
+        tofSensor.setDistanceMode(VL53L1X::Short);
         tofSensor.setMeasurementTimingBudget(50000);
         tofSensor.startContinuous(50);
     }
