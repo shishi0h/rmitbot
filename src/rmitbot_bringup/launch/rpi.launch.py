@@ -109,7 +109,5 @@ def generate_launch_description():
         localization,
         rplidar, 
         slamtoolbox, 
-        twistmux,
-        navigation_delayed,
     ])
     
