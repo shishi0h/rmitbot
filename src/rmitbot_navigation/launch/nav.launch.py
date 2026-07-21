@@ -17,6 +17,7 @@ def generate_launch_description():
         ),
         launch_arguments={
             'use_sim_time': 'false',
+            'use_collision_monitor': 'false',
             'params_file': os.path.join(get_package_share_directory('rmitbot_navigation'),
                                         'config', 'nav2_params.yaml'),
         }.items(), 
