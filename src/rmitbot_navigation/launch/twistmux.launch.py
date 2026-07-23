@@ -14,6 +14,7 @@ def generate_launch_description():
         executable='joy_node',
         name='joy_node',
         output='screen',
+        prefix='xterm -e', 
         parameters=[
             {"use_sim_time": False},
         ],
@@ -25,6 +26,7 @@ def generate_launch_description():
         executable='teleop_node',
         name='teleop_twist_joy',
         output='screen',
+        prefix='xterm -e', 
         parameters=[
             os.path.join(
                 get_package_share_directory("rmitbot_navigation"),
