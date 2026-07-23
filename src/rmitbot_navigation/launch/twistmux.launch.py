@@ -93,14 +93,17 @@ def generate_launch_description():
         ],
         remappings=[
             ('/cmd_vel_in', '/cmd_vel_joystick'),
-            # ('/cmd_vel_out', '/cmd_vel_joystick_stamped'),
+            ('/cmd_vel_out', '/cmd_vel_joystick_stamped'),
         ],
 )
 
 
 
     return LaunchDescription([ 
-        twistmux_node,  
+        joy_node,
+        teleop_joy,
         teleop_keyboard,
-        twist_stamper_node, 
+        twist_stamper_node,
+        joystick_twist_stamper,
+        twistmux_node,
     ]) 
