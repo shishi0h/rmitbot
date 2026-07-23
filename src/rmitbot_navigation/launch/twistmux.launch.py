@@ -8,6 +8,37 @@ from launch.substitutions import LaunchConfiguration
 # ros2 launch rmitbot_controller twistmux.launch.py 
 
 def generate_launch_description(): 
+    #Joy
+    joy_node = Node(
+        package='joy',
+        executable='joy_node',
+        name='joy_node',
+        output='screen',
+        parameters=[
+            {"use_sim_time": False},
+        ],
+    )
+    
+    
+    teleop_joy = Node(
+        package='teleop_twist_joy',
+        executable='teleop_node',
+        name='teleop_twist_joy',
+        output='screen',
+        parameters=[
+            os.path.join(
+                get_package_share_directory("rmitbot_navigation"),
+                "config",
+                "teleop_twist_joy.yaml"
+            ),
+            {"use_sim_time": False},
+        ],
+        remappings=[
+            ('cmd_vel', '/cmd_vel_joystick'),
+        ],
+    )
+    
+    
     # teleop_keyboard
     teleop_keyboard = Node( 
         package='teleop_twist_keyboard', 
@@ -51,6 +82,22 @@ def generate_launch_description():
         remappings=[ 
             ('/cmd_vel_out', '/diff_drive_controller/cmd_vel')], 
     ) 
+
+    joystick_twist_stamper = Node(
+        package='twist_stamper',
+        executable='twist_stamper',
+        name='joystick_twist_stamper',
+        parameters=[
+            {'frame_id': 'base_footprint'},
+            {"use_sim_time": False},
+        ],
+        remappings=[
+            ('/cmd_vel_in', '/cmd_vel_joystick'),
+            # ('/cmd_vel_out', '/cmd_vel_joystick_stamped'),
+        ],
+)
+
+
 
     return LaunchDescription([ 
         twistmux_node,  
