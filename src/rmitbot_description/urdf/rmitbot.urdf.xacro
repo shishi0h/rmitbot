@@ -2,6 +2,7 @@
 
 <robot name="rmitbot"
     xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:arg name="use_sim" default="true"/>
 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_platform.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_gazebo.xacro" />
@@ -14,12 +15,12 @@
 
     <!-- Front Left Cliff Sensor (Floating on top-left corner, pointing straight down) -->
     <xacro:cliff_sensor name="cliff_fl" parent="base_link">
-        <origin xyz="0.14 0.17 0.12" rpy="0 1.5708 0" />
+        <origin xyz="0.16 0.24 0.11" rpy="0 1.5708 0" />
     </xacro:cliff_sensor>
 
     <!-- Front Right Cliff Sensor (Floating on top-right corner, pointing straight down) -->
     <xacro:cliff_sensor name="cliff_fr" parent="base_link">
-        <origin xyz="0.14 -0.17 0.12" rpy="0 1.5708 0" />
+        <origin xyz="0.16 -0.24 0.11" rpy="0 1.5708 0" />
     </xacro:cliff_sensor>
 
 </robot>

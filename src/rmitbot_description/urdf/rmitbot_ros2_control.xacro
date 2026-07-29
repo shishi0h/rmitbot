@@ -2,11 +2,18 @@
 <robot name="rmitbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
     
     <ros2_control name="RobotSystem" type="system">    
-        <hardware>
-            <plugin>rmitbot_firmware/RmitbotInterface</plugin>
-            <!-- <param name="port">/dev/esp32</param> -->
-            <param name="port">/dev/ttyUSB0</param>
-        </hardware>
+        <xacro:if value="$(arg use_sim)">
+            <hardware>
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            </hardware>
+        </xacro:if>
+        <xacro:unless value="$(arg use_sim)">
+            <hardware>
+                <plugin>rmitbot_firmware/RmitbotInterface</plugin>
+                <!-- <param name="port">/dev/esp32</param> -->
+                <param name="port">/dev/ttyUSB0</param>
+            </hardware>
+        </xacro:unless>
 
         <joint name="front_left_wheel_joint">
             <command_interface name="velocity">
