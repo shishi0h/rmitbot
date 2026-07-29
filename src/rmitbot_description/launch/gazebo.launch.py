@@ -7,13 +7,26 @@ from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetE
 from launch.substitutions import Command, LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
-from launch_ros.actions import Node
+from launch_ros.actions import Node, SetParameter
 from launch_ros.parameter_descriptions import ParameterValue
 
 # Launch the file
 # ros2 launch rmitbot_description gazebo.launch.py
 
 def generate_launch_description():
+    use_sim_time = LaunchConfiguration('use_sim_time')
+
+    declare_use_sim_time_cmd = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value='true',
+        description='Use simulation (Gazebo) clock if true'
+    )
+
+    set_use_sim_time_cmd = SetParameter(
+        name='use_sim_time',
+        value=use_sim_time
+    )
+
     # Path to the package
     pkg_path = get_package_share_directory("rmitbot_description")
     
@@ -51,19 +64,37 @@ def generate_launch_description():
         package="ros_gz_sim",
         executable="create",
         output="screen",
-        arguments=["-topic", "robot_description","-name", "rmitbot"],
+        arguments=["-topic", "robot_description", "-name", "rmitbot", "-world", "empty"],
     )
 
     # Bridge between ROS2 and Gazebo
     gz_ros2_bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
-        arguments=["/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"], 
+        arguments=[
+            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            "/sensors/cliff/cliff_fl@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+            "/sensors/cliff/cliff_fr@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan"
+        ], 
+    )
+
+    # Launch RViz2
+    rviz = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        output='screen',
+        arguments=['-d', os.path.join(pkg_path, 'rviz', 'display.rviz')],
     )
 
     return LaunchDescription([
+        declare_use_sim_time_cmd,
+        set_use_sim_time_cmd,
         gz_resource_path,
+        robot_state_publisher,
         gazebo,
         gz_spawn_entity,
         gz_ros2_bridge,
+        rviz,
     ])
