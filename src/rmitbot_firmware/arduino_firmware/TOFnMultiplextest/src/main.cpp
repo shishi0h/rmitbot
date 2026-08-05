@@ -28,7 +28,6 @@ void setup() {
   sensor1.setTimeout(500);
   if (!sensor1.init()) {
     Serial.println("Failed to detect and initialize sensor 1 (Channel 0)!");
-  } else {
     Serial.println("Sensor 1 initialized.");
     sensor1.setDistanceMode(VL53L1X::Long);
     sensor1.setMeasurementTimingBudget(50000);
