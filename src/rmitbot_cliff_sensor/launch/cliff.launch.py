@@ -10,7 +10,10 @@ def generate_launch_description():
         executable='cliff_sensor_node',
         name='cliff_sensor_node',
         output='screen',
-        parameters=[{'use_sim_time': False}]
+        parameters=[{
+            'use_sim_time': False,
+            'port': '/dev/ttyUSB1'
+        }]
     )
 
     cliff_safety_filter_node = Node(
