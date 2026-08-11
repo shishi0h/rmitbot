@@ -82,7 +82,7 @@ def generate_launch_description():
             {"use_sim_time": False},
         ], 
         remappings=[ 
-            ('/cmd_vel_out', '/diff_drive_controller/cmd_vel')], 
+            ('/cmd_vel_out', '/cmd_vel_in')], 
     ) 
 
     joystick_twist_stamper = Node(
