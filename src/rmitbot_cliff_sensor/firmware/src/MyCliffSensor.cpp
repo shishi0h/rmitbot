@@ -32,7 +32,6 @@ void MyCliffSensor::init() {
             Serial.print("Failed to init sensor on channel ");
             Serial.println(i);
         } else {
-            sensors[i].setDistanceMode(VL53L1X::Long);
             sensors[i].setMeasurementTimingBudget(50000);
             sensors[i].startContinuous(50);
         }
@@ -42,7 +41,7 @@ void MyCliffSensor::init() {
 void MyCliffSensor::update() {
     for (int i = 0; i < NUM_CLIFF_SENSORS; i++) {
         pcaselect(i);
-        distances[i] = sensors[i].read();
+        distances[i] = sensors[i].readRangeContinuousMillimeters();
         timeouts[i] = sensors[i].timeoutOccurred();
     }
 }

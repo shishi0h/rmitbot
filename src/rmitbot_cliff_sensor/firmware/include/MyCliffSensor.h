@@ -3,11 +3,11 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <VL53L1X.h>
+#include <VL53L0X.h>
 
 #define PCA9548A_ADDR 0x70
-#define NUM_CLIFF_SENSORS 2
-#define MUX_RESET_PIN 5 // Connect this GPIO to the RST pin on the multiplexer
+#define NUM_CLIFF_SENSORS 6
+#define MUX_RESET_PIN 23 // Connect this GPIO to the RST pin on the multiplexer
 
 class MyCliffSensor {
 public:
@@ -18,7 +18,7 @@ public:
     bool isTimeout(uint8_t index);
 
 private:
-    VL53L1X sensors[NUM_CLIFF_SENSORS];
+    VL53L0X sensors[NUM_CLIFF_SENSORS];
     uint16_t distances[NUM_CLIFF_SENSORS];
     bool timeouts[NUM_CLIFF_SENSORS];
 

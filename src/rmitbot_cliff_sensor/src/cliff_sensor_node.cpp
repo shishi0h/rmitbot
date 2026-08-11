@@ -9,8 +9,9 @@ CliffSensorNode::CliffSensorNode() : Node("cliff_sensor_node") {
     cliff_threshold_ = this->get_parameter("cliff_threshold").as_double();
 
     estop_pub_ = this->create_publisher<std_msgs::msg::Bool>("emergency_stop", 10);
+    array_pub_ = this->create_publisher<std_msgs::msg::Int32MultiArray>("sensors/cliff/all_ranges", 10);
     
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 6; i++) {
         range_pubs_.push_back(this->create_publisher<sensor_msgs::msg::Range>(
             "sensors/cliff/range_" + std::to_string(i), 10));
     }
@@ -69,9 +70,9 @@ void CliffSensorNode::read_serial() {
                 range_msg.header.stamp = this->now();
                 range_msg.header.frame_id = "cliff_sensor_" + std::to_string(i) + "_link";
                 range_msg.radiation_type = sensor_msgs::msg::Range::INFRARED;
-                range_msg.field_of_view = 0.471239; // 27 degrees for VL53L1X
+                range_msg.field_of_view = 0.436332; // 25 degrees for VL53L0X
                 range_msg.min_range = 0.0;
-                range_msg.max_range = 4.0;
+                range_msg.max_range = 2.0;
                 range_msg.range = distance_m;
                 
                 range_pubs_[i]->publish(range_msg);
@@ -82,6 +83,12 @@ void CliffSensorNode::read_serial() {
                     emergency_stop = true;
                 }
             }
+            
+            std_msgs::msg::Int32MultiArray array_msg;
+            for (size_t i = 0; i < distances.size(); ++i) {
+                array_msg.data.push_back(distances[i]); // Push raw mm values
+            }
+            array_pub_->publish(array_msg);
 
             std_msgs::msg::Bool estop_msg;
             estop_msg.data = emergency_stop;

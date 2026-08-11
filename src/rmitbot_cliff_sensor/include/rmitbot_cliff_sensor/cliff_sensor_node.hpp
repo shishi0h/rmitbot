@@ -4,6 +4,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/bool.hpp>
 #include <sensor_msgs/msg/range.hpp>
+#include <std_msgs/msg/int32_multi_array.hpp>
 #include <libserial/SerialPort.h>
 
 class CliffSensorNode : public rclcpp::Node {
@@ -18,6 +19,7 @@ private:
     std::string port_name_;
     rclcpp::TimerBase::SharedPtr timer_;
     rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr estop_pub_;
+    rclcpp::Publisher<std_msgs::msg::Int32MultiArray>::SharedPtr array_pub_;
     std::vector<rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr> range_pubs_;
     
     double cliff_threshold_;
