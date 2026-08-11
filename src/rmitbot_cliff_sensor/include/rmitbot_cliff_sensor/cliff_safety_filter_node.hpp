@@ -2,7 +2,7 @@
 #define CLIFF_SAFETY_FILTER_NODE_HPP
 
 #include <rclcpp/rclcpp.hpp>
-#include <geometry_msgs/msg/twist.hpp>
+#include <geometry_msgs/msg/twist_stamped.hpp>
 #include <sensor_msgs/msg/range.hpp>
 #include <string>
 #include <vector>
@@ -14,11 +14,11 @@ public:
     CliffSafetyFilterNode();
 
 private:
-    void cmd_vel_callback(const geometry_msgs::msg::Twist::SharedPtr msg);
+    void cmd_vel_callback(const geometry_msgs::msg::TwistStamped::SharedPtr msg);
     void range_callback(const sensor_msgs::msg::Range::SharedPtr msg, const std::string& topic_name);
 
-    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
+    rclcpp::Subscription<geometry_msgs::msg::TwistStamped>::SharedPtr cmd_vel_sub_;
+    rclcpp::Publisher<geometry_msgs::msg::TwistStamped>::SharedPtr cmd_vel_pub_;
 
     std::vector<std::string> front_topics_;
     std::vector<std::string> back_topics_;

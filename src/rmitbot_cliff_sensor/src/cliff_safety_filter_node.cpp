@@ -2,10 +2,10 @@
 
 CliffSafetyFilterNode::CliffSafetyFilterNode() : Node("cliff_safety_filter_node") {
     // Declare parameters for topic lists
-    this->declare_parameter("front_sensor_topics", std::vector<std::string>{"/sensors/cliff/range_0", "/sensors/cliff/range_1"});
-    this->declare_parameter("back_sensor_topics", std::vector<std::string>{});
-    this->declare_parameter("left_sensor_topics", std::vector<std::string>{});
-    this->declare_parameter("right_sensor_topics", std::vector<std::string>{});
+    this->declare_parameter("front_sensor_topics", std::vector<std::string>{"sensors/cliff/range_0", "sensors/cliff/range_1", "sensors/cliff/range_5"});
+    this->declare_parameter("back_sensor_topics", std::vector<std::string>{"sensors/cliff/range_2", "sensors/cliff/range_3", "sensors/cliff/range_4"});
+    this->declare_parameter("left_sensor_topics", std::vector<std::string>{"sensors/cliff/range_4", "sensors/cliff/range_5"});
+    this->declare_parameter("right_sensor_topics", std::vector<std::string>{"sensors/cliff/range_1", "sensors/cliff/range_2"});
     this->declare_parameter("cliff_threshold", 0.08);
 
     front_topics_ = this->get_parameter("front_sensor_topics").as_string_array();
@@ -35,9 +35,9 @@ CliffSafetyFilterNode::CliffSafetyFilterNode() : Node("cliff_safety_filter_node"
     create_subs(left_topics_);
     create_subs(right_topics_);
 
-    cmd_vel_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
+    cmd_vel_sub_ = this->create_subscription<geometry_msgs::msg::TwistStamped>(
         "cmd_vel_in", 10, std::bind(&CliffSafetyFilterNode::cmd_vel_callback, this, std::placeholders::_1));
-    cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel_out", 10);
+    cmd_vel_pub_ = this->create_publisher<geometry_msgs::msg::TwistStamped>("cmd_vel_filter", 10);
     
     RCLCPP_INFO(this->get_logger(), "Cliff Safety Filter Node Started.");
 }
@@ -55,24 +55,24 @@ bool CliffSafetyFilterNode::is_cliff_detected(const std::vector<std::string>& to
     return false;
 }
 
-void CliffSafetyFilterNode::cmd_vel_callback(const geometry_msgs::msg::Twist::SharedPtr msg) {
+void CliffSafetyFilterNode::cmd_vel_callback(const geometry_msgs::msg::TwistStamped::SharedPtr msg) {
     auto filtered_cmd = *msg;
 
     // Check Linear X (Forward/Backward)
-    if (filtered_cmd.linear.x > 0.0 && is_cliff_detected(front_topics_)) {
-        filtered_cmd.linear.x = 0.0;
+    if (filtered_cmd.twist.linear.x > 0.0 && is_cliff_detected(front_topics_)) {
+        filtered_cmd.twist.linear.x = 0.0;
         RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Forward motion blocked by front cliff sensor!");
-    } else if (filtered_cmd.linear.x < 0.0 && is_cliff_detected(back_topics_)) {
-        filtered_cmd.linear.x = 0.0;
+    } else if (filtered_cmd.twist.linear.x < 0.0 && is_cliff_detected(back_topics_)) {
+        filtered_cmd.twist.linear.x = 0.0;
         RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Backward motion blocked by rear cliff sensor!");
     }
 
     // Check Angular Z (Turning Left/Right)
-    if (filtered_cmd.angular.z > 0.0 && is_cliff_detected(left_topics_)) {
-        filtered_cmd.angular.z = 0.0;
+    if (filtered_cmd.twist.angular.z > 0.0 && is_cliff_detected(left_topics_)) {
+        filtered_cmd.twist.angular.z = 0.0;
         RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Left turn blocked by left cliff sensor!");
-    } else if (filtered_cmd.angular.z < 0.0 && is_cliff_detected(right_topics_)) {
-        filtered_cmd.angular.z = 0.0;
+    } else if (filtered_cmd.twist.angular.z < 0.0 && is_cliff_detected(right_topics_)) {
+        filtered_cmd.twist.angular.z = 0.0;
         RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Right turn blocked by right cliff sensor!");
     }
 
