@@ -12,7 +12,8 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             'use_sim_time': False,
-            'port': '/dev/ttyUSB2'
+            'port': '/dev/ttyUSB2',
+            'cliff_threshold': 0.15
         }]
     )
 
@@ -21,7 +22,10 @@ def generate_launch_description():
         executable='cliff_safety_filter_node',
         name='cliff_safety_filter_node',
         output='screen',
-        parameters=[{'use_sim_time': False}],
+        parameters=[{
+            'use_sim_time': False,
+            'cliff_threshold': 0.15
+        }],
         remappings=[
             ('cmd_vel_filter', '/diff_drive_controller/cmd_vel')
         ]
