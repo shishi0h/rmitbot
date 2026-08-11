@@ -12,7 +12,7 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             'use_sim_time': False,
-            'port': '/dev/ttyUSB1'
+            'port': '/dev/ttyUSB2'
         }]
     )
 
