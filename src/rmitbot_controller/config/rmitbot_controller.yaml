@@ -24,7 +24,7 @@ controller_manager:
 diff_drive_controller:
   ros__parameters:
 
-    use_stamped_vel: false
+    use_stamped_vel: true
 
     left_wheel_names:
       - front_left_wheel_joint
