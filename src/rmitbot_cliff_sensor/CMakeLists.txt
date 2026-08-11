@@ -52,7 +52,7 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY urdf include
+  DIRECTORY urdf include launch
   DESTINATION share/${PROJECT_NAME}
 )
 

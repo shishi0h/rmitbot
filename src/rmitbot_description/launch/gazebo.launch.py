@@ -42,7 +42,7 @@ def generate_launch_description():
     )
 
     # Compile the xacro to urdf
-    robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' use_sim:=true']), value_type=str)
     
     # Publish the robot static TF from the urdf
     robot_state_publisher = Node(

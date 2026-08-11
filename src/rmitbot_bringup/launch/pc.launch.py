@@ -38,10 +38,20 @@ def generate_launch_description():
         actions=[navigation]
     )
     
+    # Launch cliff sensors
+    cliff_sensor = IncludeLaunchDescription(
+        os.path.join(
+            get_package_share_directory("rmitbot_cliff_sensor"),
+            "launch", "cliff.launch.py"
+        ),
+    )
+    
     # PC launches rviz, twistmux, and nav2
     # RPI launches rsp, controller, rplidar, slamtoolbox
     return LaunchDescription([
         rviz, 
         twistmux, 
         navigation_delayed,         
+        cliff_sensor,
     ])
+    

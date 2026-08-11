@@ -101,6 +101,14 @@ def generate_launch_description():
         ),
     )
     
+    # Launch cliff sensors
+    cliff_sensor = IncludeLaunchDescription(
+        os.path.join(
+            get_package_share_directory("rmitbot_cliff_sensor"),
+            "launch", "cliff.launch.py"
+        ),
+    )
+    
     # RPI launches rsp, controller
     
     return LaunchDescription([
@@ -109,5 +117,6 @@ def generate_launch_description():
         localization,
         rplidar, 
         slamtoolbox, 
+        cliff_sensor,
     ])
     
