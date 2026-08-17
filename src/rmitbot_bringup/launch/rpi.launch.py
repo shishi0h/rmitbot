@@ -113,10 +113,10 @@ def generate_launch_description():
     
     return LaunchDescription([
         rsp, 
-        # controller,
+        controller,
         localization,
         rplidar, 
         slamtoolbox, 
-        # cliff_sensor,
+        cliff_sensor,
     ])
     
