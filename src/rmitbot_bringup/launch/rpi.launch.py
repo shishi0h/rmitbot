@@ -101,12 +101,16 @@ def generate_launch_description():
         ),
     )
     
+    from launch.substitutions import LaunchConfiguration
+    namespace = LaunchConfiguration('namespace', default='')
+
     # Launch cliff sensors
     cliff_sensor = IncludeLaunchDescription(
         os.path.join(
             get_package_share_directory("rmitbot_cliff_sensor"),
             "launch", "cliff.launch.py"
         ),
+        launch_arguments={'namespace': namespace}.items()
     )
     
     # RPI launches rsp, controller
@@ -117,6 +121,5 @@ def generate_launch_description():
         localization,
         # rplidar, 
         # slamtoolbox, 
-        #cliff_sensor,
+        cliff_sensor,
     ])
-    
