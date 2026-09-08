@@ -51,7 +51,7 @@ def generate_launch_description():
     return LaunchDescription([
         rviz, 
         twistmux, 
-        navigation_delayed,         
-        cliff_sensor,
+        # navigation_delayed,         
+        # cliff_sensor,
     ])
     
