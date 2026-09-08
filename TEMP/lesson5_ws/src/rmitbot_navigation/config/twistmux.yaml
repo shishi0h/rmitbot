@@ -10,12 +10,11 @@
 #         timeout : 0.5
 #         priority: 100
 
-twist_mux_node: 
+/**/twist_mux_node: 
   ros__parameters: 
     use_stamped: true 
     # cmd_vel: /rmitbot_controller/cmd_vel # Output topic for velocity commands 
-    # cmd_vel: cmd_vel # Output topic for velocity commands 
-    cmd_vel: /diff_drive_controller/cmd_vel
+    cmd_vel: cmd_vel # Output topic for velocity commands 
     topics: 
       # joy: 
       #   topic: /cmd_vel_joystick # Input topic for joystick commands 

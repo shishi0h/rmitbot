@@ -1,34 +1,94 @@
-controller_manager:
-  ros__parameters:
-    update_rate: 100
-    use_sim_time: true
+robot_0:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100
+      use_sim_time: true
 
-    joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
 
-    diff_drive_controller:
-      type: diff_drive_controller/DiffDriveController
+      diff_drive_controller:
+        type: diff_drive_controller/DiffDriveController
+
+  diff_drive_controller:
+    ros__parameters:
+
+      # Left side wheels
+      left_wheel_names:
+        - "robot_0/front_left_wheel_joint"
+        - "robot_0/rear_left_wheel_joint"
+
+      # Right side wheels
+      right_wheel_names:
+        - "robot_0/front_right_wheel_joint"
+        - "robot_0/rear_right_wheel_joint"
+
+      # Robot geometry
+      wheel_separation: 0.40
+      wheel_radius: 0.05
+
+      # TF frames
+      base_frame_id: "robot_0/base_footprint"
+      odom_frame_id: "robot_0/odom"
+
+      # Let EKF publish odom -> base_footprint TF
+      enable_odom_tf: false
+
+      # Odometry
+      position_feedback: true
+      open_loop: false
+
+      # Command settings
+      use_stamped_vel: true
+      cmd_vel_timeout: 1.0
+
+      # Publish rate
+      publish_rate: 50.0
 
 
-diff_drive_controller:
-  ros__parameters:
+robot_1:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100
+      use_sim_time: true
 
-    use_stamped_vel: false
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
 
-    left_wheel_names:
-      - front_left_wheel_joint
-      - rear_left_wheel_joint
+      diff_drive_controller:
+        type: diff_drive_controller/DiffDriveController
 
-    right_wheel_names:
-      - front_right_wheel_joint
-      - rear_right_wheel_joint
+  diff_drive_controller:
+    ros__parameters:
 
-    wheel_separation: 0.40
-    wheel_radius: 0.05
+      # Left side wheels
+      left_wheel_names:
+        - "robot_1/front_left_wheel_joint"
+        - "robot_1/rear_left_wheel_joint"
 
-    publish_rate: 50.0
+      # Right side wheels
+      right_wheel_names:
+        - "robot_1/front_right_wheel_joint"
+        - "robot_1/rear_right_wheel_joint"
 
-    base_frame_id: base_footprint
-    odom_frame_id: odom
+      # Robot geometry
+      wheel_separation: 0.40
+      wheel_radius: 0.05
 
-    enable_odom_tf: false
+      # TF frames
+      base_frame_id: "robot_1/base_footprint"
+      odom_frame_id: "robot_1/odom"
+
+      # Let EKF publish odom -> base_footprint TF
+      enable_odom_tf: false
+
+      # Odometry
+      position_feedback: true
+      open_loop: false
+
+      # Command settings
+      use_stamped_vel: true
+      cmd_vel_timeout: 1.0
+
+      # Publish rate
+      publish_rate: 50.0

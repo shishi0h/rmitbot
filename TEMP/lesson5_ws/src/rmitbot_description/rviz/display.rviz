@@ -1,340 +1,433 @@
 Panels:
-  - Class: rviz_common/Displays
-    Help Height: 78
-    Name: Displays
-    Property Tree Widget:
-      Expanded: ~
-      Splitter Ratio: 0.5
-    Tree Height: 611
-  - Class: rviz_common/Selection
-    Name: Selection
-  - Class: rviz_common/Tool Properties
-    Expanded:
-      - /2D Goal Pose1
-      - /Publish Point1
-    Name: Tool Properties
-    Splitter Ratio: 0.5886790156364441
-  - Class: rviz_common/Views
-    Expanded:
-      - /Current View1
-    Name: Views
+- Class: rviz_common/Displays
+  Help Height: 78
+  Name: Displays
+  Property Tree Widget:
+    Expanded: null
     Splitter Ratio: 0.5
-  - Class: rviz_common/Time
-    Experimental: false
-    Name: Time
-    SyncMode: 0
-    SyncSource: LaserScan
-  - Class: nav2_rviz_plugins/Navigation 2
-    Name: Navigation 2
+  Tree Height: 611
+- Class: rviz_common/Selection
+  Name: Selection
+- Class: rviz_common/Tool Properties
+  Expanded:
+  - /2D Goal Pose1
+  - /Publish Point1
+  Name: Tool Properties
+  Splitter Ratio: 0.5886790156364441
+- Class: rviz_common/Views
+  Expanded:
+  - /Current View1
+  Name: Views
+  Splitter Ratio: 0.5
+- Class: rviz_common/Time
+  Experimental: false
+  Name: Time
+  SyncMode: 0
+  SyncSource: LaserScan
+- Class: nav2_rviz_plugins/Navigation 2
+  Name: Navigation 2
 Visualization Manager:
-  Class: ""
+  Class: ''
   Displays:
-    - Alpha: 0.5
-      Cell Size: 1
-      Class: rviz_default_plugins/Grid
-      Color: 160; 160; 164
-      Enabled: true
-      Line Style:
-        Line Width: 0.029999999329447746
-        Value: Lines
-      Name: Grid
-      Normal Cell Count: 0
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Plane: XY
-      Plane Cell Count: 10
-      Reference Frame: <Fixed Frame>
-      Value: true
-    - Class: rviz_default_plugins/TF
-      Enabled: true
-      Filter (blacklist): ""
-      Filter (whitelist): ""
-      Frame Timeout: 15
-      Frames:
-        All Enabled: true
-        base_footprint:
-          Value: true
-        base_link:
-          Value: true
-        front_left_wheel:
-          Value: true
-        front_right_wheel:
-          Value: true
-        imu_link:
-          Value: true
-        laser_link:
-          Value: true
-        map:
-          Value: true
-        odom:
-          Value: true
-        rear_left_wheel:
-          Value: true
-        rear_right_wheel:
-          Value: true
-      Marker Scale: 0.5
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: false
-      Tree:
-        map:
-          odom:
-            base_footprint:
-              base_link:
-                front_left_wheel:
-                  {}
-                front_right_wheel:
-                  {}
-                imu_link:
-                  {}
-                laser_link:
-                  {}
-                rear_left_wheel:
-                  {}
-                rear_right_wheel:
-                  {}
-      Update Interval: 0
-      Value: true
-    - Alpha: 1
-      Class: rviz_default_plugins/RobotModel
-      Collision Enabled: false
-      Description File: ""
-      Description Source: Topic
-      Description Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /robot_description
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        front_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        laser_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_left_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rear_right_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-      Mass Properties:
-        Inertia: false
-        Mass: false
-      Name: RobotModel
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
+  - Alpha: 0.5
+    Cell Size: 1
+    Class: rviz_default_plugins/Grid
+    Color: 160; 160; 164
+    Enabled: true
+    Line Style:
+      Line Width: 0.029999999329447746
+      Value: Lines
+    Name: Grid
+    Normal Cell Count: 0
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Plane: XY
+    Plane Cell Count: 10
+    Reference Frame: <Fixed Frame>
+    Value: true
+  - Class: rviz_default_plugins/TF
+    Enabled: true
+    Filter (blacklist): ''
+    Filter (whitelist): ''
+    Frame Timeout: 15
+    Frames:
+      All Enabled: true
+      base_footprint:
         Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz_default_plugins/LaserScan
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 0
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: LaserScan
-      Position Transformer: XYZ
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.009999999776482582
-      Style: Flat Squares
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /scan
-      Use Fixed Frame: true
-      Use rainbow: true
+      base_link:
+        Value: true
+      front_left_wheel:
+        Value: true
+      front_right_wheel:
+        Value: true
+      imu_link:
+        Value: true
+      laser_link:
+        Value: true
+      map:
+        Value: true
+      odom:
+        Value: true
+      rear_left_wheel:
+        Value: true
+      rear_right_wheel:
+        Value: true
+    Marker Scale: 0.5
+    Name: TF
+    Show Arrows: true
+    Show Axes: true
+    Show Names: false
+    Tree:
+      map:
+        odom:
+          base_footprint:
+            base_link:
+              front_left_wheel: {}
+              front_right_wheel: {}
+              imu_link: {}
+              laser_link: {}
+              rear_left_wheel: {}
+              rear_right_wheel: {}
+    Update Interval: 0
+    Value: true
+  - Alpha: 0.699999988079071
+    Binary representation: false
+    Binary threshold: 100
+    Class: rviz_default_plugins/Map
+    Color Scheme: map
+    Draw Behind: false
+    Enabled: true
+    Name: Map
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /map
+    Update Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /map_updates
+    Use Timestamp: false
+    Value: true
+  - Alpha: 0.699999988079071
+    Binary representation: false
+    Binary threshold: 100
+    Class: rviz_default_plugins/Map
+    Color Scheme: costmap
+    Draw Behind: false
+    Enabled: true
+    Name: Map
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /global_costmap/costmap
+    Update Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /global_costmap/costmap_updates
+    Use Timestamp: false
+    Value: true
+  - Alpha: 0.699999988079071
+    Binary representation: false
+    Binary threshold: 100
+    Class: rviz_default_plugins/Map
+    Color Scheme: map
+    Draw Behind: false
+    Enabled: true
+    Name: Map
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /local_costmap/costmap
+    Update Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /local_costmap/costmap_updates
+    Use Timestamp: false
+    Value: true
+  - Alpha: 1
+    Buffer Length: 1
+    Class: rviz_default_plugins/Path
+    Color: 0; 0; 0
+    Enabled: true
+    Head Diameter: 0.20000000298023224
+    Head Length: 0.10000000149011612
+    Length: 0.30000001192092896
+    Line Style: Lines
+    Line Width: 0.029999999329447746
+    Name: Path
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Pose Color: 255; 85; 255
+    Pose Style: None
+    Radius: 0.029999999329447746
+    Shaft Diameter: 0.05000000074505806
+    Shaft Length: 0.20000000298023224
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /plan
+    Value: true
+  - Alpha: 1
+    Buffer Length: 1
+    Class: rviz_default_plugins/Path
+    Color: 255; 25; 0
+    Enabled: true
+    Head Diameter: 0.30000001192092896
+    Head Length: 0.20000000298023224
+    Length: 0.30000001192092896
+    Line Style: Lines
+    Line Width: 0.029999999329447746
+    Name: Path
+    Offset:
+      X: 0
+      Y: 0
+      Z: 0
+    Pose Color: 255; 85; 255
+    Pose Style: None
+    Radius: 0.029999999329447746
+    Shaft Diameter: 0.10000000149011612
+    Shaft Length: 0.10000000149011612
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /local_plan
+    Value: true
+  - Alpha: 1
+    Class: rviz_default_plugins/Polygon
+    Color: 25; 255; 0
+    Enabled: true
+    Name: Polygon
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /local_costmap/published_footprint
+    Value: true
+  - Alpha: 1
+    Class: rviz_default_plugins/RobotModel
+    Collision Enabled: false
+    Description File: ''
+    Description Source: Topic
+    Description Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_0/robot_description
+    Enabled: true
+    Links:
+      All Links Enabled: true
+      Expand Joint Details: false
+      Expand Link Details: false
+      Expand Tree: false
+      Link Tree Style: Links in Alphabetic Order
+      base_footprint:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+      base_link:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      front_left_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      front_right_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      imu_link:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      laser_link:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      rear_left_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      rear_right_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+    Mass Properties:
+      Inertia: false
+      Mass: false
+    Name: RobotModel 0
+    TF Prefix: ''
+    Update Interval: 0
+    Value: true
+    Visual Enabled: true
+  - Alpha: 1
+    Class: rviz_default_plugins/RobotModel
+    Collision Enabled: false
+    Description File: ''
+    Description Source: Topic
+    Description Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_1/robot_description
+    Enabled: true
+    Links:
+      All Links Enabled: true
+      Expand Joint Details: false
+      Expand Link Details: false
+      Expand Tree: false
+      Link Tree Style: Links in Alphabetic Order
+      base_footprint:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+      base_link:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      front_left_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      front_right_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      imu_link:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      laser_link:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      rear_left_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+      rear_right_wheel:
+        Alpha: 1
+        Show Axes: false
+        Show Trail: false
+        Value: true
+    Mass Properties:
+      Inertia: false
+      Mass: false
+    Name: RobotModel 1
+    TF Prefix: ''
+    Update Interval: 0
+    Value: true
+    Visual Enabled: true
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
       Value: true
-    - Alpha: 0.699999988079071
-      Binary representation: false
-      Binary threshold: 100
-      Class: rviz_default_plugins/Map
-      Color Scheme: map
-      Draw Behind: false
-      Enabled: true
-      Name: Map
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /map
-      Update Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /map_updates
-      Use Timestamp: false
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/LaserScan
+    Color: 255; 0; 0
+    Color Transformer: Intensity
+    Decay Time: 0
+    Enabled: true
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 0
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: LaserScan 0
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.009999999776482582
+    Style: Flat Squares
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_0/scan
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: true
+  - Alpha: 1
+    Autocompute Intensity Bounds: true
+    Autocompute Value Bounds:
+      Max Value: 10
+      Min Value: -10
       Value: true
-    - Alpha: 0.699999988079071
-      Binary representation: false
-      Binary threshold: 100
-      Class: rviz_default_plugins/Map
-      Color Scheme: costmap
-      Draw Behind: false
-      Enabled: true
-      Name: Map
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /global_costmap/costmap
-      Update Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /global_costmap/costmap_updates
-      Use Timestamp: false
-      Value: true
-    - Alpha: 0.699999988079071
-      Binary representation: false
-      Binary threshold: 100
-      Class: rviz_default_plugins/Map
-      Color Scheme: map
-      Draw Behind: false
-      Enabled: true
-      Name: Map
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /local_costmap/costmap
-      Update Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /local_costmap/costmap_updates
-      Use Timestamp: false
-      Value: true
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz_default_plugins/Path
-      Color: 0; 0; 0
-      Enabled: true
-      Head Diameter: 0.20000000298023224
-      Head Length: 0.10000000149011612
-      Length: 0.30000001192092896
-      Line Style: Lines
-      Line Width: 0.029999999329447746
-      Name: Path
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 255; 85; 255
-      Pose Style: None
-      Radius: 0.029999999329447746
-      Shaft Diameter: 0.05000000074505806
-      Shaft Length: 0.20000000298023224
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /plan
-      Value: true
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz_default_plugins/Path
-      Color: 255; 25; 0
-      Enabled: true
-      Head Diameter: 0.30000001192092896
-      Head Length: 0.20000000298023224
-      Length: 0.30000001192092896
-      Line Style: Lines
-      Line Width: 0.029999999329447746
-      Name: Path
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 255; 85; 255
-      Pose Style: None
-      Radius: 0.029999999329447746
-      Shaft Diameter: 0.10000000149011612
-      Shaft Length: 0.10000000149011612
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /local_plan
-      Value: true
-    - Alpha: 1
-      Class: rviz_default_plugins/Polygon
-      Color: 25; 255; 0
-      Enabled: true
-      Name: Polygon
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /local_costmap/published_footprint
-      Value: true
+    Axis: Z
+    Channel Name: intensity
+    Class: rviz_default_plugins/LaserScan
+    Color: 0; 0; 255
+    Color Transformer: Intensity
+    Decay Time: 0
+    Enabled: true
+    Invert Rainbow: false
+    Max Color: 255; 255; 255
+    Max Intensity: 0
+    Min Color: 0; 0; 0
+    Min Intensity: 0
+    Name: LaserScan 1
+    Position Transformer: XYZ
+    Selectable: true
+    Size (Pixels): 3
+    Size (m): 0.009999999776482582
+    Style: Flat Squares
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      Filter size: 10
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_1/scan
+    Use Fixed Frame: true
+    Use rainbow: true
+    Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -342,39 +435,46 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
-    - Class: rviz_default_plugins/Interact
-      Hide Inactive Objects: true
-    - Class: rviz_default_plugins/MoveCamera
-    - Class: rviz_default_plugins/Select
-    - Class: rviz_default_plugins/FocusCamera
-    - Class: rviz_default_plugins/Measure
-      Line color: 128; 128; 0
-    - Class: rviz_default_plugins/SetInitialPose
-      Covariance x: 0.25
-      Covariance y: 0.25
-      Covariance yaw: 0.06853891909122467
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /initialpose
-    - Class: rviz_default_plugins/SetGoal
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /goal_pose
-    - Class: rviz_default_plugins/PublishPoint
-      Single click: true
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /clicked_point
-    - Class: nav2_rviz_plugins/GoalTool
+  - Class: rviz_default_plugins/Interact
+    Hide Inactive Objects: true
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  - Class: rviz_default_plugins/FocusCamera
+  - Class: rviz_default_plugins/Measure
+    Line color: 128; 128; 0
+  - Class: rviz_default_plugins/SetInitialPose
+    Covariance x: 0.25
+    Covariance y: 0.25
+    Covariance yaw: 0.06853891909122467
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /initialpose
+  - Class: rviz_default_plugins/SetGoal
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_0/goal_pose
+  - Class: rviz_default_plugins/SetGoal
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /robot_1/goal_pose
+  - Class: rviz_default_plugins/PublishPoint
+    Single click: true
+    Topic:
+      Depth: 5
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Reliability Policy: Reliable
+      Value: /clicked_point
+  - Class: nav2_rviz_plugins/GoalTool
   Transformation:
     Current:
       Class: rviz_default_plugins/TF
@@ -401,7 +501,7 @@ Visualization Manager:
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
       Yaw: 2.688598871231079
-    Saved: ~
+    Saved: null
 Window Geometry:
   Displays:
     collapsed: false

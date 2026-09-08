@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="rmitbot" xmlns:xacro="http://www.ros.org/wiki/xacro" xmlns:gz="http://gazebosim.org/schema">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" xmlns:gz="http://gazebosim.org/schema">
   <material name="orange">
     <color rgba="0.8 0.4 0.0 1.0" />
   </material>
@@ -10,16 +10,19 @@
     <color rgba="1 1 1 1.0" />
   </material>
 
-  <link name="base_footprint" />
+<xacro:macro name="rmitbot_platform" params="prefix">
+
+
+  <link name="${prefix}base_footprint" />
   
-  <joint name="base_joint" type="fixed">
-    <parent link="base_footprint" />
-    <child link="base_link" />
+  <joint name="${prefix}base_joint" type="fixed">
+    <parent link="${prefix}base_footprint" />
+    <child link="${prefix}base_link" />
     <origin xyz="0 0 0.05" rpy="0 0 0" />
   </joint>
 
   <!-- Base Link -->
-  <link name="base_link">
+  <link name="${prefix}base_link">
     <collision>
       <origin xyz="0 0 0.05" rpy="0 0 0" />
       <geometry>
@@ -47,15 +50,15 @@
   </link>
 
   <!-- front left wheel -->
-  <joint name="front_left_wheel_joint" type="continuous">
+  <joint name="${prefix}front_left_wheel_joint" type="continuous">
     <origin xyz="0.14 0.15 0" rpy="-${pi/2} 0 0" />
-    <parent link="base_link" />
-    <child link="front_left_wheel" />
+    <parent link="${prefix}base_link" />
+    <child link="${prefix}front_left_wheel" />
     <axis xyz="0 0 1" />
     <dynamics damping="0.2" />
   </joint>
 
-  <link name="front_left_wheel">
+  <link name="${prefix}front_left_wheel">
     <collision>
       <!-- <origin xyz="0 0 .06" rpy="0 0 0" /> -->
       <origin xyz="0 0 .025" rpy="0 0 0" />
@@ -86,14 +89,14 @@
   </link>
 
   <!-- front right wheel -->
-  <joint name="front_right_wheel_joint" type="continuous">
+  <joint name="${prefix}front_right_wheel_joint" type="continuous">
     <origin xyz="0.14 -0.15 0." rpy="-${pi/2} 0 0" />
-    <parent link="base_link" />
-    <child link="front_right_wheel" />
+    <parent link="${prefix}base_link" />
+    <child link="${prefix}front_right_wheel" />
     <axis xyz="0 0 1" />
     <dynamics damping="0.2" />
   </joint>
-  <link name="front_right_wheel">
+  <link name="${prefix}front_right_wheel">
     <collision>
       <!-- <origin xyz="0 0 -.06" rpy="0 0 0" /> -->
       <origin xyz="0 0 -.025" rpy="0 0 0" />
@@ -122,14 +125,14 @@
   </link>
 
   <!-- rear left wheel -->
-  <joint name="rear_left_wheel_joint" type="continuous">
+  <joint name="${prefix}rear_left_wheel_joint" type="continuous">
     <origin xyz="-0.14 0.15 0." rpy="-${pi/2} 0 0" />
-    <parent link="base_link" />
-    <child link="rear_left_wheel" />
+    <parent link="${prefix}base_link" />
+    <child link="${prefix}rear_left_wheel" />
     <axis xyz="0 0 1" />
     <dynamics damping="0.2" />
   </joint>
-  <link name="rear_left_wheel">
+  <link name="${prefix}rear_left_wheel">
     <collision>
       <!-- <origin xyz="0 0 .06" rpy="0 0 0" /> -->
        <origin xyz="0 0 .025" rpy="0 0 0" />
@@ -159,14 +162,14 @@
   </link>
 
   <!-- rear right wheel -->
-  <joint name="rear_right_wheel_joint" type="continuous">
+  <joint name="${prefix}rear_right_wheel_joint" type="continuous">
     <origin xyz="-0.14 -0.15 0." rpy="-${pi/2} 0 0" />
-    <parent link="base_link" />
-    <child link="rear_right_wheel" />
+    <parent link="${prefix}base_link" />
+    <child link="${prefix}rear_right_wheel" />
     <axis xyz="0 0 1" />
     <dynamics damping="0.2" />
   </joint>
-  <link name="rear_right_wheel">
+  <link name="${prefix}rear_right_wheel">
     <collision>
       <!-- <origin xyz="0 0 -.06" rpy="0 0 0" /> -->
        <origin xyz="0 0 -.025" rpy="0 0 0" />
@@ -194,4 +197,7 @@
         izz="0.0020" />
     </inertial>
   </link>
+
+  </xacro:macro>
+
 </robot>

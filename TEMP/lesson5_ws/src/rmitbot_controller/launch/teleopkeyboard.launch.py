@@ -12,22 +12,41 @@ from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
     
-    teleop_keyboard = Node(
-        package=    'teleop_twist_keyboard',
-        executable= 'teleop_twist_keyboard',
-        name=       'teleop_twist_keyboard',
-        output=     'screen',
-        prefix=     'xterm -e',
+    teleop_robot0 = Node(
+        package='teleop_twist_keyboard',
+        executable='teleop_twist_keyboard',
+        name='teleop_robot0',
+        output='screen',
+        prefix='xterm -T "Robot 0 Teleop" -e',
         parameters=[
             {"use_sim_time": True},
-            {'stamped': True}], 
+            {"stamped": True}
+        ],
         remappings=[
-            ('cmd_vel', '/diff_drive_controller/cmd_vel')]
-    )         
+        ('cmd_vel', '/robot_0/diff_drive_controller/cmd_vel')
+        ]
+    )   
+
+
+    teleop_robot1 = Node(
+    package='teleop_twist_keyboard',
+    executable='teleop_twist_keyboard',
+    name='teleop_robot1',
+    output='screen',
+    prefix='xterm -T "Robot 1 Teleop" -e',
+    parameters=[
+        {"use_sim_time": True},
+        {"stamped": True}
+    ],
+    remappings=[
+        ('cmd_vel', '/robot_1/diff_drive_controller/cmd_vel')
+    ]
+)
     
     return LaunchDescription(
         [
-            teleop_keyboard, 
+            teleop_robot0, 
+            teleop_robot1,
         ]
     )
     

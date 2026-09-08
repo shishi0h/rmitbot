@@ -1,61 +1,105 @@
-import os 
-from ament_index_python.packages import get_package_share_directory 
-from launch import LaunchDescription 
-from launch.actions import DeclareLaunchArgument, LogInfo 
-from launch_ros.actions import Node 
-from launch.substitutions import LaunchConfiguration 
+import os
 
-# ros2 launch rmitbot_controller twistmux.launch.py 
+from ament_index_python.packages import get_package_share_directory
 
-def generate_launch_description(): 
-    # teleop_keyboard
-    teleop_keyboard = Node( 
-        package=    'teleop_twist_keyboard', 
-        executable= 'teleop_twist_keyboard', 
-        name=       'teleop_twist_keyboard', 
-        output=     'screen', 
-        prefix=     'xterm -e', 
-        parameters=[ 
-            {"use_sim_time": True}, 
-            {'stamped': True},  
-            {'frame_id': 'base_footprint'},],  
-        remappings=[('cmd_vel', '/diff_drive_controller/cmd_vel')],  
-    ) 
+from launch import LaunchDescription
+from launch_ros.actions import Node
 
-    # twist_stamper_node: navigation does not have time stamped
-    twist_stamper_node = Node( 
-        package=    'twist_stamper', 
-        executable= 'twist_stamper', 
-        name=       'twist_stamper', 
-        parameters=[ 
-            {'frame_id': 'base_footprint'},  
-            {"use_sim_time": True}, ],  
-        remappings=[ 
-            # ('/cmd_vel_in', '/cmd_vel_joystick_unstamped'), 
-            # ('/cmd_vel_out','/cmd_vel_joystick'),  
-            ('/cmd_vel_in', 'cmd_vel_navigation_unstamped'), 
-            ('/cmd_vel_out','cmd_vel_navigation'), ],  
-    ) 
+# ros2 launch rmitbot_controller twistmux.launch.py
 
-    # twist_mux_node: mixing keyboard and navigation
-    twistmux_params = os.path.join(get_package_share_directory("rmitbot_navigation"), "config", "twistmux.yaml") 
-    twistmux_node = Node( 
-        package=    'twist_mux', 
-        executable= 'twist_mux', 
-        name=       'twist_mux_node', 
-        output=     'screen', 
-        parameters=[
-            twistmux_params,  
-            {"use_sim_time": True},
-        ], 
-        remappings=[ 
-        #     # ('/cmd_vel_out', '/rmitbot_controller/cmd_vel')], 
-        #     # ('cmd_vel_out', 'cmd_vel')], 
-            ('cmd_vel_out', '/diff_drive_controller/cmd_vel')],
-    ) 
+def generate_launch_description():
 
-    return LaunchDescription([ 
-        twistmux_node,  
-        teleop_keyboard,
-        twist_stamper_node, 
-    ]) 
+    twistmux_params = os.path.join(
+        get_package_share_directory("rmitbot_navigation"),
+        "config",
+        "twistmux.yaml"
+    )
+
+    nodes = []
+
+    for i in range(2):
+
+        ns = f"robot_{i}"
+
+        # ----------------------------
+        # Teleop Keyboard
+        # ----------------------------
+        teleop_keyboard = Node(
+            package='teleop_twist_keyboard',
+            executable='teleop_twist_keyboard',
+            namespace=ns,
+            name=f'teleop_robot{i}',
+            output='screen',
+            prefix=f'xterm -T "Robot {i} Teleop" -e',
+            parameters=[
+                {"use_sim_time": True},
+            ],
+            remappings=[
+                ('cmd_vel', 'cmd_vel_keyboard_unstamped'),
+            ],
+        )
+
+        keyboard_stamper = Node(
+            package='twist_stamper',
+            executable='twist_stamper',
+            namespace=ns,
+            name='keyboard_stamper',
+            parameters=[
+                {"use_sim_time": True},
+                {"frame_id": f"{ns}/base_footprint"},
+            ],
+            remappings=[
+                ('cmd_vel_in', 'cmd_vel_keyboard_unstamped'),
+                ('cmd_vel_out', 'cmd_vel_keyboard'),
+            ],
+        )
+
+        # ----------------------------
+        # Twist Stamper
+        # ----------------------------
+        twist_stamper = Node(
+            package='twist_stamper',
+            executable='twist_stamper',
+            namespace=ns,
+            name='twist_stamper',
+            parameters=[
+                {"use_sim_time": True},
+                {"frame_id": f"{ns}/base_footprint"},
+            ],
+            remappings=[
+                ('cmd_vel_in', 'cmd_vel_navigation_unstamped'),
+                ('cmd_vel_out', 'cmd_vel_navigation'),
+            ],
+        )
+
+        # ----------------------------
+        # Twist Mux
+        # ----------------------------
+        twist_mux = Node(
+            package='twist_mux',
+            executable='twist_mux',
+            namespace=ns,
+            name='twist_mux_node',
+            output='screen',
+            parameters=[
+                twistmux_params,
+                {"use_sim_time": True},
+            ],
+            remappings=[
+                (
+                    'cmd_vel_out',
+                    f'/{ns}/diff_drive_controller/cmd_vel'
+                ),
+                (
+                    'cmd_vel',
+                    f'/{ns}/diff_drive_controller/cmd_vel'
+                ),
+            ],
+        )
+
+        nodes.append(teleop_keyboard)
+        nodes.append(keyboard_stamper)
+        nodes.append(twist_stamper)
+        nodes.append(twist_mux)
+
+    return LaunchDescription(nodes)

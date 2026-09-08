@@ -6,10 +6,20 @@
 <robot name="rmitbot"
     xmlns:xacro="http://ros.org/wiki/xacro">
 
+    <xacro:arg name="prefix" default=""/>
+
+
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_platform.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_gazebo.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_ros2_control.xacro" /> 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_imu.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_laser.xacro" />
+
+
+    <xacro:rmitbot_platform prefix="$(arg prefix)"/>
+<xacro:rmitbot_gazebo prefix="$(arg prefix)"/>
+<xacro:rmitbot_ros2_control prefix="$(arg prefix)"/>
+<xacro:rmitbot_imu prefix="$(arg prefix)"/>
+<xacro:rmitbot_laser prefix="$(arg prefix)"/>
 
 </robot>

@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rmitbot">
-    <link name="laser_link">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <xacro:macro name="rmitbot_laser" params="prefix">
+
+    <link name="${prefix}laser_link">
         <inertial>
             <origin xyz="-0.012 -0.00038 -0.017" rpy="0 0 0" />
             <mass value="0.073" />
@@ -22,24 +25,24 @@
         </collision>
     </link>
 
-    <joint name="laser_joint" type="fixed">
+    <joint name="${prefix}laser_joint" type="fixed">
         <origin xyz="0. 0. 0.14" rpy="0 0 0" />
-        <parent link="base_link" />
-        <child link="laser_link" />
+        <parent link="${prefix}base_link" />
+        <child link="${prefix}laser_link" />
         <axis xyz="0 0 0" />
     </joint>
 
-    <gazebo reference="laser_link">
-        <sensor name="lidar" type="gpu_lidar">
-            <!-- <sensor name="lidar" type="ray"> -->
-            <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+    <gazebo reference="${prefix}laser_link">
+        <!-- <sensor name="${prefix}lidar" type="gpu_lidar"> -->
+            <sensor name="${prefix}lidar" type="gpu_lidar">
+            <!-- <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
                 <render_engine>ogre</render_engine>
-            </plugin>
+            </plugin> -->
             <always_on>true</always_on>
             <visualize>true</visualize>
-            <topic>scan</topic>
+            <topic>${prefix[:-1]}_scan</topic>
             <update_rate>5</update_rate>
-            <gz_frame_id>laser_link</gz_frame_id>
+            <gz_frame_id>${prefix}laser_link</gz_frame_id>
             <lidar>
                 <!-- <ray> -->
                 <scan>
@@ -70,4 +73,8 @@
             <!-- </ray> -->
         </sensor>
     </gazebo>
+
+    </xacro:macro>
+
+
 </robot>

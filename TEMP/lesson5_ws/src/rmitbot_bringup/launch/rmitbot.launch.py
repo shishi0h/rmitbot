@@ -63,6 +63,12 @@ def generate_launch_description():
         actions=[navigation]
     )
     
+    # Launch map merge
+    pkg_path_map_merge = get_package_share_directory("rmitbot_map_merge")
+    map_merge = IncludeLaunchDescription(
+        os.path.join(pkg_path_map_merge, "launch", "map_merge.launch.py"),
+    )
+
     return LaunchDescription([
         display, 
         gazebo,
@@ -70,5 +76,6 @@ def generate_launch_description():
         twistmux,
         localization, 
         mapping, 
+        map_merge,
         navigation_delayed, 
     ])

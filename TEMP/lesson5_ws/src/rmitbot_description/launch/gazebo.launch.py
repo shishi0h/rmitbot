@@ -31,28 +31,126 @@ def generate_launch_description():
         launch_arguments={"gz_args": f"-r -v 4 {world_path}"}.items()
     )
     
-    # Spawn the robot in Gazebo
-    gz_spawn_entity = Node(
-        package=    "ros_gz_sim",
-        executable= "create",
-        output=     "screen",
-        arguments=  ["-topic", "robot_description","-name", "rmitbot", "-z", "0.6"],
-    )
+    # # Spawn the robot in Gazebo
+    # robot1 = Node(
+    #     package=    "ros_gz_sim",
+    #     executable= "create",
+    #     output=     "screen",
+    #     arguments=  ["-topic", "robot_description","-name", "rmitbot1"],
+    # )
+
+    # # robot2 = Node(
+    # #     package=    "ros_gz_sim",
+    # #     executable= "create",
+    # #     output=     "screen",
+    # #     arguments=  ["-topic", "robot_description","-name", "rmitbot2",
+    # #     ],
+    # # )
+
+
+    robots = []
+
+    robots_config = [
+        {"gazebo_x": 0.0, "gazebo_y": 0.0, "tf_x": 0.0, "tf_y": 0.0},
+        {"gazebo_x": -1.0, "gazebo_y": 0.0, "tf_x": 0.0, "tf_y": -1.0}
+    ]
+
+    for i, config in enumerate(robots_config):
+
+        ns = f"robot_{i}"
+        
+        z = 0.51
+
+        # Robot State Publisher
+        robot_state_publisher = Node(
+            package="robot_state_publisher",
+            executable="robot_state_publisher",
+            namespace=ns,
+            output="screen",
+            parameters=[
+            {
+                "robot_description": ParameterValue(
+                    Command([
+                        "xacro ",
+                        os.path.join(
+                            pkg_path_description,
+                            "urdf",
+                            "rmitbot.urdf.xacro"
+                        ),
+                        f" prefix:={ns}/"
+                    ]),
+                    value_type=str
+                ),
+                "use_sim_time": True
+            }
+                    ]           
+        )
+
+        # Spawn robot in Gazebo
+        spawn_robot = Node(
+            package="ros_gz_sim",
+            executable="create",
+            namespace=ns,
+            output="screen",
+            arguments=[
+                "-topic", f"/{ns}/robot_description",
+                "-name", ns,
+                "-x", str(config["gazebo_x"]),
+                "-y", str(config["gazebo_y"]),
+                "-z", str(z),
+                "-Y", "4.71"
+            ]
+        )
+
+        # Broadcast the initial spawn pose to the TF tree
+        static_tf_publisher = Node(
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            name=f"static_tf_pub_{ns}",
+            output="screen",
+            arguments=[
+                "--x", str(config["tf_x"]),
+                "--y", str(config["tf_y"]),
+                "--z", "0.0", 
+                "--yaw", "0.0", # Matches your Gazebo spawn yaw
+                "--pitch", "0.0",
+                "--roll", "0.0",
+                "--frame-id", "map",
+                "--child-frame-id", f"{ns}/map"
+            ]
+        )
+
+
+        robots.append(robot_state_publisher)
+        robots.append(spawn_robot)
+        robots.append(static_tf_publisher)
+    
+
+
+
 
     # Bridge between ROS2 and Gazebo
     gz_ros2_bridge = Node(
         package=    "ros_gz_bridge",
         executable= "parameter_bridge",
         arguments=[ "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock", 
-                    "/imu@sensor_msgs/msg/Imu[gz.msgs.IMU", 
-                    "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
-                    ], 
-        # remappings=[('/imu', '/imu/out')], 
+                    "/robot_0_scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+    "/robot_1_scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+
+    "/robot_0_imu@sensor_msgs/msg/Imu[gz.msgs.IMU",
+    "/robot_1_imu@sensor_msgs/msg/Imu[gz.msgs.IMU",
+    ],
+        remappings=[
+            ('/robot_0_scan', '/robot_0/scan'),
+            ('/robot_1_scan', '/robot_1/scan'),
+            ('/robot_0_imu', '/robot_0/imu'),
+            ('/robot_1_imu', '/robot_1/imu'),
+        ]
     )
 
     return LaunchDescription([
         gz_resource_path,
         gz_sim,
-        gz_spawn_entity,
         gz_ros2_bridge,
+        *robots
     ])
