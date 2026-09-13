@@ -22,7 +22,10 @@ def generate_launch_description():
     urdf_path =      os.path.join(pkg_path_description, 'urdf', 'rmitbot.urdf.xacro')
     ctrl_config =    os.path.join(pkg_path_controller, 'config', 'rmitbot_controller.yaml')
     
-    robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
+    prefix = LaunchConfiguration('prefix', default='')
+    prefix_arg = DeclareLaunchArgument('prefix', default_value='')
+
+    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' prefix:=', prefix]), value_type=str)
     
     # controller manager node
     controller_manager = Node(
@@ -79,6 +82,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            prefix_arg,
             controller_manager, 
             jsb_spawner,
             controller_spawner_delayed,

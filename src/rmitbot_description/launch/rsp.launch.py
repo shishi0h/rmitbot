@@ -16,9 +16,11 @@ def generate_launch_description():
     
     # Path to the urdf file
     urdf_path = os.path.join(pkg_path, 'urdf', 'rmitbot.urdf.xacro')
-    
+    prefix = LaunchConfiguration('prefix', default='')
+    prefix_arg = DeclareLaunchArgument('prefix', default_value='')
+
     # Compile the xacro file to urdf
-    robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' prefix:=', prefix]), value_type=str)
     
     # Publish the robot static TF from the urdf
     robot_state_publisher = Node(
@@ -35,6 +37,7 @@ def generate_launch_description():
     )
     
     return LaunchDescription([
+        prefix_arg,
         robot_state_publisher, 
         # joint_state_publisher_gui,
     ])

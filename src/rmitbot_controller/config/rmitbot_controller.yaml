@@ -1,50 +1,71 @@
-controller_manager:
-  ros__parameters:
-    update_rate: 100  # in Hz
-    # use_sim_time: true # real hardware does not use sim_time
+robot_1:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100
+      use_sim_time: false
 
-    joint_state_broadcaster:
-      type: joint_state_broadcaster/JointStateBroadcaster
-      ros__parameters:
-        joints:
-          - front_left_wheel_joint
-          - front_right_wheel_joint
-          - rear_left_wheel_joint
-          - rear_right_wheel_joint
-        interfaces:
-          - position
-          - velocity
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
 
-    diff_drive_controller:
-      type: diff_drive_controller/DiffDriveController
+      diff_drive_controller:
+        type: diff_drive_controller/DiffDriveController
 
-    imu_sensor_broadcaster:
-      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+      imu_sensor_broadcaster:
+        type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
-diff_drive_controller:
-  ros__parameters:
+  diff_drive_controller:
+    ros__parameters:
+      use_stamped_vel: true
+      left_wheel_names:
+        - "robot_1/front_left_wheel_joint"
+        - "robot_1/rear_left_wheel_joint"
+      right_wheel_names:
+        - "robot_1/front_right_wheel_joint"
+        - "robot_1/rear_right_wheel_joint"
+      wheel_separation: 0.40
+      wheel_radius: 0.05
+      publish_rate: 50.0
+      base_frame_id: "robot_1/base_footprint"
+      odom_frame_id: "robot_1/odom"
+      enable_odom_tf: false
 
-    use_stamped_vel: true
+  imu_sensor_broadcaster:
+    ros__parameters:
+      sensor_name: "robot_1/imu_sensor"
+      frame_id:  "robot_1/imu_link"
 
-    left_wheel_names:
-      - front_left_wheel_joint
-      - rear_left_wheel_joint
+robot_2:
+  controller_manager:
+    ros__parameters:
+      update_rate: 100
+      use_sim_time: false
 
-    right_wheel_names:
-      - front_right_wheel_joint
-      - rear_right_wheel_joint
+      joint_state_broadcaster:
+        type: joint_state_broadcaster/JointStateBroadcaster
 
-    wheel_separation: 0.40
-    wheel_radius: 0.05
+      diff_drive_controller:
+        type: diff_drive_controller/DiffDriveController
 
-    publish_rate: 50.0
+      imu_sensor_broadcaster:
+        type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
-    base_frame_id: base_footprint
-    odom_frame_id: odom
+  diff_drive_controller:
+    ros__parameters:
+      use_stamped_vel: true
+      left_wheel_names:
+        - "robot_2/front_left_wheel_joint"
+        - "robot_2/rear_left_wheel_joint"
+      right_wheel_names:
+        - "robot_2/front_right_wheel_joint"
+        - "robot_2/rear_right_wheel_joint"
+      wheel_separation: 0.40
+      wheel_radius: 0.05
+      publish_rate: 50.0
+      base_frame_id: "robot_2/base_footprint"
+      odom_frame_id: "robot_2/odom"
+      enable_odom_tf: false
 
-    enable_odom_tf: false
-
-imu_sensor_broadcaster:  # Comment this section when run on gazebo along with broadcaster
-  ros__parameters:
-    sensor_name: "imu_sensor"
-    frame_id:  "imu_link"
+  imu_sensor_broadcaster:
+    ros__parameters:
+      sensor_name: "robot_2/imu_sensor"
+      frame_id:  "robot_2/imu_link"

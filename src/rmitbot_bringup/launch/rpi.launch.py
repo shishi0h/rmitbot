@@ -1,13 +1,20 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction, RegisterEventHandler
+from launch.actions import IncludeLaunchDescription, TimerAction, RegisterEventHandler, GroupAction, DeclareLaunchArgument
 from ament_index_python.packages import get_package_share_directory
 from launch.event_handlers import OnProcessExit
+from launch_ros.actions import PushRosNamespace
+from launch.substitutions import LaunchConfiguration
 
 # Launch the file
 # ros2 launch rmitbot_bringup rpi.launch.py
 
 def generate_launch_description():
+    namespace = LaunchConfiguration('namespace', default='')
+    prefix = LaunchConfiguration('prefix', default='')
+    
+    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
+    prefix_arg = DeclareLaunchArgument('prefix', default_value='')
     
     # Launch rviz
     display = IncludeLaunchDescription(
@@ -24,6 +31,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_controller"),
             "launch", "controller.launch.py"
         ),
+        launch_arguments={'prefix': prefix}.items()
     )
     
     
@@ -99,11 +107,9 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_description"),
             "launch", "rsp.launch.py"
         ),
+        launch_arguments={'prefix': prefix}.items()
     )
     
-    from launch.substitutions import LaunchConfiguration
-    namespace = LaunchConfiguration('namespace', default='')
-
     # Launch cliff sensors
     cliff_sensor = IncludeLaunchDescription(
         os.path.join(
@@ -115,11 +121,18 @@ def generate_launch_description():
     
     # RPI launches rsp, controller
     
-    return LaunchDescription([
+    swarm_group = GroupAction([
+        PushRosNamespace(namespace),
         rsp, 
         controller,
         localization,
         # rplidar, 
         # slamtoolbox, 
         # cliff_sensor,
+    ])
+
+    return LaunchDescription([
+        namespace_arg,
+        prefix_arg,
+        swarm_group
     ])

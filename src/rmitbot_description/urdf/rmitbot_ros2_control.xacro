@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot name="rmitbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
     
+    <xacro:macro name="rmitbot_ros2_control" params="prefix">
     <ros2_control name="RobotSystem" type="system">    
         <xacro:if value="$(arg use_sim)">
             <hardware>
@@ -15,7 +16,7 @@
             </hardware>
         </xacro:unless>
 
-        <joint name="front_left_wheel_joint">
+        <joint name="${prefix}front_left_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -24,7 +25,7 @@
             <state_interface name="velocity" />
         </joint>
 
-        <joint name="front_right_wheel_joint">
+        <joint name="${prefix}front_right_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -33,7 +34,7 @@
             <state_interface name="velocity" />
         </joint>
 
-        <joint name="rear_left_wheel_joint">
+        <joint name="${prefix}rear_left_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -42,7 +43,7 @@
             <state_interface name="velocity" />
         </joint>
         
-        <joint name="rear_right_wheel_joint">
+        <joint name="${prefix}rear_right_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -51,7 +52,7 @@
             <state_interface name="velocity" />
         </joint>
 
-        <sensor name="imu_sensor">
+        <sensor name="${prefix}imu_sensor">
             <state_interface name="orientation.x" />
             <state_interface name="orientation.y" />
             <state_interface name="orientation.z" />
@@ -70,9 +71,11 @@
         <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters>$(find rmitbot_controller)/config/rmitbot_controller.yaml</parameters>
             <ros>
-                <remapping>/mecanum_drive_controller/odom:=/odom</remapping>
+                <namespace>${prefix[:-1]}</namespace>
+                <remapping>diff_drive_controller/odom:=/${prefix}odom</remapping>
             </ros>
         </plugin>
     </gazebo>
 
+    </xacro:macro>
 </robot>
