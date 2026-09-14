@@ -1,11 +1,11 @@
 #include "MyIMU.h"
 
-double quat[4] = {0, 0, 0, 1};
-double gyr[3] = {0, 0, 0};
-double acc[3] = {0, 0, 0};
-double quat_calib[4] = {0, 0, 0, 0};
-double gyr_calib[3] = {0, 0, 0};
-double acc_calib[3] = {0, 0, 0};
+extern double quat[4];
+extern double gyr[3];
+extern double acc[3];
+extern double quat_calib[4];
+extern double gyr_calib[3];
+extern double acc_calib[3];
 
 ICM_20948_I2C myICM;
 
@@ -110,9 +110,8 @@ void IMUGetData_Uncalibrated()
             double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
             double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
             double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
-            double sum_sq = (q1 * q1) + (q2 * q2) + (q3 * q3);
-            double q0 = (sum_sq < 1.0) ? sqrt(1.0 - sum_sq) : 0.0;
-            double n = sqrt(q0 * q0 + sum_sq);
+            double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+            double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
 
             quat[0] = q1 / n;
             quat[1] = q2 / n;
@@ -160,9 +159,8 @@ void IMUGetData()
             double q1 = ((double)data.Quat6.Data.Q1) / 1073741824.0; // Convert to double. Divide by 2^30
             double q2 = ((double)data.Quat6.Data.Q2) / 1073741824.0; // Convert to double. Divide by 2^30
             double q3 = ((double)data.Quat6.Data.Q3) / 1073741824.0; // Convert to double. Divide by 2^30
-            double sum_sq = (q1 * q1) + (q2 * q2) + (q3 * q3);
-            double q0 = (sum_sq < 1.0) ? sqrt(1.0 - sum_sq) : 0.0;
-            double n = sqrt(q0 * q0 + sum_sq);
+            double q0 = sqrt(1.0 - ((q1 * q1) + (q2 * q2) + (q3 * q3)));
+            double n = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
 
             quat[0] = q1 / n;
             quat[1] = q2 / n;

@@ -8,11 +8,17 @@
             </hardware>
         </xacro:if>
         <xacro:unless value="$(arg use_sim)">
-            <hardware>
-                <plugin>rmitbot_firmware/RmitbotInterface</plugin>
-                <!-- <param name="port">/dev/esp32</param> -->
-                <param name="port">/dev/ttyUSB0</param>
-            </hardware>
+            <xacro:if value="$(arg use_mock_hardware)">
+                <hardware>
+                    <plugin>mock_components/GenericSystem</plugin>
+                </hardware>
+            </xacro:if>
+            <xacro:unless value="$(arg use_mock_hardware)">
+                <hardware>
+                    <plugin>rmitbot_firmware/RmitbotInterface</plugin>
+                    <param name="port">/dev/ttyUSB0</param>
+                </hardware>
+            </xacro:unless>
         </xacro:unless>
 
         <joint name="front_left_wheel_joint">
