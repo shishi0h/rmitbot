@@ -11,7 +11,7 @@ from nav2_common.launch import RewrittenYaml
 def generate_launch_description():
     
     nav_pkg_path = get_package_share_directory("rmitbot_navigation")
-    nav_config_file = os.path.join(nav_pkg_path, 'config', 'nav2_params.yaml')
+    nav_config_file = os.path.join(nav_pkg_path, 'config', 'nav2_params copy.yaml')
 
     nodes = []
     
