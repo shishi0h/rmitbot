@@ -20,8 +20,7 @@ def generate_launch_description():
                 'serial_port': '/dev/ttyUSB1',
                 # 'serial_port': '/dev/rplidar',
                 'frame_id': PythonExpression(["'", prefix, "' + 'laser_link'"]),
-                'angle_compensate': True,
-                'scan_mode': 'Standard', 
+                'angle_compensate': False,
                 'use_sim_time': False, # This is important for simulation/hardware
             }]
         )
