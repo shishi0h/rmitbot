@@ -124,6 +124,7 @@ def generate_launch_description():
     )
     
     # RPI launches rsp, controller
+    
     swarm_group = GroupAction([
         PushRosNamespace(namespace),
         rsp, 
