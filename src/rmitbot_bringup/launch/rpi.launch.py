@@ -130,7 +130,7 @@ def generate_launch_description():
         rsp, 
         controller,
         localization,
-        # rplidar, 
+        rplidar, 
         # slamtoolbox, 
         # cliff_sensor,
     ])
