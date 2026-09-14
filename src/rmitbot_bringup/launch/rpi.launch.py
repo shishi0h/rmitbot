@@ -121,5 +121,5 @@ def generate_launch_description():
         localization,
         # rplidar, 
         # slamtoolbox, 
-        cliff_sensor,
+        # cliff_sensor,
     ])
