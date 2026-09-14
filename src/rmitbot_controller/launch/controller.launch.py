@@ -24,6 +24,9 @@ def generate_launch_description():
     
     prefix = LaunchConfiguration('prefix', default='')
     prefix_arg = DeclareLaunchArgument('prefix', default_value='')
+    
+    namespace = LaunchConfiguration('namespace', default='')
+    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
 
     robot_description = ParameterValue(Command(['xacro ', urdf_path, ' prefix:=', prefix]), value_type=str)
     
@@ -41,7 +44,7 @@ def generate_launch_description():
     jsb_spawner = Node(
         package=    'controller_manager',
         executable= 'spawner',
-        arguments=['joint_state_broadcaster'],
+        arguments=['joint_state_broadcaster', '-c', ['/', namespace, '/controller_manager']],
     )
     
     # controller: IK from Cartesian speed to motor speed command
@@ -50,6 +53,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             "diff_drive_controller",
+            "-c", ['/', namespace, '/controller_manager'],
             "--param-file",
             ctrl_config,
         ],
@@ -68,6 +72,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             'imu_sensor_broadcaster',
+            "-c", ['/', namespace, '/controller_manager'],
             '--param-file',
             ctrl_config,
         ],
@@ -83,6 +88,7 @@ def generate_launch_description():
     return LaunchDescription(
         [
             prefix_arg,
+            namespace_arg,
             controller_manager, 
             jsb_spawner,
             controller_spawner_delayed,

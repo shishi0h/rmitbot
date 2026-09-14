@@ -31,7 +31,10 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_controller"),
             "launch", "controller.launch.py"
         ),
-        launch_arguments={'prefix': prefix}.items()
+        launch_arguments={
+            'prefix': prefix,
+            'namespace': namespace
+        }.items()
     )
     
     
