@@ -64,7 +64,8 @@ def generate_launch_description():
             "launch", "rplidar.launch.py"
         ),
         launch_arguments={
-            "use_sim_time": "False"
+            "use_sim_time": "False",
+            "prefix": prefix
         }.items()
     )
     
