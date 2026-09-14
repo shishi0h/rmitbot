@@ -3,8 +3,8 @@
 // ==============================================
 #define ENC1_A 39 // Pin used on ESP32 for the ENC1_A
 #define ENC1_B 36 // Pin used on ESP32 for the ENC1_B
-#define ENC2_A 35 // Pin used on ESP32 for the ENC2_A
-#define ENC2_B 32 // Pin used on ESP32 for the ENC2_B
+#define ENC2_A 32 // Pin used on ESP32 for the ENC2_A
+#define ENC2_B 35 // Pin used on ESP32 for the ENC2_B
 #define ENC3_A 13 // Pin used on ESP32 for the ENC3_A
 #define ENC3_B 14 // Pin used on ESP32 for the ENC3_B
 #define ENC4_A 4  // Pin used on ESP32 for the ENC4_A
