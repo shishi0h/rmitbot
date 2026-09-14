@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot name="rmitbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<xacro:macro name="rmitbot_ros2_control" params="prefix">
     
     <ros2_control name="RobotSystem" type="system">    
         <xacro:if value="$(arg use_sim)">
@@ -21,7 +22,7 @@
             </xacro:unless>
         </xacro:unless>
 
-        <joint name="front_left_wheel_joint">
+        <joint name="${prefix}front_left_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -30,7 +31,7 @@
             <state_interface name="velocity" />
         </joint>
 
-        <joint name="front_right_wheel_joint">
+        <joint name="${prefix}front_right_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -39,7 +40,7 @@
             <state_interface name="velocity" />
         </joint>
 
-        <joint name="rear_left_wheel_joint">
+        <joint name="${prefix}rear_left_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -48,7 +49,7 @@
             <state_interface name="velocity" />
         </joint>
         
-        <joint name="rear_right_wheel_joint">
+        <joint name="${prefix}rear_right_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -81,4 +82,5 @@
         </plugin>
     </gazebo>
 
+</xacro:macro>
 </robot>

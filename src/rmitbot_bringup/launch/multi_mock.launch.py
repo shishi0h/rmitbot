@@ -2,7 +2,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.parameter_descriptions import ParameterValue
 from launch import LaunchDescription
-from launch.actions import RegisterEventHandler
+from launch.actions import RegisterEventHandler, TimerAction
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command
 
@@ -14,9 +14,9 @@ def generate_launch_description():
     for i in range(2):
         ns = f"robot_{i+1}"
 
-        # Path to the controller config file
+        # Path to the controller config file for this specific robot
         pkg_path_controller = get_package_share_directory("rmitbot_controller")
-        config_controller = os.path.join(pkg_path_controller, 'config', 'multi_mock_controller.yaml')
+        config_controller = os.path.join(pkg_path_controller, 'config', f'{ns}_controller.yaml')
 
         # Path to the package
         pkg_path_description = get_package_share_directory("rmitbot_description")
@@ -27,7 +27,7 @@ def generate_launch_description():
             Command([
                 "xacro ",
                 urdf_path,
-                f" prefix:={ns}/ use_mock_hardware:=true"
+                f" prefix:={ns}_ use_mock_hardware:=true"
             ]),
             value_type=str
         )
@@ -41,7 +41,7 @@ def generate_launch_description():
         )
         
         # Run the controller manager using the mock hardware
-        controller_manager = Node(
+        ros2_control_node = Node(
             package="controller_manager",
             executable="ros2_control_node",
             namespace=ns,
@@ -59,13 +59,13 @@ def generate_launch_description():
             namespace=ns,
             arguments=['joint_state_broadcaster', '-c', f'/{ns}/controller_manager'],
         )
-        
+
         # diff_drive_controller
         diff_drive_controller_spawner = Node(
-            package="controller_manager",
-            executable="spawner",
+            package='controller_manager',
+            executable='spawner',
             namespace=ns,
-            arguments=["diff_drive_controller", "-c", f"/{ns}/controller_manager"],
+            arguments=['diff_drive_controller', '-c', f'/{ns}/controller_manager'],
         )
         
         # Spawners must wait for the controller manager to be ready, but without 
@@ -97,9 +97,19 @@ def generate_launch_description():
         )
 
         controllers.append(robot_state_publisher)
-        controllers.append(controller_manager)
-        controllers.append(joint_state_broadcaster_spawner)
-        controllers.append(controller_spawner_after_jsb)
         controllers.append(static_tf_publisher)
+        controllers.append(ros2_control_node)
+
+        # To prevent race conditions and spawner timeouts when launching multiple 
+        # controller managers concurrently, we delay all spawners to give controller_managers
+        # time to parse the URDF and initialize the mock hardware.
+        delayed_controllers = TimerAction(
+            period=3.0 + (3.0 * i),
+            actions=[
+                joint_state_broadcaster_spawner,
+                controller_spawner_after_jsb
+            ]
+        )
+        controllers.append(delayed_controllers)
 
     return LaunchDescription(controllers)
