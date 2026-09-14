@@ -15,7 +15,7 @@ robot_1:
 
   diff_drive_controller:
     ros__parameters:
-      use_stamped_vel: true
+      use_stamped_vel: false
       left_wheel_names:
         - "robot_1_front_left_wheel_joint"
         - "robot_1_rear_left_wheel_joint"
