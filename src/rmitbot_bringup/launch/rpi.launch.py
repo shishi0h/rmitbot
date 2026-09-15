@@ -113,13 +113,22 @@ def generate_launch_description():
         launch_arguments={'namespace': namespace}.items()
     )
     
-    # RPI launches rsp, controller
+    # Launch vision
+    vision = IncludeLaunchDescription(
+        os.path.join(
+            get_package_share_directory("rmitbot_vision"),
+            "launch", "vision.launch.py"
+        ),
+    )
+    
+    # RPI launches rsp, controller, sensors
     
     return LaunchDescription([
         rsp, 
         controller,
         localization,
-        # rplidar, 
-        # slamtoolbox, 
-        # cliff_sensor,
+        rplidar, 
+        cliff_sensor,
+        vision,
+        slamtoolbox, 
     ])
