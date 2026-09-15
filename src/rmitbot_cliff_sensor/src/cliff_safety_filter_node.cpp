@@ -6,7 +6,7 @@ CliffSafetyFilterNode::CliffSafetyFilterNode() : Node("cliff_safety_filter_node"
     this->declare_parameter("back_sensor_topics", std::vector<std::string>{"sensors/cliff/range_2", "sensors/cliff/range_3", "sensors/cliff/range_4"});
     this->declare_parameter("left_sensor_topics", std::vector<std::string>{"sensors/cliff/range_4", "sensors/cliff/range_5"});
     this->declare_parameter("right_sensor_topics", std::vector<std::string>{"sensors/cliff/range_1", "sensors/cliff/range_2"});
-    this->declare_parameter("cliff_threshold", 0.08);
+    this->declare_parameter("cliff_threshold", 0.35);
 
     front_topics_ = this->get_parameter("front_sensor_topics").as_string_array();
     back_topics_ = this->get_parameter("back_sensor_topics").as_string_array();
