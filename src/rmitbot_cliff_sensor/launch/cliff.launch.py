@@ -24,7 +24,7 @@ def generate_launch_description():
         parameters=[{
             'use_sim_time': False,
             'port': '/dev/ttyUSB1',
-            'cliff_threshold': 0.15
+            'cliff_threshold': 0.50
         }]
     )
 
@@ -36,7 +36,7 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             'use_sim_time': False,
-            'cliff_threshold': 0.15
+            'cliff_threshold': 0.50
         }],
         remappings=[
             ('cmd_vel_filter', 'diff_drive_controller/cmd_vel')
