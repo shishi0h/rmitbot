@@ -61,21 +61,23 @@ void CliffSensorNode::read_serial() {
                 }
             }
 
+            std::vector<int> active_indices = {0, 1, 3, 4, 5};
             bool emergency_stop = false;
 
-            for (size_t i = 0; i < distances.size() && i < range_pubs_.size(); ++i) {
+            for (size_t i = 0; i < distances.size() && i < active_indices.size(); ++i) {
+                int sensor_idx = active_indices[i];
                 double distance_m = distances[i] / 1000.0;
                 
                 sensor_msgs::msg::Range range_msg;
                 range_msg.header.stamp = this->now();
-                range_msg.header.frame_id = "cliff_sensor_" + std::to_string(i) + "_link";
+                range_msg.header.frame_id = "cliff_sensor_" + std::to_string(sensor_idx) + "_link";
                 range_msg.radiation_type = sensor_msgs::msg::Range::INFRARED;
                 range_msg.field_of_view = 0.436332; // 25 degrees for VL53L0X
                 range_msg.min_range = 0.0;
                 range_msg.max_range = 2.0;
                 range_msg.range = distance_m;
                 
-                range_pubs_[i]->publish(range_msg);
+                range_pubs_[sensor_idx]->publish(range_msg);
 
                 // If distance is greater than threshold, it's a cliff
                 // Or if it's 0 it might be an error, but let's just trigger on > threshold

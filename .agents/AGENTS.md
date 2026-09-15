@@ -1,0 +1,1 @@
+- Unless working on heavy tasks like swarm deployment, DO NOT run `colcon build` automatically. Leave building and debugging to the user to save AI credits/usage.
