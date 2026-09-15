@@ -26,6 +26,7 @@ void MyCliffSensor::init() {
     Wire.setClock(400000); // 400 kHz
 
     for (int i = 0; i < NUM_CLIFF_SENSORS; i++) {
+        if (i == 2) continue; // Skip faulty sensor 3
         pcaselect(i);
         sensors[i].setTimeout(500);
         if (!sensors[i].init()) {
@@ -40,6 +41,7 @@ void MyCliffSensor::init() {
 
 void MyCliffSensor::update() {
     for (int i = 0; i < NUM_CLIFF_SENSORS; i++) {
+        if (i == 2) continue; // Skip faulty sensor 3
         pcaselect(i);
         distances[i] = sensors[i].readRangeContinuousMillimeters();
         timeouts[i] = sensors[i].timeoutOccurred();
