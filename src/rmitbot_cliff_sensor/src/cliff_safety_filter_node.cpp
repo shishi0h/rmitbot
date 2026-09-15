@@ -53,7 +53,7 @@ bool CliffSafetyFilterNode::is_cliff_detected(const std::vector<std::string>& to
     //         return true;
     //     }
     // }
-    return true;
+    return false;
 }
 
 void CliffSafetyFilterNode::cmd_vel_callback(const geometry_msgs::msg::TwistStamped::SharedPtr msg) {
