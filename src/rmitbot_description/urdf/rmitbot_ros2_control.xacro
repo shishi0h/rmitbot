@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
-<robot name="rmitbot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+
+<robot name="rmitbot" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
+<!-- Define the vehicles hardware,
+    command and state interfaces  -->
     
-    <ros2_control name="RobotSystem" type="system">    
-        <xacro:if value="$(arg use_sim)">
-            <hardware>
-                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-            </hardware>
-        </xacro:if>
-        <xacro:unless value="$(arg use_sim)">
-            <hardware>
-                <plugin>rmitbot_firmware/RmitbotInterface</plugin>
-                <!-- <param name="port">/dev/esp32</param> -->
-                <param name="port">/dev/ttyUSB0</param>
-            </hardware>
-        </xacro:unless>
 
-        <joint name="front_left_wheel_joint">
+     <xacro:macro name="rmitbot_ros2_control" params="prefix">
+     <ros2_control name="GazeboSimSystem" type="system">
+
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+        <joint name="${prefix}front_left_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -23,8 +20,7 @@
             <state_interface name="position" />
             <state_interface name="velocity" />
         </joint>
-
-        <joint name="front_right_wheel_joint">
+        <joint name="${prefix}front_right_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -32,8 +28,7 @@
             <state_interface name="position" />
             <state_interface name="velocity" />
         </joint>
-
-        <joint name="rear_left_wheel_joint">
+        <joint name="${prefix}rear_left_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -41,8 +36,7 @@
             <state_interface name="position" />
             <state_interface name="velocity" />
         </joint>
-        
-        <joint name="rear_right_wheel_joint">
+        <joint name="${prefix}rear_right_wheel_joint">
             <command_interface name="velocity">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -50,29 +44,19 @@
             <state_interface name="position" />
             <state_interface name="velocity" />
         </joint>
-
-        <sensor name="imu_sensor">
-            <state_interface name="orientation.x" />
-            <state_interface name="orientation.y" />
-            <state_interface name="orientation.z" />
-            <state_interface name="orientation.w" />
-            <state_interface name="angular_velocity.x" />
-            <state_interface name="angular_velocity.y" />
-            <state_interface name="angular_velocity.z" />
-            <state_interface name="linear_acceleration.x" />
-            <state_interface name="linear_acceleration.y" />
-            <state_interface name="linear_acceleration.z" />
-        </sensor>
-
     </ros2_control>
 
-    <gazebo>
+    <!-- ROS2 Control plugin and topic re-mapping -->
+  <gazebo>
         <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters>$(find rmitbot_controller)/config/rmitbot_controller.yaml</parameters>
             <ros>
-                <remapping>/mecanum_drive_controller/odom:=/odom</remapping>
+                <namespace>${prefix[:-1]}</namespace>
+                <remapping>diff_drive_controller/odom:=/${prefix}odom</remapping>
             </ros>
         </plugin>
     </gazebo>
+
+     </xacro:macro>
 
 </robot>

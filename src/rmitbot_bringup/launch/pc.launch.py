@@ -18,12 +18,38 @@ def generate_launch_description():
         ),
     )
     
-    # Launch the twistmux instead of keyboard node only
-    twistmux = IncludeLaunchDescription(
-        os.path.join(get_package_share_directory("rmitbot_navigation"),
-            "launch","twistmux.launch.py"
-        ),
-    )
+    from launch.actions import GroupAction
+    from launch_ros.actions import PushRosNamespace
+
+    # Launch twistmux for robot1 (with joy and keyboard)
+    twistmux_robot1 = GroupAction([
+        PushRosNamespace('robot1'),
+        IncludeLaunchDescription(
+            os.path.join(get_package_share_directory("rmitbot_navigation"),
+                "launch","twistmux.launch.py"
+            ),
+            launch_arguments={
+                'prefix': 'robot1/',
+                'use_joy': 'true',
+                'use_keyboard': 'true'
+            }.items()
+        )
+    ])
+    
+    # Launch twistmux for robot2 (with keyboard only)
+    twistmux_robot2 = GroupAction([
+        PushRosNamespace('robot2'),
+        IncludeLaunchDescription(
+            os.path.join(get_package_share_directory("rmitbot_navigation"),
+                "launch","twistmux.launch.py"
+            ),
+            launch_arguments={
+                'prefix': 'robot2/',
+                'use_joy': 'false',
+                'use_keyboard': 'true'
+            }.items()
+        )
+    ])
     
     navigation = IncludeLaunchDescription(
         os.path.join(
@@ -38,12 +64,20 @@ def generate_launch_description():
         actions=[navigation]
     )
     
+    # Launch map merge
+    map_merge = IncludeLaunchDescription(
+        os.path.join(get_package_share_directory("rmitbot_map_merge"),
+            "launch", "map_merge.launch.py"
+        ),
+    )
 
-    # PC launches rviz, twistmux, and nav2
+    # PC launches rviz, twistmux, nav2, and map_merge
     # RPI launches rsp, controller, rplidar, slamtoolbox
     return LaunchDescription([
         rviz, 
-        twistmux, 
+        twistmux_robot1,
+        twistmux_robot2, 
+        map_merge,
         # navigation_delayed,         
     ])
     

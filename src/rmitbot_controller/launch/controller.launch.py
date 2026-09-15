@@ -15,6 +15,12 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     
+    prefix = LaunchConfiguration('prefix')
+    has_cliff_sensor = LaunchConfiguration('has_cliff_sensor')
+    
+    prefix_arg = DeclareLaunchArgument('prefix', default_value='')
+    has_cliff_sensor_arg = DeclareLaunchArgument('has_cliff_sensor', default_value='true')
+
     # Path to the controller config file
     pkg_path_description =  get_package_share_directory("rmitbot_description")
     pkg_path_controller =   get_package_share_directory("rmitbot_controller")
@@ -22,7 +28,7 @@ def generate_launch_description():
     urdf_path =      os.path.join(pkg_path_description, 'urdf', 'rmitbot.urdf.xacro')
     ctrl_config =    os.path.join(pkg_path_controller, 'config', 'rmitbot_controller.yaml')
     
-    robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' prefix:=', prefix, ' has_cliff_sensor:=', has_cliff_sensor]), value_type=str)
     
     # controller manager node
     controller_manager = Node(
@@ -79,6 +85,8 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            prefix_arg,
+            has_cliff_sensor_arg,
             controller_manager, 
             jsb_spawner,
             controller_spawner_delayed,
