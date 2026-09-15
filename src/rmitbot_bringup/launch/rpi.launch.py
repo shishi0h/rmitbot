@@ -55,6 +55,9 @@ def generate_launch_description():
             "launch",
             "localization.launch.py"
         ),
+        launch_arguments={
+            'prefix': prefix
+        }.items()
     )
     
     # Launch the rplidar hardware
@@ -64,6 +67,7 @@ def generate_launch_description():
             "launch", "rplidar.launch.py"
         ),
         launch_arguments={
+            'prefix': prefix,
             "use_sim_time": "False"
         }.items()
     )
@@ -75,6 +79,7 @@ def generate_launch_description():
             "launch", "slam.launch.py"
         ),
         launch_arguments={
+            'prefix': prefix,
             "use_sim_time": "False"
         }.items()
     )

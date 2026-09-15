@@ -1,4 +1,4 @@
-slam_toolbox:
+/**:
   ros__parameters:
 
     # Plugin params
@@ -14,7 +14,7 @@ slam_toolbox:
     # odom_frame: base_footprint # This is for the sake of testing the slamwith the rplidar hardware, use odom for the real robot
     map_frame: map
     base_frame: base_footprint
-    scan_topic: /scan
+    scan_topic: scan
     use_map_saver: true
     mode: mapping #localization
     use_sim_time: false
