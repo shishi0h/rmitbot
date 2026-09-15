@@ -6,7 +6,7 @@ CliffSafetyFilterNode::CliffSafetyFilterNode() : Node("cliff_safety_filter_node"
     this->declare_parameter("back_sensor_topics", std::vector<std::string>{"sensors/cliff/range_2", "sensors/cliff/range_3", "sensors/cliff/range_4"});
     this->declare_parameter("left_sensor_topics", std::vector<std::string>{"sensors/cliff/range_4", "sensors/cliff/range_5"});
     this->declare_parameter("right_sensor_topics", std::vector<std::string>{"sensors/cliff/range_1", "sensors/cliff/range_2"});
-    this->declare_parameter("cliff_threshold", 0.35);
+    this->declare_parameter("cliff_threshold", 0.50);
 
     front_topics_ = this->get_parameter("front_sensor_topics").as_string_array();
     back_topics_ = this->get_parameter("back_sensor_topics").as_string_array();
@@ -47,12 +47,11 @@ void CliffSafetyFilterNode::range_callback(const sensor_msgs::msg::Range::Shared
 }
 
 bool CliffSafetyFilterNode::is_cliff_detected(const std::vector<std::string>& topics) {
-    // TEMPORARY OVERRIDE: Fake all data as safe
-    // for (const auto& topic : topics) {
-    //     if (latest_ranges_[topic] > cliff_threshold_) {
-    //         return true;
-    //     }
-    // }
+    for (const auto& topic : topics) {
+        if (latest_ranges_[topic] > cliff_threshold_) {
+            return true;
+        }
+    }
     return false;
 }
 

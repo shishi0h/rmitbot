@@ -3,7 +3,7 @@
 
 CliffSensorNode::CliffSensorNode() : Node("cliff_sensor_node") {
     this->declare_parameter("port", "/dev/ttyUSB0");
-    this->declare_parameter("cliff_threshold", 0.35); // 350 mm
+    this->declare_parameter("cliff_threshold", 0.50); // 500 mm
 
     port_name_ = this->get_parameter("port").as_string();
     cliff_threshold_ = this->get_parameter("cliff_threshold").as_double();
