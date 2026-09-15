@@ -31,6 +31,14 @@ def generate_launch_description():
     ) 
     
 
+    flipper_node = Node(
+        package='rmitbot_vision',
+        executable='image_flipper.py',
+        name='image_flipper',
+        output='screen'
+    )
+
     return LaunchDescription([
         camera_node, 
+        flipper_node,
     ])
