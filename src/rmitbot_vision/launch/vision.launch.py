@@ -31,14 +31,14 @@ def generate_launch_description():
     ) 
     
 
-    flipper_node = Node(
-        package='rmitbot_vision',
-        executable='image_flipper.py',
-        name='image_flipper',
-        output='screen'
+    tf_node = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='camera_tf_publisher',
+        arguments=['--x', '0', '--y', '0', '--z', '0.2', '--roll', '3.14159', '--pitch', '0', '--yaw', '0', '--frame-id', 'base_link', '--child-frame-id', 'camera']
     )
 
     return LaunchDescription([
         camera_node, 
-        flipper_node,
+        tf_node,
     ])
