@@ -9,9 +9,5 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(
-  PROGRAMS scripts/image_flipper.py
-  DESTINATION lib/${PROJECT_NAME}
-)
 
 ament_package()
