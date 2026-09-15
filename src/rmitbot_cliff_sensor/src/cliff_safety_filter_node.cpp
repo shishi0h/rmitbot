@@ -46,34 +46,38 @@ void CliffSafetyFilterNode::range_callback(const sensor_msgs::msg::Range::Shared
     latest_ranges_[topic_name] = msg->range;
 }
 
-bool CliffSafetyFilterNode::is_cliff_detected(const std::vector<std::string>& topics) {
+bool CliffSafetyFilterNode::is_cliff_detected(const std::vector<std::string>& topics, double& out_val) {
     for (const auto& topic : topics) {
         if (latest_ranges_[topic] > cliff_threshold_) {
+            out_val = latest_ranges_[topic];
             return true;
         }
     }
+    out_val = 0.0;
     return false;
 }
 
 void CliffSafetyFilterNode::cmd_vel_callback(const geometry_msgs::msg::TwistStamped::SharedPtr msg) {
     auto filtered_cmd = *msg;
 
+    double cliff_val = 0.0;
+
     // Check Linear X (Forward/Backward)
-    if (filtered_cmd.twist.linear.x > 0.0 && is_cliff_detected(front_topics_)) {
+    if (filtered_cmd.twist.linear.x > 0.0 && is_cliff_detected(front_topics_, cliff_val)) {
         filtered_cmd.twist.linear.x = 0.0;
-        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Forward motion blocked by front cliff sensor!");
-    } else if (filtered_cmd.twist.linear.x < 0.0 && is_cliff_detected(back_topics_)) {
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Forward motion blocked by front cliff sensor! Value: %.3f m", cliff_val);
+    } else if (filtered_cmd.twist.linear.x < 0.0 && is_cliff_detected(back_topics_, cliff_val)) {
         filtered_cmd.twist.linear.x = 0.0;
-        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Backward motion blocked by rear cliff sensor!");
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Backward motion blocked by rear cliff sensor! Value: %.3f m", cliff_val);
     }
 
     // Check Angular Z (Turning Left/Right)
-    if (filtered_cmd.twist.angular.z > 0.0 && is_cliff_detected(left_topics_)) {
+    if (filtered_cmd.twist.angular.z > 0.0 && is_cliff_detected(left_topics_, cliff_val)) {
         filtered_cmd.twist.angular.z = 0.0;
-        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Left turn blocked by left cliff sensor!");
-    } else if (filtered_cmd.twist.angular.z < 0.0 && is_cliff_detected(right_topics_)) {
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Left turn blocked by left cliff sensor! Value: %.3f m", cliff_val);
+    } else if (filtered_cmd.twist.angular.z < 0.0 && is_cliff_detected(right_topics_, cliff_val)) {
         filtered_cmd.twist.angular.z = 0.0;
-        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Right turn blocked by right cliff sensor!");
+        RCLCPP_WARN_THROTTLE(this->get_logger(), *this->get_clock(), 1000, "Right turn blocked by right cliff sensor! Value: %.3f m", cliff_val);
     }
 
     cmd_vel_pub_->publish(filtered_cmd);

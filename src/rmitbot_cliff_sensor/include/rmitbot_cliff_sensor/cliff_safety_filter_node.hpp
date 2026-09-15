@@ -30,7 +30,7 @@ private:
 
     double cliff_threshold_;
 
-    bool is_cliff_detected(const std::vector<std::string>& topics);
+    bool is_cliff_detected(const std::vector<std::string>& topics, double& out_val);
 };
 
 #endif
