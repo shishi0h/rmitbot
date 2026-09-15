@@ -4,10 +4,10 @@
       framerate: 25.0
       io_method: "mmap"
       frame_id: "camera"
-      pixel_format: "mjpeg2rgb"  # see usb_cam/supported_formats for list of supported formats
+      pixel_format: "yuyv2rgb"  # EasyCap driver on Pi forces YUYV
       # av_device_format: "YUV422P"
-      image_width: 640
-      image_height: 480
+      image_width: 480
+      image_height: 320
       camera_name: "test_camera"
       # camera_info_url: "package://usb_cam/config/camera_info.yaml"
       # brightness: 10
