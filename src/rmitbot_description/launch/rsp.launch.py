@@ -28,8 +28,6 @@ def launch_setup(context, *args, **kwargs):
             if 'name' in link.attrib:
                 link.attrib['name'] = prefix + link.attrib['name']
         for joint in root.findall('.//joint'):
-            if 'name' in joint.attrib:
-                joint.attrib['name'] = prefix + joint.attrib['name']
             parent = joint.find('parent')
             if parent is not None and 'link' in parent.attrib:
                 parent.attrib['link'] = prefix + parent.attrib['link']
