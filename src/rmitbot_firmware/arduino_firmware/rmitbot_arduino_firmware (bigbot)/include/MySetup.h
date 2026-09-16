@@ -1,8 +1,8 @@
 // ==============================================
 // Pin definitions for the encoders
 // ==============================================
-#define ENC1_A 39 // Pin used on ESP32 for the ENC1_A
-#define ENC1_B 36 // Pin used on ESP32 for the ENC1_B
+#define ENC1_A 36 // Pin used on ESP32 for the ENC1_A
+#define ENC1_B 39 // Pin used on ESP32 for the ENC1_B
 #define ENC2_A 14 // Pin used on ESP32 for the ENC2_A
 #define ENC2_B 13 // Pin used on ESP32 for the ENC2_B
 #define ENC3_A 35 // Pin used on ESP32 for the ENC3_A
@@ -13,8 +13,8 @@
 // ==============================================
 // Pin definitions for the motors
 // ==============================================
-#define MOT1_A 32 // Pin used on ESP32 for the MOT1_A
-#define MOT1_B 33 // Pin used on ESP32 for the MOT1_B
+#define MOT1_A 33 // Pin used on ESP32 for the MOT1_A
+#define MOT1_B 32 // Pin used on ESP32 for the MOT1_B
 #define MOT2_A 18 // Pin used on ESP32 for the MOT2_A
 #define MOT2_B 27 // Pin used on ESP32 for the MOT2_B
 #define MOT3_A 25 // Pin used on ESP32 for the MOT3_A
