@@ -38,7 +38,7 @@ def generate_launch_description():
     jsb_spawner = Node(
         package=    'controller_manager',
         executable= 'spawner',
-        arguments=['joint_state_broadcaster'],
+        arguments=['joint_state_broadcaster', '-c', 'controller_manager'],
     )
     
     # controller: IK from Cartesian speed to motor speed command
@@ -47,6 +47,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             "diff_drive_controller",
+            "-c", "controller_manager",
             "--param-file",
             ctrl_config,
         ],
@@ -65,6 +66,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             'imu_sensor_broadcaster',
+            '-c', 'controller_manager',
             '--param-file',
             ctrl_config,
         ],

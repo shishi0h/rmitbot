@@ -1,4 +1,4 @@
-controller_manager:
+/**/controller_manager:
   ros__parameters:
     update_rate: 100  # in Hz
     # use_sim_time: true # real hardware does not use sim_time
@@ -21,7 +21,7 @@ controller_manager:
     imu_sensor_broadcaster:
       type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
-diff_drive_controller:
+/**/diff_drive_controller:
   ros__parameters:
 
     use_stamped_vel: true
@@ -44,7 +44,7 @@ diff_drive_controller:
 
     enable_odom_tf: false
 
-imu_sensor_broadcaster:  # Comment this section when run on gazebo along with broadcaster
+/**/imu_sensor_broadcaster:  # Comment this section when run on gazebo along with broadcaster
   ros__parameters:
     sensor_name: "imu_sensor"
     frame_id:  "imu_link"

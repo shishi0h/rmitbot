@@ -36,7 +36,7 @@ def generate_launch_description():
             {"use_sim_time": False},
         ],
         remappings=[
-            ('cmd_vel', '/cmd_vel_joystick'),
+            ('cmd_vel', 'cmd_vel_joystick'),
         ],
     )
     
@@ -52,7 +52,7 @@ def generate_launch_description():
             {"use_sim_time": False}, 
             {'stamped': True},  
             {'frame_id': 'base_footprint'},],  
-        remappings=[('cmd_vel', '/cmd_vel_keyboard')],  
+        remappings=[('cmd_vel', 'cmd_vel_keyboard')],  
     ) 
 
     # twist_stamper_node: navigation does not have time stamped
@@ -65,9 +65,9 @@ def generate_launch_description():
             {"use_sim_time": False}, ],  
         remappings=[ 
             # ('/cmd_vel_in', '/cmd_vel_joystick_unstamped'), 
-            # ('/cmd_vel_out','/cmd_vel_joystick'),  
-            ('/cmd_vel_in', '/cmd_vel'), 
-            ('/cmd_vel_out','/cmd_vel_navigation'), ],  
+        remappings=[ 
+            ('cmd_vel_in', 'cmd_vel'), 
+            ('cmd_vel_out','cmd_vel_navigation'), ],  
     ) 
 
     # twist_mux_node: mixing keyboard and navigation
@@ -82,7 +82,7 @@ def generate_launch_description():
             {"use_sim_time": False},
         ], 
         remappings=[ 
-            ('/cmd_vel_out', '/cmd_vel_in')], 
+            ('cmd_vel_out', 'cmd_vel_in')], 
     ) 
 
     joystick_twist_stamper = Node(
@@ -94,8 +94,8 @@ def generate_launch_description():
             {"use_sim_time": False},
         ],
         remappings=[
-            ('/cmd_vel_in', '/cmd_vel_joystick'),
-            ('/cmd_vel_out', '/cmd_vel_joystick_stamped'),
+            ('cmd_vel_in', 'cmd_vel_joystick'),
+            ('cmd_vel_out', 'cmd_vel_joystick_stamped'),
         ],
 )
 
