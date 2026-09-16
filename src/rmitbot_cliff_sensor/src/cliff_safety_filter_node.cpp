@@ -7,12 +7,14 @@ CliffSafetyFilterNode::CliffSafetyFilterNode() : Node("cliff_safety_filter_node"
     this->declare_parameter("left_sensor_topics", std::vector<std::string>{"sensors/cliff/range_4", "sensors/cliff/range_5"});
     this->declare_parameter("right_sensor_topics", std::vector<std::string>{"sensors/cliff/range_1", "sensors/cliff/range_2"});
     this->declare_parameter("cliff_threshold", 0.50);
+    this->declare_parameter("bypass_cliff_sensor", false);
 
     front_topics_ = this->get_parameter("front_sensor_topics").as_string_array();
     back_topics_ = this->get_parameter("back_sensor_topics").as_string_array();
     left_topics_ = this->get_parameter("left_sensor_topics").as_string_array();
     right_topics_ = this->get_parameter("right_sensor_topics").as_string_array();
     cliff_threshold_ = this->get_parameter("cliff_threshold").as_double();
+    bypass_cliff_sensor_ = this->get_parameter("bypass_cliff_sensor").as_bool();
 
     // Create subscriptions for all configured topics
     auto create_subs = [this](const std::vector<std::string>& topics) {
@@ -59,6 +61,11 @@ bool CliffSafetyFilterNode::is_cliff_detected(const std::vector<std::string>& to
 
 void CliffSafetyFilterNode::cmd_vel_callback(const geometry_msgs::msg::TwistStamped::SharedPtr msg) {
     auto filtered_cmd = *msg;
+
+    if (bypass_cliff_sensor_) {
+        cmd_vel_pub_->publish(filtered_cmd);
+        return;
+    }
 
     double front_val = 0.0;
     double back_val = 0.0;

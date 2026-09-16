@@ -4,12 +4,18 @@ from launch_ros.actions import Node
 from launch.actions import IncludeLaunchDescription, TimerAction, RegisterEventHandler
 from ament_index_python.packages import get_package_share_directory
 from launch.event_handlers import OnProcessExit
+from launch.actions import DeclareLaunchArgument, GroupAction
+from launch.substitutions import LaunchConfiguration
+from launch_ros.actions import PushRosNamespace
 
 # Launch the file
 # ros2 launch rmitbot_bringup pc.launch.py
 
 def generate_launch_description():
     
+    namespace = LaunchConfiguration('namespace')
+    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
+
     # Launch rviz
     rviz = IncludeLaunchDescription(
         os.path.join(
@@ -40,10 +46,15 @@ def generate_launch_description():
     
 
     # PC launches rviz, twistmux, and nav2
-    # RPI launches rsp, controller, rplidar, slamtoolbox
-    return LaunchDescription([
+    namespaced_nodes = GroupAction([
+        PushRosNamespace(namespace),
         rviz, 
         twistmux, 
-        navigation_delayed,         
+        navigation_delayed, 
+    ])
+    
+    return LaunchDescription([
+        namespace_arg,
+        namespaced_nodes
     ])
     

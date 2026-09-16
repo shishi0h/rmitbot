@@ -31,6 +31,8 @@ private:
     double cliff_threshold_;
 
     bool is_cliff_detected(const std::vector<std::string>& topics, double& out_val);
+
+    bool bypass_cliff_sensor_;
 };
 
 #endif

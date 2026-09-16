@@ -14,6 +14,13 @@ def generate_launch_description():
         default_value='',
         description='Top-level namespace'
     )
+    
+    bypass_cliff_sensor = LaunchConfiguration('bypass_cliff_sensor')
+    bypass_cliff_sensor_arg = DeclareLaunchArgument(
+        'bypass_cliff_sensor',
+        default_value='false',
+        description='Bypass the cliff safety filter logic'
+    )
 
     cliff_sensor_node = Node(
         package='rmitbot_cliff_sensor',
@@ -36,7 +43,8 @@ def generate_launch_description():
         output='screen',
         parameters=[{
             'use_sim_time': False,
-            'cliff_threshold': 0.50
+            'cliff_threshold': 0.50,
+            'bypass_cliff_sensor': bypass_cliff_sensor
         }],
         remappings=[
             ('cmd_vel_filter', 'diff_drive_controller/cmd_vel')
@@ -45,6 +53,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         namespace_arg,
+        bypass_cliff_sensor_arg,
         cliff_sensor_node,
         cliff_safety_filter_node
     ])

@@ -11,6 +11,9 @@ from launch.substitutions import Command, LaunchConfiguration
 
 def generate_launch_description():
 
+    namespace = LaunchConfiguration('namespace', default='')
+    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
+    
     # Path to the package
     pkg_path = get_package_share_directory("rmitbot_description")
     
@@ -18,12 +21,13 @@ def generate_launch_description():
     urdf_path = os.path.join(pkg_path, 'urdf', 'rmitbot.urdf.xacro')
     
     # Compile the xacro file to urdf
-    robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' prefix:=', namespace, '/']), value_type=str)
     
     # Publish the robot static TF from the urdf
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
+        namespace=namespace,
         parameters=[{"use_sim_time": False, 
                      "robot_description": robot_description}],
         )
@@ -35,6 +39,7 @@ def generate_launch_description():
     )
     
     return LaunchDescription([
+        namespace_arg,
         robot_state_publisher, 
         # joint_state_publisher_gui,
     ])
