@@ -20,6 +20,7 @@ def generate_launch_description():
 
     base_frame_id = PythonExpression(["'", namespace, "/base_footprint' if '", namespace, "' else 'base_footprint'"])
     odom_frame_id = PythonExpression(["'", namespace, "/odom' if '", namespace, "' else 'odom'"])
+    controller_manager_name = PythonExpression(["'/", namespace, "/controller_manager' if '", namespace, "' else '/controller_manager'"])
     
     # Path to the controller config file
     pkg_path_description =  get_package_share_directory("rmitbot_description")
@@ -49,7 +50,7 @@ def generate_launch_description():
     jsb_spawner = Node(
         package=    'controller_manager',
         executable= 'spawner',
-        arguments=['joint_state_broadcaster', '-c', 'controller_manager'],
+        arguments=['joint_state_broadcaster', '-c', controller_manager_name],
     )
     
     # controller: IK from Cartesian speed to motor speed command
@@ -58,7 +59,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             "diff_drive_controller",
-            "-c", "controller_manager",
+            "-c", controller_manager_name,
             "--param-file",
             ctrl_config,
         ],
@@ -77,7 +78,7 @@ def generate_launch_description():
         executable="spawner",
         arguments=[
             'imu_sensor_broadcaster',
-            '-c', 'controller_manager',
+            '-c', controller_manager_name,
             '--param-file',
             ctrl_config,
         ],
