@@ -65,9 +65,9 @@ def generate_launch_description():
             {"use_sim_time": False}, ],  
         remappings=[ 
             # ('/cmd_vel_in', '/cmd_vel_joystick_unstamped'), 
-        remappings=[ 
             ('cmd_vel_in', 'cmd_vel'), 
-            ('cmd_vel_out','cmd_vel_navigation'), ],  
+            ('cmd_vel_out','cmd_vel_navigation'), 
+        ],  
     ) 
 
     # twist_mux_node: mixing keyboard and navigation
