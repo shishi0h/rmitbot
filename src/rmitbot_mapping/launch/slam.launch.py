@@ -22,6 +22,7 @@ def launch_setup(context, *args, **kwargs):
     prefix = namespace + '/' if namespace else ''
     base_frame = prefix + 'base_footprint'
     odom_frame = prefix + 'odom'
+    map_frame = prefix + 'map'
     
     # Read the YAML
     with open(slam_params_path, 'r') as f:
@@ -30,11 +31,19 @@ def launch_setup(context, *args, **kwargs):
     # Replace the frames dynamically
     config_text = config_text.replace('base_frame: base_footprint', f'base_frame: {base_frame}')
     config_text = config_text.replace('odom_frame: odom', f'odom_frame: {odom_frame}')
+    config_text = config_text.replace('map_frame: map', f'map_frame: {map_frame}')
     
     # Write to temp file
     temp_yaml = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.yaml')
     temp_yaml.write(config_text)
     temp_yaml.close()
+
+    remappings = []
+    if namespace:
+        remappings = [
+            ('/map', f'/{namespace}/map'),
+            ('/map_metadata', f'/{namespace}/map_metadata')
+        ]
 
     # Launch the SLAM Toolbox node directly to avoid hardcoded namespace='' in its default launch file
     slam_toolbox_node = LifecycleNode(
@@ -45,8 +54,9 @@ def launch_setup(context, *args, **kwargs):
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
         name='slam_toolbox',
-        namespace='',
-        output='screen'
+        namespace=namespace,
+        output='screen',
+        remappings=remappings
     )
 
     configure_event = RegisterEventHandler(

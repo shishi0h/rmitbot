@@ -3,11 +3,16 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription 
 from launch.actions import DeclareLaunchArgument, LogInfo 
 from launch_ros.actions import Node 
-from launch.substitutions import LaunchConfiguration 
+from launch.substitutions import LaunchConfiguration, PythonExpression
 
 # ros2 launch rmitbot_controller twistmux.launch.py 
 
 def generate_launch_description(): 
+    namespace = LaunchConfiguration('namespace')
+    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
+    
+    frame_id = PythonExpression(["'", namespace, "/base_footprint' if '", namespace, "' else 'base_footprint'"])
+
     #Joy
     joy_node = Node(
         package='joy',
@@ -51,7 +56,7 @@ def generate_launch_description():
         parameters=[ 
             {"use_sim_time": False}, 
             {'stamped': True},  
-            {'frame_id': 'base_footprint'},],  
+            {'frame_id': frame_id},],  
         remappings=[('cmd_vel', 'cmd_vel_keyboard')],  
     ) 
 
@@ -61,7 +66,7 @@ def generate_launch_description():
         executable='twist_stamper', 
         name='twist_stamper', 
         parameters=[ 
-            {'frame_id': 'base_footprint'},  
+            {'frame_id': frame_id},  
             {"use_sim_time": False}, ],  
         remappings=[ 
             # ('/cmd_vel_in', '/cmd_vel_joystick_unstamped'), 
@@ -90,7 +95,7 @@ def generate_launch_description():
         executable='twist_stamper',
         name='joystick_twist_stamper',
         parameters=[
-            {'frame_id': 'base_footprint'},
+            {'frame_id': frame_id},
             {"use_sim_time": False},
         ],
         remappings=[
@@ -102,6 +107,7 @@ def generate_launch_description():
 
 
     return LaunchDescription([ 
+        namespace_arg,
         joy_node,
         teleop_joy,
         teleop_keyboard,

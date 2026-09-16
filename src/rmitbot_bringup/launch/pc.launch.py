@@ -46,6 +46,14 @@ def generate_launch_description():
     )
     
 
+    # Map merge
+    map_merge = IncludeLaunchDescription(
+        os.path.join(
+            get_package_share_directory("rmitbot_map_merge"),
+            "launch", "map_merge.launch.py"
+        ),
+    )
+
     # PC launches rviz, twistmux, and nav2
     namespaced_nodes = GroupAction([
         PushRosNamespace(namespace),
@@ -56,6 +64,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         namespace_arg,
-        namespaced_nodes
+        namespaced_nodes,
+        map_merge
     ])
     
