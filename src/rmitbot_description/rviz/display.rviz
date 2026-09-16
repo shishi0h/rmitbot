@@ -75,7 +75,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_description
+        Value: robot_description
       Enabled: true
       Links:
         All Links Enabled: true
@@ -128,7 +128,7 @@ Visualization Manager:
         Filter size: 100
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /odometry/filtered
+        Value: odometry/filtered
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -160,7 +160,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /scan
+        Value: scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -199,7 +199,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /image_raw
+        Value: image_raw
       Value: true
   Enabled: true
   Global Options:
@@ -224,14 +224,14 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /initialpose
+        Value: initialpose
     - Class: rviz_default_plugins/SetGoal
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /goal_pose
+        Value: goal_pose
     - Class: rviz_default_plugins/PublishPoint
       Single click: true
       Topic:
@@ -239,7 +239,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /clicked_point
+        Value: clicked_point
     - Class: nav2_rviz_plugins/GoalTool
   Transformation:
     Current:
