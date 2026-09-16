@@ -14,67 +14,67 @@ from launch.substitutions import PythonExpression
 
 # ros2 launch rmitbot_controller controller.launch.py
 
-def generate_launch_description():
-    namespace = LaunchConfiguration('namespace')
-    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
-
-    base_frame_id = PythonExpression(["'", namespace, "/base_footprint' if '", namespace, "' else 'base_footprint'"])
-    odom_frame_id = PythonExpression(["'", namespace, "/odom' if '", namespace, "' else 'odom'"])
-    controller_manager_name = PythonExpression(["'/", namespace, "/controller_manager' if '", namespace, "' else '/controller_manager'"])
+def launch_setup(context, *args, **kwargs):
+    namespace = LaunchConfiguration('namespace').perform(context)
     
-    # Path to the controller config file
-    pkg_path_description =  get_package_share_directory("rmitbot_description")
-    pkg_path_controller =   get_package_share_directory("rmitbot_controller")
-
-    urdf_path =      os.path.join(pkg_path_description, 'urdf', 'rmitbot.urdf.xacro')
-    ctrl_config =    os.path.join(pkg_path_controller, 'config', 'rmitbot_controller.yaml')
+    base_frame_id = f"{namespace}/base_footprint" if namespace else "base_footprint"
+    odom_frame_id = f"{namespace}/odom" if namespace else "odom"
+    imu_frame_id = f"{namespace}/imu_link" if namespace else "imu_link"
+    controller_manager_name = f"/{namespace}/controller_manager" if namespace else "/controller_manager"
+    
+    pkg_path_description = get_package_share_directory("rmitbot_description")
+    pkg_path_controller = get_package_share_directory("rmitbot_controller")
+    urdf_path = os.path.join(pkg_path_description, 'urdf', 'rmitbot.urdf.xacro')
+    ctrl_config = os.path.join(pkg_path_controller, 'config', 'rmitbot_controller.yaml')
     
     robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
     
-    imu_frame_id = PythonExpression(["'", namespace, "/imu_link' if '", namespace, "' else 'imu_link'"])
-
-    # controller manager node
+    import tempfile
+    with open(ctrl_config, 'r') as f:
+        config_text = f.read()
+    
+    config_text = config_text.replace('base_frame_id: base_footprint', f'base_frame_id: {base_frame_id}')
+    config_text = config_text.replace('odom_frame_id: odom', f'odom_frame_id: {odom_frame_id}')
+    config_text = config_text.replace('frame_id:  "imu_link"', f'frame_id: "{imu_frame_id}"')
+    
+    temp_yaml = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.yaml')
+    temp_yaml.write(config_text)
+    temp_yaml.close()
+    
     controller_manager = Node(
-        package=    "controller_manager",
-        executable= "ros2_control_node",
+        package="controller_manager",
+        executable="ros2_control_node",
         parameters=[
-            ctrl_config, 
+            temp_yaml.name, 
             {
                 "robot_description": robot_description,
                 "use_sim_time": False,
-                "diff_drive_controller.base_frame_id": base_frame_id,
-                "diff_drive_controller.odom_frame_id": odom_frame_id,
-                "imu_sensor_broadcaster.frame_id": imu_frame_id,
             }
         ],
     )
 
-    # joint_state_broadcaster (jsb): position, velocity from the robot hardware
     jsb_spawner = Node(
-        package=    'controller_manager',
-        executable= 'spawner',
+        package='controller_manager',
+        executable='spawner',
         arguments=['joint_state_broadcaster', '-c', controller_manager_name],
     )
     
-    # controller: IK from Cartesian speed to motor speed command
     controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[
             "diff_drive_controller",
             "-c", controller_manager_name,
-            "--param-file",
-            ctrl_config,
+            "--param-file", temp_yaml.name,
         ],
     )
     
-    # controller must be spawned after the jsb
     controller_spawner_delayed = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=jsb_spawner,
             on_exit=[controller_spawner],
-            )
         )
+    )
     
     imu_broadcaster = Node(
         package="controller_manager",
@@ -82,8 +82,7 @@ def generate_launch_description():
         arguments=[
             'imu_sensor_broadcaster',
             '-c', controller_manager_name,
-            '--param-file',
-            ctrl_config,
+            "--param-file", temp_yaml.name,
         ],
     )
     
@@ -91,15 +90,19 @@ def generate_launch_description():
         event_handler=OnProcessExit(
             target_action=controller_spawner,
             on_exit=[imu_broadcaster],
-            )
         )
-
-    return LaunchDescription(
-        [
-            namespace_arg,
-            controller_manager, 
-            jsb_spawner,
-            controller_spawner_delayed,
-            imu_broadcaster_delayed, 
-        ]
     )
+
+    return [
+        controller_manager, 
+        jsb_spawner,
+        controller_spawner_delayed,
+        imu_broadcaster_delayed, 
+    ]
+
+def generate_launch_description():
+    from launch.actions import OpaqueFunction
+    return LaunchDescription([
+        DeclareLaunchArgument('namespace', default_value=''),
+        OpaqueFunction(function=launch_setup)
+    ])
