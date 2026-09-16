@@ -2,7 +2,7 @@
 #include <sstream>
 
 CliffSensorNode::CliffSensorNode() : Node("cliff_sensor_node") {
-    this->declare_parameter("port", "/dev/ttyUSB1");
+    this->declare_parameter("port", "/dev/serial/by-path/platform-xhci-hcd.1-usb-0:2:1.0-port0");
     this->declare_parameter("cliff_threshold", 0.50); // 500 mm
 
     port_name_ = this->get_parameter("port").as_string();
