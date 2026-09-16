@@ -44,6 +44,6 @@ def generate_launch_description():
     return LaunchDescription([
         rviz, 
         twistmux, 
-        # navigation_delayed,         
+        navigation_delayed,         
     ])
     
