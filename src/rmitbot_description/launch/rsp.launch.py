@@ -27,7 +27,6 @@ def generate_launch_description():
     robot_state_publisher = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        namespace=namespace,
         parameters=[{"use_sim_time": False, 
                      "robot_description": robot_description}],
         )

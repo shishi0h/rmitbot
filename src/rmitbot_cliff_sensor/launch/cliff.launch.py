@@ -26,7 +26,6 @@ def generate_launch_description():
         package='rmitbot_cliff_sensor',
         executable='cliff_sensor_node',
         name='cliff_sensor_node',
-        namespace=namespace,
         output='screen',
         parameters=[{
             'use_sim_time': False,
@@ -39,7 +38,6 @@ def generate_launch_description():
         package='rmitbot_cliff_sensor',
         executable='cliff_safety_filter_node',
         name='cliff_safety_filter_node',
-        namespace=namespace,
         output='screen',
         parameters=[{
             'use_sim_time': False,
