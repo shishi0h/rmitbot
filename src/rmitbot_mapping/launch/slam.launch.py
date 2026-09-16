@@ -7,6 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch.actions import DeclareLaunchArgument, EmitEvent, RegisterEventHandler, OpaqueFunction
 from launch_ros.events.lifecycle import ChangeState
 from launch_ros.event_handlers import OnStateTransition
+from launch.event_handlers import OnProcessStart
 from lifecycle_msgs.msg import Transition
 import launch
 
@@ -48,10 +49,17 @@ def launch_setup(context, *args, **kwargs):
         output='screen'
     )
 
-    configure_event = EmitEvent(
-        event=ChangeState(
-          lifecycle_node_matcher=launch.events.matches_action(slam_toolbox_node),
-          transition_id=Transition.TRANSITION_CONFIGURE
+    configure_event = RegisterEventHandler(
+        OnProcessStart(
+            target_action=slam_toolbox_node,
+            on_start=[
+                EmitEvent(
+                    event=ChangeState(
+                        lifecycle_node_matcher=launch.events.matches_action(slam_toolbox_node),
+                        transition_id=Transition.TRANSITION_CONFIGURE
+                    )
+                )
+            ]
         )
     )
 
