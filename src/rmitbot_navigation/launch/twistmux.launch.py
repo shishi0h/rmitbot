@@ -102,8 +102,8 @@ def generate_launch_description():
 
 
     return LaunchDescription([ 
-        joy_node,
-        teleop_joy,
+        # joy_node,
+        # teleop_joy,
         teleop_keyboard,
         twist_stamper_node,
         joystick_twist_stamper,
