@@ -52,7 +52,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_mapping"),
             "launch", "slam.launch.py"
         ),
-        launch_arguments={"use_sim_time": "False"}.items()
+        launch_arguments={"use_sim_time": "False", 'namespace': namespace}.items()
     )
 
     # Launch cliff sensors with BYPASS enabled
