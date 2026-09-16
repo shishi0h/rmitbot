@@ -1,0 +1,20 @@
+digraph G {
+"smallbot/base_link" -> "smallbot/front_left_wheel"[label=" Broadcaster: default_authority\nAverage rate: 18.322\nBuffer length: 5.021\nMost recent transform: 1789551561.644212\nOldest transform: 1789551556.62296\n"];
+"smallbot/base_footprint" -> "smallbot/base_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/front_right_wheel"[label=" Broadcaster: default_authority\nAverage rate: 18.322\nBuffer length: 5.021\nMost recent transform: 1789551561.644212\nOldest transform: 1789551556.62296\n"];
+"smallbot/base_link" -> "smallbot/rear_left_wheel"[label=" Broadcaster: default_authority\nAverage rate: 18.322\nBuffer length: 5.021\nMost recent transform: 1789551561.644212\nOldest transform: 1789551556.62296\n"];
+"smallbot/base_link" -> "smallbot/rear_right_wheel"[label=" Broadcaster: default_authority\nAverage rate: 18.322\nBuffer length: 5.021\nMost recent transform: 1789551561.644212\nOldest transform: 1789551556.62296\n"];
+"smallbot/odom" -> "smallbot/base_footprint"[label=" Broadcaster: default_authority\nAverage rate: 60.039\nBuffer length: 5.08\nMost recent transform: 1789551561.690425\nOldest transform: 1789551556.610429\n"];
+"smallbot/base_link" -> "smallbot/cliff_sensor_0_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/cliff_sensor_1_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/cliff_sensor_2_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/cliff_sensor_3_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/cliff_sensor_4_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/cliff_sensor_5_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/imu_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"smallbot/base_link" -> "smallbot/laser_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1789551561.7662668"[ shape=plaintext ] ;
+}->"smallbot/odom";
+}

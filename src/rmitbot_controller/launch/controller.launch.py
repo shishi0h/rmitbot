@@ -31,6 +31,8 @@ def generate_launch_description():
     
     robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
     
+    imu_frame_id = PythonExpression(["'", namespace, "/imu_link' if '", namespace, "' else 'imu_link'"])
+
     # controller manager node
     controller_manager = Node(
         package=    "controller_manager",
@@ -42,6 +44,7 @@ def generate_launch_description():
                 "use_sim_time": False,
                 "diff_drive_controller.base_frame_id": base_frame_id,
                 "diff_drive_controller.odom_frame_id": odom_frame_id,
+                "imu_sensor_broadcaster.frame_id": imu_frame_id,
             }
         ],
     )
