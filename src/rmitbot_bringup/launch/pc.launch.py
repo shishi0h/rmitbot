@@ -36,6 +36,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_navigation"),
             "launch","nav.launch.py"
         ),
+        launch_arguments={'namespace': namespace}.items()
     )
     
     # Delay the navigation node, to make sure that a map is available

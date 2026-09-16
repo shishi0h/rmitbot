@@ -10,10 +10,16 @@ from launch.substitutions import Command, FindExecutable, LaunchConfiguration, P
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch.substitutions import PythonExpression
 
 # ros2 launch rmitbot_controller controller.launch.py
 
 def generate_launch_description():
+    namespace = LaunchConfiguration('namespace')
+    namespace_arg = DeclareLaunchArgument('namespace', default_value='')
+
+    base_frame_id = PythonExpression(["'", namespace, "/base_footprint' if '", namespace, "' else 'base_footprint'"])
+    odom_frame_id = PythonExpression(["'", namespace, "/odom' if '", namespace, "' else 'odom'"])
     
     # Path to the controller config file
     pkg_path_description =  get_package_share_directory("rmitbot_description")
@@ -28,9 +34,14 @@ def generate_launch_description():
     controller_manager = Node(
         package=    "controller_manager",
         executable= "ros2_control_node",
-        parameters=[{   "robot_description": robot_description,
-                        "use_sim_time": False},
-                        ctrl_config, 
+        parameters=[
+            ctrl_config, 
+            {
+                "robot_description": robot_description,
+                "use_sim_time": False,
+                "diff_drive_controller.base_frame_id": base_frame_id,
+                "diff_drive_controller.odom_frame_id": odom_frame_id,
+            }
         ],
     )
 
@@ -81,6 +92,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            namespace_arg,
             controller_manager, 
             jsb_spawner,
             controller_spawner_delayed,

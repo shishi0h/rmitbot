@@ -25,6 +25,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_controller"),
             "launch", "controller.launch.py"
         ),
+        launch_arguments={'namespace': namespace}.items()
     )
     
     localization = IncludeLaunchDescription(
@@ -33,6 +34,7 @@ def generate_launch_description():
             "launch",
             "localization.launch.py"
         ),
+        launch_arguments={'namespace': namespace}.items()
     )
     
     # Launch the rplidar hardware
