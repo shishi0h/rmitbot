@@ -131,4 +131,6 @@ def generate_launch_description():
         cliff_sensor,
         vision,
         slamtoolbox, 
+        twistmux,
+        navigation_delayed,
     ])
