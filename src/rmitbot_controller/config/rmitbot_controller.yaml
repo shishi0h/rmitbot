@@ -6,6 +6,12 @@
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+    imu_sensor_broadcaster:
+      type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
 /**/joint_state_broadcaster:
   ros__parameters:
     joints:
@@ -16,12 +22,6 @@
     interfaces:
       - position
       - velocity
-
-    diff_drive_controller:
-      type: diff_drive_controller/DiffDriveController
-
-    imu_sensor_broadcaster:
-      type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
 /**/diff_drive_controller:
   ros__parameters:
