@@ -11,7 +11,7 @@ void MySerial::sendData() {
     Serial.print("[");
     bool first = true;
     for (int i = 0; i < NUM_CLIFF_SENSORS; i++) {
-        if (i == 2) continue; // Skip sensor 2
+        if (i != 3 && i != 5) continue; // Only use sensors 3 and 5
         
         if (!first) {
             Serial.print("\t");

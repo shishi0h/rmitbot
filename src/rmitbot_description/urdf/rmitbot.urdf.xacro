@@ -13,32 +13,12 @@
     <!-- Include the cliff sensor macro -->
     <xacro:include filename="$(find rmitbot_cliff_sensor)/urdf/cliff_sensor.xacro" />
 
-    <!-- Cliff Sensor 0 (Front Left) -->
-    <xacro:cliff_sensor name="cliff_sensor_0" parent="base_link">
-        <origin xyz="0.2 0.085 0.25" rpy="0 0.5236 0.2618" />
-    </xacro:cliff_sensor>
-
-    <!-- Cliff Sensor 1 (Back Right) -->
-    <xacro:cliff_sensor name="cliff_sensor_1" parent="base_link">
-        <origin xyz="-0.2 -0.085 0.25" rpy="0 0.5236 -2.8798" />
-    </xacro:cliff_sensor>
-
-    <!-- Cliff Sensor 2 (Faulty - Unused) -->
-    <xacro:cliff_sensor name="cliff_sensor_2" parent="base_link">
-        <origin xyz="-0.16 -0.24 0.25" rpy="0 1.5708 0" />
-    </xacro:cliff_sensor>
-
     <!-- Cliff Sensor 3 (Front Center) -->
     <xacro:cliff_sensor name="cliff_sensor_3" parent="base_link">
         <origin xyz="0.2 0.0 0.25" rpy="0 0.5236 0" />
     </xacro:cliff_sensor>
 
-    <!-- Cliff Sensor 4 (Front Right) -->
-    <xacro:cliff_sensor name="cliff_sensor_4" parent="base_link">
-        <origin xyz="0.2 -0.085 0.25" rpy="0 0.5236 -0.2618" />
-    </xacro:cliff_sensor>
-
-    <!-- Cliff Sensor 5 (Back Left) -->
+    <!-- Cliff Sensor 5 (Back Left - Used as Back) -->
     <xacro:cliff_sensor name="cliff_sensor_5" parent="base_link">
         <origin xyz="-0.2 0.085 0.25" rpy="0 0.5236 2.8798" />
     </xacro:cliff_sensor>
