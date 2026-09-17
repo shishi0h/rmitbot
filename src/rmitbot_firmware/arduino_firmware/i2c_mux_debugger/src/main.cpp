@@ -50,8 +50,9 @@ void setup() {
   }
   Serial.println("---------------------------------");
 
-  // 4. Scan Channels 2, 3, and 4 on the MUX and attempt to read VL53L0X
-  for (uint8_t t=2; t<=4; t++) {
+  // 4. Scan Channels 3 and 5 on the MUX and attempt to read VL53L0X
+  for (uint8_t t=3; t<=5; t++) {
+    if (t == 4) continue; // Skip channel 4
     tcaselect(t);
     Serial.print("TCA Port #"); Serial.println(t);
 
