@@ -61,7 +61,7 @@ void CliffSensorNode::read_serial() {
                 }
             }
 
-            std::vector<int> active_indices = {3, 5};
+            std::vector<int> active_indices = {5, 3};
             bool emergency_stop = false;
 
             for (size_t i = 0; i < distances.size() && i < active_indices.size(); ++i) {
