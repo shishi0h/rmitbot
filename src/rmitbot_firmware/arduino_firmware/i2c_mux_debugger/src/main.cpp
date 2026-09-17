@@ -2,7 +2,17 @@
 #include <Wire.h>
 #include <VL53L0X.h>
 
+#define MUX_ADDRESS 0x70 // Default PCA9548A I2C address
+#define MUX_RESET_PIN 23
+
 VL53L0X sensor;
+
+void tcaselect(uint8_t i) {
+  if (i > 7) return;
+  Wire.beginTransmission(MUX_ADDRESS);
+  Wire.write(1 << i);
+  Wire.endTransmission();  
+}
 
 void setup() {
   Serial.begin(115200);
@@ -10,50 +20,77 @@ void setup() {
     delay(10);
   }
   
-  Serial.println("\n--- Direct Cliff Sensor Test ---");
+  Serial.println("\n--- I2C MUX Debugger Started! ---");
   
-  // You requested SCL on 21, SDA on 22
-  // Wire.begin(SDA, SCL)
-  Wire.begin(22, 21);
+  // 1. Hardware reset of the multiplexer
+  Serial.println("Resetting MUX via GPIO 23...");
+  pinMode(MUX_RESET_PIN, OUTPUT);
+  digitalWrite(MUX_RESET_PIN, LOW);
+  delay(10);
+  digitalWrite(MUX_RESET_PIN, HIGH);
+  delay(50);
   
-  // 1. Scan for the sensor at 0x29
-  Serial.println("Scanning I2C bus for VL53L0X at 0x29...");
-  Wire.beginTransmission(0x29);
+  // 2. Start I2C (matching your main firmware: SDA=21, SCL=22)
+  Wire.begin(21, 22);
+  
+  // 3. Ping the MUX itself
+  Serial.println("---------------------------------");
+  Serial.println("Pinging PCA9548A MUX at 0x70...");
+  Wire.beginTransmission(MUX_ADDRESS);
   byte error = Wire.endTransmission();
   
   if (error == 0) {
-    Serial.println("SUCCESS: Found device at 0x29!");
+    Serial.println("SUCCESS: MUX found at 0x70!");
   } else {
-    Serial.print("FAILED: Device not found at 0x29. Error code: ");
+    Serial.print("FAILED: MUX NOT found. Error code: ");
     Serial.println(error);
-    Serial.println("Check SDA, SCL, VCC, and GND wiring.");
+    Serial.println("Check power, ground, and I2C wiring to the MUX.");
+    // Wait here if no MUX is found
     while(1) { delay(1000); }
   }
+  Serial.println("---------------------------------");
 
-  // 2. Try to initialize the VL53L0X driver
-  Serial.println("Initializing VL53L0X sensor...");
-  sensor.setTimeout(500);
-  if (!sensor.init()) {
-    Serial.println("ERROR: Failed to detect and initialize sensor!");
-    while (1) { delay(1000); }
+  // 4. Scan every channel on the MUX and attempt to read VL53L0X
+  for (uint8_t t=0; t<8; t++) {
+    tcaselect(t);
+    Serial.print("TCA Port #"); Serial.println(t);
+
+    bool sensorFound = false;
+    for (uint8_t addr = 0; addr<=127; addr++) {
+      if (addr == MUX_ADDRESS) continue; // Skip the MUX itself
+
+      Wire.beginTransmission(addr);
+      if (!Wire.endTransmission()) {
+        Serial.print("  Found I2C 0x");
+        if (addr < 16) Serial.print("0");
+        Serial.println(addr, HEX);
+        if (addr == 0x29) {
+          sensorFound = true;
+        }
+      }
+    }
+
+    // Try to initialize and read from the VL53L0X regardless of I2C scan result
+    sensor.setTimeout(500);
+    if (!sensor.init()) {
+      Serial.println("  [SENSOR] Failed to initialize VL53L0X on this port.");
+    } else {
+      uint16_t distance = sensor.readRangeSingleMillimeters();
+      if (sensor.timeoutOccurred()) {
+        Serial.println("  [SENSOR] Read TIMEOUT!");
+      } else {
+        Serial.print("  [SENSOR] Distance: ");
+        Serial.print(distance);
+        Serial.println(" mm");
+      }
+    }
   }
-
-  // Set up continuous measurement for testing
-  sensor.setMeasurementTimingBudget(50000);
-  sensor.startContinuous(50);
-  Serial.println("Sensor initialized! Starting continuous read...\n");
+  
+  Serial.println("---------------------------------");
+  Serial.println("Scan complete.");
 }
 
 void loop() {
-  uint16_t distance = sensor.readRangeContinuousMillimeters();
-  
-  if (sensor.timeoutOccurred()) {
-    Serial.println("[ERROR] Read TIMEOUT! Sensor hung.");
-  } else {
-    Serial.print("Distance: ");
-    Serial.print(distance);
-    Serial.println(" mm");
-  }
-  
-  delay(100);
+  // Do nothing
+  delay(1000);
 }
