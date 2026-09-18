@@ -72,7 +72,7 @@ def generate_launch_description():
         ),
     )
     
-    # Group all nodes under the namespace
+    # Group all nodes under the namespace except slamtoolbox which manages its own namespace
     namespaced_nodes = GroupAction([
         PushRosNamespace(namespace),
         rsp, 
@@ -81,10 +81,10 @@ def generate_launch_description():
         rplidar, 
         # cliff_sensor,
         # vision,
-        slamtoolbox, 
     ])
     
     return LaunchDescription([
         namespace_arg,
-        namespaced_nodes
+        namespaced_nodes,
+        slamtoolbox
     ])

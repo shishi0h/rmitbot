@@ -10,6 +10,7 @@ from launch_ros.event_handlers import OnStateTransition
 from launch.event_handlers import OnProcessStart
 from lifecycle_msgs.msg import Transition
 import launch
+import launch_ros
 
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
@@ -49,8 +50,9 @@ def launch_setup(context, *args, **kwargs):
             ('tf_static', '/tf_static')
         ]
 
-    # Launch the SLAM Toolbox node directly to avoid hardcoded namespace='' in its default launch file
-    slam_toolbox_node = Node(
+    # Launch the SLAM Toolbox node as a LifecycleNode but WITHOUT namespace=namespace (to avoid double namespace)
+    slam_toolbox_node = launch_ros.actions.LifecycleNode(
+        namespace=namespace,
         parameters=[
           temp_yaml.name,
           {'use_sim_time': use_sim_time.lower() == 'true'}
@@ -62,7 +64,35 @@ def launch_setup(context, *args, **kwargs):
         remappings=remappings
     )
 
-    return [slam_toolbox_node]
+    configure_event = RegisterEventHandler(
+        OnProcessStart(
+            target_action=slam_toolbox_node,
+            on_start=[
+                EmitEvent(
+                    event=ChangeState(
+                        lifecycle_node_matcher=launch.events.matches_action(slam_toolbox_node),
+                        transition_id=Transition.TRANSITION_CONFIGURE
+                    )
+                )
+            ]
+        )
+    )
+
+    activate_event = RegisterEventHandler(
+        OnStateTransition(
+            target_lifecycle_node=slam_toolbox_node,
+            start_state="configuring",
+            goal_state="inactive",
+            entities=[
+                EmitEvent(event=ChangeState(
+                    lifecycle_node_matcher=launch.events.matches_action(slam_toolbox_node),
+                    transition_id=Transition.TRANSITION_ACTIVATE
+                ))
+            ]
+        )
+    )
+
+    return [slam_toolbox_node, configure_event, activate_event]
 
 
 def generate_launch_description():

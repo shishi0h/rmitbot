@@ -74,10 +74,10 @@ def generate_launch_description():
         localization,
         rplidar, 
         # cliff_sensor,
-        slamtoolbox, 
     ])
     
     return LaunchDescription([
         namespace_arg,
-        namespaced_nodes
+        namespaced_nodes,
+        slamtoolbox
     ])
