@@ -10,7 +10,7 @@
     ceres_loss_function: None
 
     # ROS Parameters
-    odom_frame: odom 
+    odom_frame: odom
     # odom_frame: base_footprint # This is for the sake of testing the slamwith the rplidar hardware, use odom for the real robot
     map_frame: map
     base_frame: base_footprint
@@ -27,7 +27,7 @@
     #map_start_at_dock: true
     scan_queue_size: 100 # from chatgtp
     transform_tolerance: 0.3 # from chatgtp
-    transform_timeout: 0.5 # from chatgtp 
+    transform_timeout: 2.0 # Increased for Raspberry Pi CPU delays 
 
     debug_logging: false
     throttle_scans: 1
