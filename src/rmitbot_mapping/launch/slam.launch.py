@@ -1,7 +1,7 @@
 import os
 import tempfile
 from launch import LaunchDescription
-from launch_ros.actions import LifecycleNode
+from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from ament_index_python.packages import get_package_share_directory
 from launch.actions import DeclareLaunchArgument, EmitEvent, RegisterEventHandler, OpaqueFunction
@@ -46,7 +46,7 @@ def launch_setup(context, *args, **kwargs):
         ]
 
     # Launch the SLAM Toolbox node directly to avoid hardcoded namespace='' in its default launch file
-    slam_toolbox_node = LifecycleNode(
+    slam_toolbox_node = Node(
         parameters=[
           temp_yaml.name,
           {'use_sim_time': use_sim_time.lower() == 'true'}
@@ -54,40 +54,11 @@ def launch_setup(context, *args, **kwargs):
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
         name='slam_toolbox',
-        namespace=namespace,
         output='screen',
         remappings=remappings
     )
 
-    configure_event = RegisterEventHandler(
-        OnProcessStart(
-            target_action=slam_toolbox_node,
-            on_start=[
-                EmitEvent(
-                    event=ChangeState(
-                        lifecycle_node_matcher=launch.events.matches_action(slam_toolbox_node),
-                        transition_id=Transition.TRANSITION_CONFIGURE
-                    )
-                )
-            ]
-        )
-    )
-
-    activate_event = RegisterEventHandler(
-        OnStateTransition(
-            target_lifecycle_node=slam_toolbox_node,
-            start_state="configuring",
-            goal_state="inactive",
-            entities=[
-                EmitEvent(event=ChangeState(
-                    lifecycle_node_matcher=launch.events.matches_action(slam_toolbox_node),
-                    transition_id=Transition.TRANSITION_ACTIVATE
-                ))
-            ]
-        )
-    )
-
-    return [slam_toolbox_node, configure_event, activate_event]
+    return [slam_toolbox_node]
 
 
 def generate_launch_description():
