@@ -26,9 +26,4 @@
       navigation: 
         topic: cmd_vel_navigation # Input topic for navigation commands 
         priority: 5 
-        timeout: 0.5 
-#     locks:
-#       cliff_estop:
-#         topic: emergency_stop
-#         timeout: 0.0 # 0.0 means it doesn't timeout, it stays locked as long as the topic is True
-#         priority: 255 # Highest priority to override everything 
+        timeout: 0.5

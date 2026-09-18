@@ -10,17 +10,6 @@
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_imu.xacro" /> 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_laser.xacro" />
     
-    <!-- Include the cliff sensor macro -->
-    <xacro:include filename="$(find rmitbot_cliff_sensor)/urdf/cliff_sensor.xacro" />
 
-    <!-- Cliff Sensor 3 (Front Center) -->
-    <xacro:cliff_sensor name="cliff_sensor_3" parent="base_link">
-        <origin xyz="0.2 0.0 0.25" rpy="0 0.5236 0" />
-    </xacro:cliff_sensor>
-
-    <!-- Cliff Sensor 5 (Back Left - Used as Back) -->
-    <xacro:cliff_sensor name="cliff_sensor_5" parent="base_link">
-        <origin xyz="-0.2 0.085 0.25" rpy="0 0.5236 2.8798" />
-    </xacro:cliff_sensor>
 
 </robot>
