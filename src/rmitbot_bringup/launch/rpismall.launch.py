@@ -80,7 +80,7 @@ def generate_launch_description():
         localization,
         rplidar, 
         # cliff_sensor,
-        vision,
+        # vision,
         slamtoolbox, 
     ])
     

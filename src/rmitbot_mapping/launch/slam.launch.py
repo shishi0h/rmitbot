@@ -42,7 +42,11 @@ def launch_setup(context, *args, **kwargs):
     if namespace:
         remappings = [
             ('/map', f'/{namespace}/map'),
-            ('/map_metadata', f'/{namespace}/map_metadata')
+            ('/map_metadata', f'/{namespace}/map_metadata'),
+            ('/tf', '/tf'),
+            ('/tf_static', '/tf_static'),
+            ('tf', '/tf'),
+            ('tf_static', '/tf_static')
         ]
 
     # Launch the SLAM Toolbox node directly to avoid hardcoded namespace='' in its default launch file
