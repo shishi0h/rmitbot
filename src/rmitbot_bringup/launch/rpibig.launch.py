@@ -56,13 +56,13 @@ def generate_launch_description():
     )
 
     # Launch cliff sensors with BYPASS enabled
-    cliff_sensor = IncludeLaunchDescription(
-        os.path.join(
-            get_package_share_directory("rmitbot_cliff_sensor"),
-            "launch", "cliff.launch.py"
-        ),
-        launch_arguments={'namespace': namespace, 'bypass_cliff_sensor': 'true'}.items()
-    )
+    # cliff_sensor = IncludeLaunchDescription(
+    #     os.path.join(
+    #         get_package_share_directory("rmitbot_cliff_sensor"),
+    #         "launch", "cliff.launch.py"
+    #     ),
+    #     launch_arguments={'namespace': namespace, 'bypass_cliff_sensor': 'true'}.items()
+    # )
     
     # Note: Vision (Camera) is intentionally omitted in rpibig.launch.py
     
@@ -73,7 +73,7 @@ def generate_launch_description():
         controller,
         localization,
         rplidar, 
-        cliff_sensor,
+        # cliff_sensor,
         slamtoolbox, 
     ])
     

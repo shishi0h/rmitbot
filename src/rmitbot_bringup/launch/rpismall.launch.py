@@ -56,13 +56,13 @@ def generate_launch_description():
     )
 
     # Launch cliff sensors
-    cliff_sensor = IncludeLaunchDescription(
-        os.path.join(
-            get_package_share_directory("rmitbot_cliff_sensor"),
-            "launch", "cliff.launch.py"
-        ),
-        launch_arguments={'namespace': namespace, 'bypass_cliff_sensor': 'false'}.items()
-    )
+    # cliff_sensor = IncludeLaunchDescription(
+    #     os.path.join(
+    #         get_package_share_directory("rmitbot_cliff_sensor"),
+    #         "launch", "cliff.launch.py"
+    #     ),
+    #     launch_arguments={'namespace': namespace, 'bypass_cliff_sensor': 'false'}.items()
+    # )
     
     # Launch vision (Camera IS included in small bot)
     vision = IncludeLaunchDescription(
@@ -79,7 +79,7 @@ def generate_launch_description():
         controller,
         localization,
         rplidar, 
-        cliff_sensor,
+        # cliff_sensor,
         vision,
         slamtoolbox, 
     ])

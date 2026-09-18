@@ -105,13 +105,13 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace', default='')
 
     # Launch cliff sensors
-    cliff_sensor = IncludeLaunchDescription(
-        os.path.join(
-            get_package_share_directory("rmitbot_cliff_sensor"),
-            "launch", "cliff.launch.py"
-        ),
-        launch_arguments={'namespace': namespace}.items()
-    )
+    # cliff_sensor = IncludeLaunchDescription(
+    #     os.path.join(
+    #         get_package_share_directory("rmitbot_cliff_sensor"),
+    #         "launch", "cliff.launch.py"
+    #     ),
+    #     launch_arguments={'namespace': namespace}.items()
+    # )
     
     # Launch vision
     vision = IncludeLaunchDescription(
@@ -128,7 +128,7 @@ def generate_launch_description():
         controller,
         localization,
         rplidar, 
-        cliff_sensor,
+        # cliff_sensor,
         vision,
         slamtoolbox, 
     ])
