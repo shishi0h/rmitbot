@@ -58,7 +58,16 @@ def launch_setup(context, *args, **kwargs):
         }.items(), 
     )
 
-    return [nav2_launch]
+    from launch.actions import GroupAction
+    from launch_ros.actions import SetRemap
+
+    nav2_group = GroupAction([
+        SetRemap(src='tf', dst='/tf'),
+        SetRemap(src='tf_static', dst='/tf_static'),
+        nav2_launch
+    ])
+
+    return [nav2_group]
 
 def generate_launch_description():
     namespace_arg = DeclareLaunchArgument('namespace', default_value='')

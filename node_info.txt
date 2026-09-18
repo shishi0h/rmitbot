@@ -1,0 +1,20 @@
+/robot_1/test_node
+  Subscribers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+  Publishers:
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+  Service Servers:
+    /robot_1/test_node/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /robot_1/test_node/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /robot_1/test_node/get_parameters: rcl_interfaces/srv/GetParameters
+    /robot_1/test_node/get_type_description: type_description_interfaces/srv/GetTypeDescription
+    /robot_1/test_node/list_parameters: rcl_interfaces/srv/ListParameters
+    /robot_1/test_node/set_parameters: rcl_interfaces/srv/SetParameters
+    /robot_1/test_node/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
+
