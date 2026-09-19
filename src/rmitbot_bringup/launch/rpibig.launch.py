@@ -16,7 +16,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_description"),
             "launch", "rsp.launch.py"
         ),
-        launch_arguments={'namespace': namespace}.items()
+        launch_arguments={'namespace': namespace, 'robot_type': 'bigbot'}.items()
     )
     
     # Launch the controller manager spawner
@@ -25,7 +25,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_controller"),
             "launch", "controller.launch.py"
         ),
-        launch_arguments={'namespace': namespace}.items()
+        launch_arguments={'namespace': namespace, 'robot_type': 'bigbot'}.items()
     )
     
     localization = IncludeLaunchDescription(
@@ -60,14 +60,7 @@ def generate_launch_description():
         launch_arguments={"use_sim_time": "False", 'namespace': namespace}.items()
     )
 
-    # Launch cliff sensors with BYPASS enabled
-    # cliff_sensor = IncludeLaunchDescription(
-    #     os.path.join(
-    #         get_package_share_directory("rmitbot_cliff_sensor"),
-    #         "launch", "cliff.launch.py"
-    #     ),
-    #     launch_arguments={'namespace': namespace, 'bypass_cliff_sensor': 'true'}.items()
-    # )
+    # Cliff sensor ignored/removed
     
     # Note: Vision (Camera) is intentionally omitted in rpibig.launch.py
     
@@ -78,7 +71,6 @@ def generate_launch_description():
         controller,
         localization,
         rplidar, 
-        # cliff_sensor,
     ])
     
     return LaunchDescription([

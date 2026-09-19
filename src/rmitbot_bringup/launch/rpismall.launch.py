@@ -16,7 +16,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_description"),
             "launch", "rsp.launch.py"
         ),
-        launch_arguments={'namespace': namespace}.items()
+        launch_arguments={'namespace': namespace, 'robot_type': 'smallbot'}.items()
     )
     
     # Launch the controller manager spawner
@@ -25,7 +25,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_controller"),
             "launch", "controller.launch.py"
         ),
-        launch_arguments={'namespace': namespace}.items()
+        launch_arguments={'namespace': namespace, 'robot_type': 'smallbot'}.items()
     )
     
     localization = IncludeLaunchDescription(
@@ -55,15 +55,7 @@ def generate_launch_description():
         launch_arguments={"use_sim_time": "False", 'namespace': namespace}.items()
     )
 
-    # Launch cliff sensors
-    # cliff_sensor = IncludeLaunchDescription(
-    #     os.path.join(
-    #         get_package_share_directory("rmitbot_cliff_sensor"),
-    #         "launch", "cliff.launch.py"
-    #     ),
-    #     launch_arguments={'namespace': namespace, 'bypass_cliff_sensor': 'false'}.items()
-    # )
-    
+    # Cliff sensor ignored/removed
     # Launch vision (Camera IS included in small bot)
     vision = IncludeLaunchDescription(
         os.path.join(
@@ -79,7 +71,6 @@ def generate_launch_description():
         controller,
         localization,
         rplidar, 
-        # cliff_sensor,
         # vision,
     ])
     

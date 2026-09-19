@@ -11,10 +11,18 @@ from launch.substitutions import Command, LaunchConfiguration
 
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
+    robot_type = LaunchConfiguration('robot_type').perform(context)
     prefix = f"{namespace}/" if namespace else ""
     
     pkg_path = get_package_share_directory("rmitbot_description")
-    urdf_path = os.path.join(pkg_path, 'urdf', 'rmitbot.urdf.xacro')
+    if robot_type == 'smallbot':
+        urdf_file = 'smallbot.urdf.xacro'
+    elif robot_type == 'bigbot':
+        urdf_file = 'bigbot.urdf.xacro'
+    else:
+        urdf_file = 'rmitbot.urdf.xacro'
+        
+    urdf_path = os.path.join(pkg_path, 'urdf', urdf_file)
     
     import subprocess
     import xml.etree.ElementTree as ET
@@ -55,5 +63,6 @@ def generate_launch_description():
     from launch.actions import OpaqueFunction
     return LaunchDescription([
         DeclareLaunchArgument('namespace', default_value=''),
+        DeclareLaunchArgument('robot_type', default_value='smallbot', description='Type of robot: smallbot or bigbot'),
         OpaqueFunction(function=launch_setup)
     ])

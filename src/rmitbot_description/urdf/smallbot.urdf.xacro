@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-
-<robot name="rmitbot"
-    xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="rmitbot_small" xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:arg name="use_sim" default="false"/>
     <xacro:arg name="controller_serial_port" default="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"/>
 
@@ -15,7 +13,5 @@
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_ros2_control.xacro" /> 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_imu.xacro" /> 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_laser.xacro" />
-    
-
 
 </robot>

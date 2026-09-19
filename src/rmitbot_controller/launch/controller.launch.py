@@ -16,6 +16,7 @@ from launch.substitutions import PythonExpression
 
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
+    robot_type = LaunchConfiguration('robot_type').perform(context)
     
     base_frame_id = f"{namespace}/base_footprint" if namespace else "base_footprint"
     odom_frame_id = f"{namespace}/odom" if namespace else "odom"
@@ -26,7 +27,21 @@ def launch_setup(context, *args, **kwargs):
     
     pkg_path_description = get_package_share_directory("rmitbot_description")
     pkg_path_controller = get_package_share_directory("rmitbot_controller")
-    urdf_path = os.path.join(pkg_path_description, 'urdf', 'rmitbot.urdf.xacro')
+    
+    if robot_type == 'smallbot':
+        urdf_file = 'smallbot.urdf.xacro'
+        wheel_separation = '0.36'
+        wheel_radius = '0.13'
+    elif robot_type == 'bigbot':
+        urdf_file = 'bigbot.urdf.xacro'
+        wheel_separation = '0.61'
+        wheel_radius = '0.25'
+    else:
+        urdf_file = 'rmitbot.urdf.xacro'
+        wheel_separation = '0.40'
+        wheel_radius = '0.05'
+        
+    urdf_path = os.path.join(pkg_path_description, 'urdf', urdf_file)
     ctrl_config = os.path.join(pkg_path_controller, 'config', 'rmitbot_controller.yaml')
     
     robot_description = ParameterValue(Command(['xacro ', urdf_path, ' controller_serial_port:=', controller_serial_port]), value_type=str)
@@ -38,6 +53,10 @@ def launch_setup(context, *args, **kwargs):
     config_text = config_text.replace('base_frame_id: base_footprint', f'base_frame_id: {base_frame_id}')
     config_text = config_text.replace('odom_frame_id: odom', f'odom_frame_id: {odom_frame_id}')
     config_text = config_text.replace('frame_id:  "imu_link"', f'frame_id: "{imu_frame_id}"')
+    
+    # Inject dynamic physical dimensions for diff drive odometry
+    config_text = config_text.replace('wheel_separation: 0.40', f'wheel_separation: {wheel_separation}')
+    config_text = config_text.replace('wheel_radius: 0.05', f'wheel_radius: {wheel_radius}')
     
     temp_yaml = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.yaml')
     temp_yaml.write(config_text)
@@ -106,6 +125,7 @@ def generate_launch_description():
     from launch.actions import OpaqueFunction
     return LaunchDescription([
         DeclareLaunchArgument('namespace', default_value=''),
+        DeclareLaunchArgument('robot_type', default_value='smallbot', description='Type of robot: smallbot or bigbot'),
         DeclareLaunchArgument('controller_serial_port', default_value='/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0'),
         OpaqueFunction(function=launch_setup)
     ])

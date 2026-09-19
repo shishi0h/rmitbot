@@ -1,21 +1,17 @@
 <?xml version="1.0"?>
-
-<robot name="rmitbot"
-    xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="rmitbot_big" xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:arg name="use_sim" default="false"/>
     <xacro:arg name="controller_serial_port" default="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"/>
 
-    <xacro:property name="wheel_radius" value="0.13" />
-    <xacro:property name="wheel_track_y" value="0.36" />
-    <xacro:property name="wheel_base_x" value="0.19" />
-    <xacro:property name="lidar_z" value="0.27" />
+    <xacro:property name="wheel_radius" value="0.25" />
+    <xacro:property name="wheel_track_y" value="0.61" />
+    <xacro:property name="wheel_base_x" value="0.33" />
+    <xacro:property name="lidar_z" value="0.37" />
 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_platform.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_gazebo.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_ros2_control.xacro" /> 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_imu.xacro" /> 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_laser.xacro" />
-    
-
 
 </robot>
