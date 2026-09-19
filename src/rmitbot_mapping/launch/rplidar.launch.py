@@ -14,20 +14,33 @@ def generate_launch_description():
         default_value='/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0'
     )
     
+    serial_baudrate_arg = DeclareLaunchArgument(
+        'serial_baudrate',
+        default_value='115200'
+    )
+    
+    scan_mode_arg = DeclareLaunchArgument(
+        'scan_mode',
+        default_value='Standard'
+    )
+    
     frame_id = PythonExpression(["'", namespace, "/laser_link' if '", namespace, "' else 'laser_link'"])
 
     return LaunchDescription([
         namespace_arg,
         lidar_serial_port_arg,
+        serial_baudrate_arg,
+        scan_mode_arg,
         Node(
             package='rplidar_ros',
             executable='rplidar_composition',
             output='screen',
             parameters=[{
                 'serial_port': LaunchConfiguration('lidar_serial_port'),
+                'serial_baudrate': LaunchConfiguration('serial_baudrate'),
                 'frame_id': frame_id,
                 'angle_compensate': True,
-                'scan_mode': 'Standard', 
+                'scan_mode': LaunchConfiguration('scan_mode'), 
                 'use_sim_time': False,
             }]
         )
