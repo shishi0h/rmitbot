@@ -21,7 +21,7 @@ def generate_launch_description():
     # Robot 1 (Smallbot) Nodes
     twistmux_1 = IncludeLaunchDescription(
         os.path.join(get_package_share_directory("rmitbot_navigation"), "launch", "twistmux.launch.py"),
-        launch_arguments={'namespace': 'robot_1'}.items()
+        launch_arguments={'namespace': 'robot_1', 'joy_dev': '0'}.items()
     )
     navigation_1 = IncludeLaunchDescription(
         os.path.join(get_package_share_directory("rmitbot_navigation"), "launch", "nav.launch.py"),
@@ -32,7 +32,7 @@ def generate_launch_description():
     # Robot 2 (Bigbot) Nodes
     twistmux_2 = IncludeLaunchDescription(
         os.path.join(get_package_share_directory("rmitbot_navigation"), "launch", "twistmux.launch.py"),
-        launch_arguments={'namespace': 'robot_2'}.items()
+        launch_arguments={'namespace': 'robot_2', 'joy_dev': '1'}.items()
     )
     navigation_2 = IncludeLaunchDescription(
         os.path.join(get_package_share_directory("rmitbot_navigation"), "launch", "nav.launch.py"),

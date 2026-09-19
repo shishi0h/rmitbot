@@ -31,11 +31,11 @@ def launch_setup(context, *args, **kwargs):
     if robot_type == 'smallbot':
         urdf_file = 'smallbot.urdf.xacro'
         wheel_separation = '0.36'
-        wheel_radius = '0.13'
+        wheel_radius = '0.065'
     elif robot_type == 'bigbot':
         urdf_file = 'bigbot.urdf.xacro'
         wheel_separation = '0.61'
-        wheel_radius = '0.25'
+        wheel_radius = '0.125'
     else:
         urdf_file = 'rmitbot.urdf.xacro'
         wheel_separation = '0.40'

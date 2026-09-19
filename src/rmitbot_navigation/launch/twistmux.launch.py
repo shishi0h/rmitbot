@@ -11,6 +11,9 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     namespace_arg = DeclareLaunchArgument('namespace', default_value='')
     
+    joy_dev = LaunchConfiguration('joy_dev')
+    joy_dev_arg = DeclareLaunchArgument('joy_dev', default_value='0')
+    
     frame_id = PythonExpression(["'", namespace, "/base_footprint' if '", namespace, "' else 'base_footprint'"])
 
     #Joy
@@ -19,9 +22,8 @@ def generate_launch_description():
         executable='joy_node',
         name='joy_node',
         output='screen',
-        prefix='xterm -e', 
         parameters=[
-            {"use_sim_time": False},
+            {"use_sim_time": False, "device_id": joy_dev},
         ],
     )
     
@@ -31,7 +33,6 @@ def generate_launch_description():
         executable='teleop_node',
         name='teleop_twist_joy',
         output='screen',
-        prefix='xterm -e', 
         parameters=[
             os.path.join(
                 get_package_share_directory("rmitbot_navigation"),
@@ -108,6 +109,7 @@ def generate_launch_description():
 
     return LaunchDescription([ 
         namespace_arg,
+        joy_dev_arg,
         joy_node,
         teleop_joy,
         teleop_keyboard,
