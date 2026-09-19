@@ -106,6 +106,6 @@ def generate_launch_description():
     from launch.actions import OpaqueFunction
     return LaunchDescription([
         DeclareLaunchArgument('namespace', default_value=''),
-        DeclareLaunchArgument('serial_port', default_value='/dev/serial/by-path/platform-xhci-hcd.0-usb-0:2:1.0-port0'),
+        DeclareLaunchArgument('serial_port', default_value='/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0'),
         OpaqueFunction(function=launch_setup)
     ])

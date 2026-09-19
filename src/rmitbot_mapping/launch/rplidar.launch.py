@@ -11,7 +11,7 @@ def generate_launch_description():
     
     serial_port_arg = DeclareLaunchArgument(
         'serial_port', 
-        default_value='/dev/serial/by-path/platform-xhci-hcd.0-usb-0:1:1.0-port0'
+        default_value='/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0'
     )
     
     frame_id = PythonExpression(["'", namespace, "/laser_link' if '", namespace, "' else 'laser_link'"])
