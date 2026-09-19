@@ -3,7 +3,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription 
 from launch.actions import DeclareLaunchArgument, LogInfo 
 from launch_ros.actions import Node 
-from launch.substitutions import LaunchConfiguration, PythonExpression
+from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoinSubstitution
 
 # ros2 launch rmitbot_controller twistmux.launch.py 
 
@@ -13,6 +13,9 @@ def generate_launch_description():
     
     joy_dev = LaunchConfiguration('joy_dev')
     joy_dev_arg = DeclareLaunchArgument('joy_dev', default_value='0')
+    
+    joy_config = LaunchConfiguration('joy_config')
+    joy_config_arg = DeclareLaunchArgument('joy_config', default_value='teleop_twist_joy.yaml')
     
     frame_id = PythonExpression(["'", namespace, "/base_footprint' if '", namespace, "' else 'base_footprint'"])
 
@@ -34,11 +37,11 @@ def generate_launch_description():
         name='teleop_twist_joy',
         output='screen',
         parameters=[
-            os.path.join(
+            PathJoinSubstitution([
                 get_package_share_directory("rmitbot_navigation"),
                 "config",
-                "teleop_twist_joy.yaml"
-            ),
+                joy_config
+            ]),
             {"use_sim_time": False},
         ],
         remappings=[
@@ -110,6 +113,7 @@ def generate_launch_description():
     return LaunchDescription([ 
         namespace_arg,
         joy_dev_arg,
+        joy_config_arg,
         joy_node,
         teleop_joy,
         teleop_keyboard,

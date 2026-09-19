@@ -21,7 +21,7 @@ def generate_launch_description():
     # Robot 1 (Smallbot) Nodes
     twistmux_1 = IncludeLaunchDescription(
         os.path.join(get_package_share_directory("rmitbot_navigation"), "launch", "twistmux.launch.py"),
-        launch_arguments={'namespace': 'robot_1', 'joy_dev': '0'}.items()
+        launch_arguments={'namespace': 'robot_1', 'joy_dev': '0', 'joy_config': 'teleop_twist_joy_ps5.yaml'}.items()
     )
     navigation_1 = IncludeLaunchDescription(
         os.path.join(get_package_share_directory("rmitbot_navigation"), "launch", "nav.launch.py"),
