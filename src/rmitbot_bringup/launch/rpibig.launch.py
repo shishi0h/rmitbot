@@ -43,7 +43,12 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_mapping"),
             "launch", "rplidar.launch.py"
         ),
-        launch_arguments={"use_sim_time": "False", 'namespace': namespace}.items()
+        launch_arguments={
+            "use_sim_time": "False",
+            'namespace': namespace,
+            'serial_baudrate': '256000',
+            'scan_mode': 'Standard'
+        }.items()
     )
     
     # Launch the slamtoolbox 
