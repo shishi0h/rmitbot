@@ -45,9 +45,9 @@ def launch_setup(context, *args, **kwargs):
     nav2_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             PathJoinSubstitution([
-                FindPackageShare('nav2_bringup'),
+                FindPackageShare('rmitbot_navigation'),
                 'launch',
-                'navigation_launch.py'
+                'navigation_custom.launch.py'
             ])
         ),
         launch_arguments={
@@ -58,16 +58,7 @@ def launch_setup(context, *args, **kwargs):
         }.items(), 
     )
 
-    from launch.actions import GroupAction
-    from launch_ros.actions import SetRemap
-
-    nav2_group = GroupAction([
-        SetRemap(src='tf', dst='/tf'),
-        SetRemap(src='tf_static', dst='/tf_static'),
-        nav2_launch
-    ])
-
-    return [nav2_group]
+    return [nav2_launch]
 
 def generate_launch_description():
     namespace_arg = DeclareLaunchArgument('namespace', default_value='')
