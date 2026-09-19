@@ -17,7 +17,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan 1
+    SyncSource: LaserScan 2
   - Class: rviz_common/Tool Properties
     Expanded:
       - /2D Goal Pose1
@@ -202,34 +202,6 @@ Visualization Manager:
       Length: 0.30000001192092896
       Line Style: Billboards
       Line Width: 0.05000000074505806
-      Name: Path (Robot 0)
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 255; 85; 255
-      Pose Style: None
-      Radius: 0.029999999329447746
-      Shaft Diameter: 0.05000000074505806
-      Shaft Length: 0.20000000298023224
-      Topic:
-        Depth: 5
-        Durability Policy: System Default
-        Filter size: 10
-        History Policy: Keep Last
-        Reliability Policy: System Default
-        Value: /robot_1/robot_0/plan
-      Value: true
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz_default_plugins/Path
-      Color: 0; 0; 0
-      Enabled: true
-      Head Diameter: 0.20000000298023224
-      Head Length: 0.10000000149011612
-      Length: 0.30000001192092896
-      Line Style: Billboards
-      Line Width: 0.05000000074505806
       Name: Path (Robot 1)
       Offset:
         X: 0
@@ -249,17 +221,32 @@ Visualization Manager:
         Value: /robot_1/plan
       Value: true
     - Alpha: 1
-      Class: rviz_default_plugins/Polygon
-      Color: 25; 255; 0
+      Buffer Length: 1
+      Class: rviz_default_plugins/Path
+      Color: 0; 0; 0
       Enabled: true
-      Name: Polygon (Robot 0)
+      Head Diameter: 0.20000000298023224
+      Head Length: 0.10000000149011612
+      Length: 0.30000001192092896
+      Line Style: Billboards
+      Line Width: 0.05000000074505806
+      Name: Path (Robot 2)
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.05000000074505806
+      Shaft Length: 0.20000000298023224
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: System Default
         Filter size: 10
         History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /robot_1/robot_0/local_costmap/published_footprint
+        Reliability Policy: System Default
+        Value: /robot_2/plan
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/Polygon
@@ -273,6 +260,19 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /robot_1/local_costmap/published_footprint
+      Value: true
+    - Alpha: 1
+      Class: rviz_default_plugins/Polygon
+      Color: 25; 255; 0
+      Enabled: true
+      Name: Polygon (Robot 2)
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_2/local_costmap/published_footprint
       Value: true
     - Alpha: 1
       Class: rviz_default_plugins/RobotModel
@@ -334,7 +334,7 @@ Visualization Manager:
       Mass Properties:
         Inertia: false
         Mass: false
-      Name: RobotModel 0
+      Name: RobotModel 1
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -399,7 +399,7 @@ Visualization Manager:
       Mass Properties:
         Inertia: false
         Mass: false
-      Name: RobotModel 1
+      Name: RobotModel 2
       TF Prefix: ""
       Update Interval: 0
       Value: true
@@ -422,7 +422,7 @@ Visualization Manager:
       Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: LaserScan 0
+      Name: LaserScan 1
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -434,7 +434,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_1/robot_0/scan
+        Value: /robot_1/scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -456,7 +456,7 @@ Visualization Manager:
       Max Intensity: 15
       Min Color: 0; 0; 0
       Min Intensity: 4
-      Name: LaserScan 1
+      Name: LaserScan 2
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
@@ -468,7 +468,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_1/scan
+        Value: /robot_2/scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -502,14 +502,16 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_0/goal_pose
+        Value: /robot_1/goal_pose
+      Name: 2D Goal Pose 1
     - Class: rviz_default_plugins/SetGoal
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /robot_1/goal_pose
+        Value: /robot_2/goal_pose
+      Name: 2D Goal Pose 2
     - Class: rviz_default_plugins/PublishPoint
       Single click: true
       Topic:
