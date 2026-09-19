@@ -25,7 +25,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_controller"),
             "launch", "controller.launch.py"
         ),
-        launch_arguments={'namespace': namespace}.items()
+        launch_arguments={'namespace': namespace, 'serial_port': '/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0'}.items()
     )
     
     localization = IncludeLaunchDescription(
@@ -43,7 +43,7 @@ def generate_launch_description():
             get_package_share_directory("rmitbot_mapping"),
             "launch", "rplidar.launch.py"
         ),
-        launch_arguments={"use_sim_time": "False", 'namespace': namespace}.items()
+        launch_arguments={"use_sim_time": "False", 'namespace': namespace, 'serial_port': '/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0'}.items()
     )
     
     # Launch the slamtoolbox 
