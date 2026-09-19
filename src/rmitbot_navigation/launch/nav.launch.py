@@ -1,11 +1,13 @@
 import os
-import tempfile
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.substitutions import FindPackageShare
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, PythonExpression
 from launch.actions import OpaqueFunction
+import tempfile
+import yaml
 
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
@@ -23,6 +25,8 @@ def launch_setup(context, *args, **kwargs):
         config_text = f.read()
         
     # Replace the frames dynamically
+    # Note: We must be careful to only replace exact frame values
+    # In nav2_params.yaml, we have `robot_base_frame: base_footprint`
     config_text = config_text.replace('robot_base_frame: base_footprint', f'robot_base_frame: {base_frame}')
     config_text = config_text.replace('robot_base_frame: "base_footprint"', f'robot_base_frame: "{base_frame}"')
     
@@ -38,22 +42,14 @@ def launch_setup(context, *args, **kwargs):
     temp_yaml.write(config_text)
     temp_yaml.close()
 
-    # --- DYNAMICALLY PATCH navigation_launch.py ---
-    # nav2_bringup hardcodes remappings to local tf. We MUST remove this to use global tf.
-    nav2_bringup_launch_path = os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
-    with open(nav2_bringup_launch_path, 'r') as f:
-        nav2_launch_code = f.read()
-    
-    # Replace the local tf remapping with global tf remapping
-    nav2_launch_code = nav2_launch_code.replace("('/tf', 'tf')", "('/tf', '/tf')")
-    nav2_launch_code = nav2_launch_code.replace("('/tf_static', 'tf_static')", "('/tf_static', '/tf_static')")
-    
-    temp_launch = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='_navigation_launch.py')
-    temp_launch.write(nav2_launch_code)
-    temp_launch.close()
-
     nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(temp_launch.name),
+        PythonLaunchDescriptionSource(
+            PathJoinSubstitution([
+                FindPackageShare('nav2_bringup'),
+                'launch',
+                'navigation_launch.py'
+            ])
+        ),
         launch_arguments={
             'use_sim_time': 'false',
             'use_collision_monitor': 'false',
@@ -62,7 +58,16 @@ def launch_setup(context, *args, **kwargs):
         }.items(), 
     )
 
-    return [nav2_launch]
+    from launch.actions import GroupAction
+    from launch_ros.actions import SetRemap
+
+    nav2_group = GroupAction([
+        SetRemap(src='tf', dst='/tf'),
+        SetRemap(src='tf_static', dst='/tf_static'),
+        nav2_launch
+    ])
+
+    return [nav2_group]
 
 def generate_launch_description():
     namespace_arg = DeclareLaunchArgument('namespace', default_value='')
@@ -70,4 +75,7 @@ def generate_launch_description():
     return LaunchDescription([
         namespace_arg, 
         OpaqueFunction(function=launch_setup)
-    ])  
+    ])
+
+
+    
