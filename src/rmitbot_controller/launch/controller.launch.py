@@ -22,14 +22,14 @@ def launch_setup(context, *args, **kwargs):
     imu_frame_id = f"{namespace}/imu_link" if namespace else "imu_link"
     controller_manager_name = f"/{namespace}/controller_manager" if namespace else "/controller_manager"
     
-    serial_port = LaunchConfiguration('serial_port').perform(context)
+    controller_serial_port = LaunchConfiguration('controller_serial_port').perform(context)
     
     pkg_path_description = get_package_share_directory("rmitbot_description")
     pkg_path_controller = get_package_share_directory("rmitbot_controller")
     urdf_path = os.path.join(pkg_path_description, 'urdf', 'rmitbot.urdf.xacro')
     ctrl_config = os.path.join(pkg_path_controller, 'config', 'rmitbot_controller.yaml')
     
-    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' serial_port:=', serial_port]), value_type=str)
+    robot_description = ParameterValue(Command(['xacro ', urdf_path, ' controller_serial_port:=', controller_serial_port]), value_type=str)
     
     import tempfile
     with open(ctrl_config, 'r') as f:
@@ -106,6 +106,6 @@ def generate_launch_description():
     from launch.actions import OpaqueFunction
     return LaunchDescription([
         DeclareLaunchArgument('namespace', default_value=''),
-        DeclareLaunchArgument('serial_port', default_value='/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0'),
+        DeclareLaunchArgument('controller_serial_port', default_value='/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0'),
         OpaqueFunction(function=launch_setup)
     ])

@@ -9,8 +9,8 @@ def generate_launch_description():
     namespace = LaunchConfiguration('namespace')
     namespace_arg = DeclareLaunchArgument('namespace', default_value='')
     
-    serial_port_arg = DeclareLaunchArgument(
-        'serial_port', 
+    lidar_serial_port_arg = DeclareLaunchArgument(
+        'lidar_serial_port', 
         default_value='/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0'
     )
     
@@ -18,13 +18,13 @@ def generate_launch_description():
 
     return LaunchDescription([
         namespace_arg,
-        serial_port_arg,
+        lidar_serial_port_arg,
         Node(
             package='rplidar_ros',
             executable='rplidar_composition',
             output='screen',
             parameters=[{
-                'serial_port': LaunchConfiguration('serial_port'),
+                'serial_port': LaunchConfiguration('lidar_serial_port'),
                 'frame_id': frame_id,
                 'angle_compensate': True,
                 'scan_mode': 'Standard', 

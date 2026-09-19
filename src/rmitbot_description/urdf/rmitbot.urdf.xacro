@@ -3,7 +3,7 @@
 <robot name="rmitbot"
     xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:arg name="use_sim" default="false"/>
-    <xacro:arg name="serial_port" default="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"/>
+    <xacro:arg name="controller_serial_port" default="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"/>
 
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_platform.xacro" />
     <xacro:include filename="$(find rmitbot_description)/urdf/rmitbot_gazebo.xacro" />

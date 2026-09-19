@@ -11,7 +11,7 @@
             <hardware>
                 <plugin>rmitbot_firmware/RmitbotInterface</plugin>
                 <!-- <param name="port">/dev/esp32</param> -->
-                <param name="port">$(arg serial_port)</param>
+                <param name="port">$(arg controller_serial_port)</param>
             </hardware>
         </xacro:unless>
 
